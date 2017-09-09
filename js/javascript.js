@@ -10,7 +10,8 @@ $(document).ready(function() {
  */
  function setupUniversalNav() {
     $("#universalNav").html(
-      '<ul>\
+      '<h1>Framing Queensland</h1>\
+      <ul>\
         <li><a href="../index.html">Home</a></li>\
         <li><a href="game.html">Play</a></li>\
         <li><a href="account.html">Profile</a></li>\
