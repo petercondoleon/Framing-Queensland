@@ -24,7 +24,10 @@
         <link rel="mask-icon" href="./favicons/safari-pinned-tab.svg" color="#5bbad5">
         <meta name="theme-color" content="#ffffff">
 -->
-        <!--Google Font-->
+        <!--Temp for testing will fix up on next commit-->
+        <script type="text/javascript" src="./js/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="./js/SLQ-AJAX_Call.js"></script>
+        <script type="text/javascript" src="./js/javascript.js"></script>
 
     </head>
     <body>
@@ -35,8 +38,18 @@
             <h1>
                 Framing Queensland
             </h1>
+            <!--for ease of read and to test my AJAX call I am placing the script in this doc, move to JS file on doc ready-->
             <div id="photoStack">
-                <img src="img/framePlaceholder.jpg" alt="placeholder frame" width="200px"/>
+                <script type="text/javascript">
+                    var id = "photoCall",
+                        imageCount = 2;
+                        //imageCount will come into play later when I create new divs instead of update
+                    loadSLQImages(id);
+                </script>
+                <div id="photoCall">
+                    <img src="" alt="The SLQ database cannot be contacted!" width="200px"/>
+                </div>
+                
             </div>
             <div id="greetingMsg">
                 <p>Hey you! Welcome to Framing Queensland!</p>
@@ -54,8 +67,9 @@
         </footer>
         <div>
             <!-- END CONTAINER SCRIPTS -->
-            <script type="text/javascript" src="./js/jquery-3.2.1.min.js"></script>
-            <script type="text/javascript" src="./js/javascript.js"></script>
+            <!--<script type="text/javascript" src="./js/jquery-3.2.1.min.js"></script>
+            <script type="text/javascript" src="./js/SLQ-AJAX_Call.js"></script>
+            <script type="text/javascript" src="./js/javascript.js"></script>-->
         </div>
     </body>
 </html>
