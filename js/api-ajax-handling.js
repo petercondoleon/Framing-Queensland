@@ -41,16 +41,22 @@ function loadSLQImages(count, exclusionData) {
         data: data,
         dataType: 'jsonp',
         cache: true,
+        async: false, // I WILL CHANGE THIS, as this WILL CAUSE EVERYTHING TO WAIT ON THIS FUNCTION OTHERWISE!!!
+        
+    type: "POST",
         success: function(data) {
             //console.log(data.result.records);
+            imageData = [];
             for (var i = 0; i < data.result.records.length; i++) {
                 // TODO: check for exclusionData
                 imageData.push(buildJSON(data.result.records[i]));
             }
-        }
-        
+            data = JSON.stringify(imageData);
+            localStorage.setItem('slqDataImages', data);
+        }  
     });
-    //console.log (imageData)
+    //console.log(localStorage.getItem('slqDataImages'));
+    imageData = JSON.parse(localStorage.getItem('slqDataImages'));
     return imageData;
 }
 
@@ -106,8 +112,4 @@ function keywordAPICall(imageURL) {
 */
 $(document).ready(function() {
     //console.log("js linked!");
-    var arrayR = loadSLQImages(2,[0]);
-    var newArray = arrayR.slice(0);
-    console.log(arrayR);
-    console.log(newArray);
 });
