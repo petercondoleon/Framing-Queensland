@@ -31,14 +31,7 @@
             <h1>
                 Framing Queensland
             </h1>
-            <!--for ease of read and to test my AJAX call I am placing the script in this doc, move to JS file on doc ready-->
             <div id="photoStack">
-                <script type="text/javascript">
-                    var id = "photoCall",
-                        imageCount = 2;
-                        //imageCount will come into play later when I create new divs instead of update
-                    loadSLQImages(id);
-                </script>
                 <div id="photoCall">
                     <img src="" alt="The SLQ database cannot be contacted!" width="500px"/>
                 </div>
@@ -61,7 +54,7 @@
         <div>
             <!-- END CONTAINER SCRIPTS -->
             <script type="text/javascript" src="./js/jquery-3.2.1.min.js"></script>
-            <script type="text/javascript" src="./js/slq-ajax_call.js"></script>
+            <script type="text/javascript" src="./js/api-ajax-handling.js"></script>
             <script type="text/javascript" src="./js/javascript.js"></script>
         </div>
     </body>
