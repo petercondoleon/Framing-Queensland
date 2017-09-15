@@ -87,7 +87,7 @@ function keywordAPICall(imageURL) {
         data = imageURL;
     $.ajax({
         url: 'localhost',
-        data: data
+        data: data,
         success: function(data) {
             keywords = data;
         }
