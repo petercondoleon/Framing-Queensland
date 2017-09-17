@@ -5,6 +5,10 @@ $(document).ready(function() {
     homepageImagesSetup();
 });
 
+$("#loadingScreen").click(function() {
+  $(this).animate({bottom: "100%"}, 500);
+});
+
 /*
 * Sets up homepage with images.
 * @param {Object[]} an array of objects containing images

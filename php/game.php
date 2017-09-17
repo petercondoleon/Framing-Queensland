@@ -24,6 +24,7 @@
         <meta name="theme-color" content="#8cd2e8">
     </head>
     <body>
+        <?php include 'loadingScreen.php'; ?>
         <section>
             <!--Every page except the hompage has this Nav.
             Either we copy or paste, or just JS in the html

@@ -1,3 +1,8 @@
+/* General */
+body {
+  background-color: #8AD2E8;
+}
+
 /* Universal Navigation */
 
 #universalNav {
@@ -8,7 +13,7 @@
 }
 
 #universalNav h1 {
-  color: lightblue;
+  color: #8AD2E8;
   padding: 20px;
   font-size: 32px;
   background-color: white;
@@ -16,8 +21,9 @@
 
 #universalNav ul {
   width: 100%;
-  background-color: lightblue;
+  background-color: #8AD2E8;
   padding: 20px;
+  border-bottom: 3px solid white;
 }
 
 #universalNav li {
@@ -33,4 +39,51 @@
 
 #universalNav a:hover {
   text-decoration:underline;
+}
+
+/* Loading Screen */
+
+#loadingScreen {
+  background-color: white;
+  position: absolute;
+  z-index: 1000;
+  width: 100%;
+  height: 100%;
+}
+
+#loadingScreen div {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  transform: translate(-50%, -50%);
+}
+
+#loadingScreen h1 {
+  text-align: center;
+  color: #8AD2E8;
+  font-size: 72px;
+  padding: 50px
+}
+
+#loadingScreen img {
+  display: block;
+  margin: 0 auto;
+  padding: 50px;
+  height: 200px;
+  border: 2px solid black;
+}
+
+#loadingScreen h2 {
+  text-align: center;
+  color: #8AD2E8;
+  font-size: 32px;
+  padding: 16px
+}
+
+#loadingScreen p {
+  text-align: center;
+  color: #8AD2E8;
+  font-size: 16px;
+  padding: 8px
 }
