@@ -42,8 +42,7 @@ function loadSLQImages(count, exclusionData) {
         dataType: 'jsonp',
         cache: true,
         async: false, // I WILL CHANGE THIS, as this WILL CAUSE EVERYTHING TO WAIT ON THIS FUNCTION OTHERWISE!!!
-        
-    type: "POST",
+        type: "POST",
         success: function(data) {
             //console.log(data.result.records);
             imageData = [];
