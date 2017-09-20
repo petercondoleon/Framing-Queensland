@@ -13,13 +13,13 @@ Author: Sky Design
 // JSON resource info requirement
 const resourceInfo = {
         slq:{data_id:'9913b881-d76d-43f5-acd6-3541a130853d',limit: 1},
-        keywords:{data_id:''}
+        keywords:{api_key:'acc_5f2b725d827949d'}
       };
 
 // grab variable from const resource info - allows for updatability 
 var slq_data_id = resourceInfo.slq.data_id,
     slq_limit = resourceInfo.slq.limit,
-    keywords_data_id = resourceInfo.keywords.data_id;
+    keywords_api_key = resourceInfo.keywords.api_key;
 
 /**
  * Accesses data.gov api to return an array json objects with filtered 
