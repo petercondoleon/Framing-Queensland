@@ -49,3 +49,25 @@ function insertImage(image, width) {
      $(this).css("width", width+"px");
    });
  }
+/* Timer and Overlay */
+function start() {
+    var elem = document.getElementById("timePassed"); 
+    var width = 0;
+    var id = setInterval(frame, 1000);
+    function frame() {
+        if (width >= 100) {
+            clearInterval(id);
+        } else {
+            width = width + 5; 
+            elem.style.width = width + '%'; 
+        }
+    }
+}
+function on() {
+    document.getElementById("overlay").style.display = "block";
+}
+
+function off() {
+    document.getElementById("overlay").style.display = "none";
+    start()
+}
