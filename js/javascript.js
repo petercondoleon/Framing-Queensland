@@ -57,13 +57,16 @@ function start() {
     var width = 0;
     var id = setInterval(frame, 1000);
     function frame() {
+        if (width == 50) {
+            elem.style.backgroundColor  = "yellow";
+        }
         if (width >= 100) {
+            elem.style.backgroundColor  = "red";
             clearInterval(id);
         } else {
             width = width + 5; 
             elem.style.width = width + '%'; 
             document.getElementById("gameFrame").style.filter = "blur(" + (100 - width)/5 + 'px' + ")";
-            //blur.style.filter = "blur(" + (100 - width)/5 + 'px' + ")";
         }
     }
 }
