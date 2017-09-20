@@ -264,3 +264,75 @@ img.gameFrame {
     filter: blur(20px);
     padding: 20px;
 }
+/*game over page*/
+img.gameOverFrame {
+  display: block;
+  margin: auto;
+  width: 40%;
+  padding: 20px;
+}
+#playAgain , #leaderBoard {
+display:inline-block;
+text-align: center;
+padding: 20px;
+padding-bottom: 200px;
+}
+
+#playAgain button, #leaderBoard button {
+  display: inline-block;
+  padding: 15px 25px;
+  font-size: 24px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #8AD2E8;
+  background-color: white;
+  border: none;
+  border-radius: 15px;
+  box-shadow: -9px 9px #86C7DC;
+  transition: 0.1s;
+}
+
+#playAgain button:hover, #leaderBoard button:hover, {
+  box-shadow: -9px 12px #86C7DC;
+}
+#parentGameOver {
+  margin: center;
+  text-align: center;
+}
+/*sky design page*/
+#returnHome {
+display:inline-block;
+text-align: center;
+padding: 20px;
+padding-bottom: 200px;
+}
+#returnHome button {
+  display: inline-block;
+  padding: 15px 25px;
+  font-size: 24px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #8AD2E8;
+  background-color: white;
+  border: none;
+  border-radius: 15px;
+  box-shadow: -9px 9px #86C7DC;
+  transition: 0.1s;
+}
+#information {
+  margin: center;
+  text-align: center;
+}
+#parentSkyDesign {
+  margin: center;
+  text-align: center;
+}
+/*Leaderboard*/
+#parentLeaderBoard {
+  margin: center;
+  text-align: center;
+}
