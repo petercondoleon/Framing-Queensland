@@ -175,11 +175,13 @@ ul {
 #totalTime{
     width: 100%;
     background-color: grey;
+    border-radius: 5px;
 }
 #timePassed {
     width: 0%;
     height: 30px;
-    background-color: lightblue;
+    background-color: lightgreen;
+    border-radius: 5px;
     transition: all 1s;
 }
 #overlay {
@@ -203,4 +205,62 @@ ul {
     color: white;
     transform: translate(-50%,-50%);
     -ms-transform: translate(-50%,-50%);
+}
+/* Game Page */
+#endGame {
+  text-align: center;
+  padding: 20px;
+  padding-bottom: 200px;
+}
+
+#endGame button {
+  display: inline-block;
+  padding: 15px 25px;
+  font-size: 24px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #8AD2E8;
+  background-color: white;
+  border: none;
+  border-radius: 15px;
+  box-shadow: -9px 9px #86C7DC;
+  transition: 0.1s;
+}
+
+#endGame button:hover {
+  box-shadow: -9px 12px #86C7DC;
+}
+
+input[type=text], select {
+    width: 30%;
+    margin: center;
+}
+
+input[type=submit] {
+    width: 30%;
+    color: white;
+    margin: center;
+}
+
+input[type=submit]:hover {
+
+}
+#guess
+{
+margin: 0 auto;
+margin-left: auto;
+margin-right: auto;
+text-align:center;
+padding: 20px;
+}
+
+
+img.gameFrame {
+    display: block;
+    margin: auto;
+    width: 40%;
+    filter: blur(20px);
+    padding: 20px;
 }

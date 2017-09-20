@@ -49,7 +49,9 @@ function insertImage(image, width) {
      $(this).css("width", width+"px");
    });
  }
-/* Timer and Overlay */
+
+
+/* Timer and blurr */
 function start() {
     var elem = document.getElementById("timePassed"); 
     var width = 0;
@@ -60,13 +62,15 @@ function start() {
         } else {
             width = width + 5; 
             elem.style.width = width + '%'; 
+            document.getElementById("gameFrame").style.filter = "blur(" + (100 - width)/5 + 'px' + ")";
+            //blur.style.filter = "blur(" + (100 - width)/5 + 'px' + ")";
         }
     }
 }
+/*Overlay*/
 function on() {
     document.getElementById("overlay").style.display = "block";
 }
-
 function off() {
     document.getElementById("overlay").style.display = "none";
     start()
