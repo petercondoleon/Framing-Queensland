@@ -33,9 +33,18 @@
 
             <div id="gameImageOuter">
                 <div id="gameImageInner">
-                    <img src="/img/framePlaceholder.jpg" alt="placeholder for game image" width="200px"/>
+                    <img id="gameFrame" class="gameFrame" src="/img/framePlaceholder.jpg" alt="placeholder for game image" width="200px"/>
+
                 </div>
             </div>
+            <div id="totalTime">
+                <div id="timePassed"></div>
+            </div>
+            <!--
+            <div onclick="off()" id="overlay">
+                <div id="Instructions">Guess the image before time runs out!!!!</div>
+            </div>
+            -->
             <!--Guess Text Field-->
             <div id="guess">
                 <form>
@@ -44,7 +53,7 @@
             </div>
             <!--This will eventually be removed inplace of the automated progression (time runs out)-->
             <div id="endGame">
-                <a href="../html/gameover.html">
+                <a href="/html/gameover.html">
                     <button>
                         End Game
                     </button>
@@ -58,6 +67,7 @@
             <script type="text/javascript" src="/js/jquery-3.2.1.min.js"></script>
             <script type="text/javascript" src="/js/api-ajax-handling.js"></script>
             <script type="text/javascript" src="/js/javascript.js"></script>
+            <script type="text/javascript" src="/js/game.js"></script>
         </div>
     </body>
 </html>

@@ -11,6 +11,7 @@ $(document).ready(function() {
  */
 $("#loadingScreen").click(function() {
   $(this).animate({bottom: "100%"}, 500);
+  start();
 });
 
 /*
@@ -50,10 +51,9 @@ function insertImage(image, width) {
    });
  }
 
-
 /* Timer and blurr */
 function start() {
-    var elem = document.getElementById("timePassed"); 
+    var elem = document.getElementById("timePassed");
     var width = 0;
     var id = setInterval(frame, 1000);
     function frame() {
@@ -64,8 +64,8 @@ function start() {
             elem.style.backgroundColor  = "red";
             clearInterval(id);
         } else {
-            width = width + 5; 
-            elem.style.width = width + '%'; 
+            width = width + 5;
+            elem.style.width = width + '%';
             document.getElementById("gameFrame").style.filter = "blur(" + (100 - width)/5 + 'px' + ")";
         }
     }
