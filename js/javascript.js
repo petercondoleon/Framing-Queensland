@@ -51,7 +51,9 @@ function insertImage(image, width) {
    });
  }
 
-/* Timer and blurr */
+/* 
+* Timer and blur effect
+*/
 function start() {
     var elem = document.getElementById("timePassed");
     var width = 0;
@@ -70,7 +72,9 @@ function start() {
         }
     }
 }
-/*Overlay*/
+/*
+*Overlay
+*/
 function on() {
     document.getElementById("overlay").style.display = "block";
 }

@@ -1,5 +1,3 @@
-
-
 $(document).ready(function() {
 
   var gameImages = loadSLQImages(10, [0]);

@@ -9,7 +9,6 @@ Course: DECO1800 Semester 2 - 2017
 Author: Sky Design
 *************************************/
 
-
 // JSON resource info requirement
 const resourceInfo = {
         slq:{data_id:'9913b881-d76d-43f5-acd6-3541a130853d',limit: 1},
@@ -82,14 +81,14 @@ function buildJSON(imageData) {
 
 /**
 * An external API is called to generate keywords 
-* based on a parsed image url. 
+* based on a parsed image url.
 * @param {string} takes a string URL of an image.
 * @return {Object} returns an array of keywords in 
 * referance to the image.
 */
 function keywordAPICall(imageURL) {
     var keywords = [],
-        data = imageURL;
+        data = {url:imageUrl,api_key:keywords_api_key}
     $.ajax({
         url: 'localhost',
         data: data,
@@ -100,10 +99,6 @@ function keywordAPICall(imageURL) {
     return keywords;
 }
 
-/**
-* TODO: function pixelImages() {}
-* In discussion on alternatives. 
-*/
 
 /**
 * Function excutes when html document is ready.
@@ -112,3 +107,5 @@ function keywordAPICall(imageURL) {
 $(document).ready(function() {
     //console.log("js linked!");
 });
+
+
