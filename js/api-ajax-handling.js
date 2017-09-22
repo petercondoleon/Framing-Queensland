@@ -36,21 +36,29 @@ function loadSLQImages(count, exclusionData) {
         data = {resource_id:slq_data_id,limit:count};
     
     $.ajax({
-        url: 'http://data.gov.au/api/action/datastore_search',
+        url: 'https://data.gov.au/api/action/datastore_search',
         data: data,
         dataType: 'jsonp',
         cache: true,
-        async: false, // I WILL CHANGE THIS, as this WILL CAUSE EVERYTHING TO WAIT ON THIS FUNCTION OTHERWISE!!!
+        async: false,
         type: "POST",
         success: function(data) {
-            //console.log(data.result.records);
-            imageData = [];
-            for (var i = 0; i < data.result.records.length; i++) {
-                // TODO: check for exclusionData
-                imageData.push(buildJSON(data.result.records[i]));
-            }
-            data = JSON.stringify(imageData);
-            localStorage.setItem('slqDataImages', data);
+        //console.log(data.result.records);
+         function dataIsHere(){
+            setTimeout(function() {
+                if (data) {
+                    imageData = [];
+                    for (var i = 0; i < data.result.records.length; i++) {
+                        // TODO: check for exclusionData
+                        imageData.push(buildJSON(data.result.records[i]));
+                    }
+                    data = JSON.stringify(imageData);
+                    localStorage.setItem('slqDataImages', data);
+                    } else {
+                        dataIsHere();
+                    }
+            }, 1000);
+         } 
         }  
     });
     //console.log(localStorage.getItem('slqDataImages'));
