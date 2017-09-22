@@ -5,39 +5,39 @@ body {
 
 /* Universal Navigation */
 
-#universalNav {
+.universalNav {
   z-index: 100;
   width: 100%;
   text-align: center;
   margin-bottom: 20px;
 }
 
-#universalNav h1 {
+.universalNav h1 {
   color: #8AD2E8;
   padding: 20px;
   font-size: 32px;
   background-color: white;
 }
 
-#universalNav ul {
+.universalNav ul {
   width: 100%;
   background-color: #8AD2E8;
   padding: 20px;
   border-bottom: 3px solid white;
 }
 
-#universalNav li {
+.universalNav li {
   display: inline;
   padding: 0 5%;
 }
 
-#universalNav a {
+.universalNav a {
   color: white;
   font-size: 24px;
   text-decoration: none;
 }
 
-#universalNav a:hover {
+.universalNav a:hover {
   text-decoration:underline;
 }
 

@@ -1,5 +1,5 @@
 <?php
-echo '<nav id="universalNav">
+echo '<nav class="universalNav">
         <h1>Framing Queensland</h1>
         <ul>
           <li><a href="/index.php">Home</a></li>

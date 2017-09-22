@@ -1,4 +1,4 @@
-/*
+/**
  * Executes when the document is ready.
  */
 $(document).ready(function() {
@@ -6,7 +6,7 @@ $(document).ready(function() {
     rotateImages();
 });
 
-/*
+/**
  * Basic loading screen dismiss animation
  */
 $("#loadingScreen").click(function() {
@@ -14,10 +14,10 @@ $("#loadingScreen").click(function() {
   start();
 });
 
-/*
-* Sets up homepage with images.
-* @param {Object[]} an array of objects containing images
-*/
+/**
+ * Sets up homepage with images.
+ * @param {Object[]} an array of objects containing images
+ */
 function homepageImagesSetup(jsonImages) {
     $("#photoCall img").replaceWith("<ul></ul>");
     for (var i = 0; i < jsonImages.length; i++) {
@@ -28,18 +28,18 @@ function homepageImagesSetup(jsonImages) {
     }
 }
 
-/*
-* loads an image at a give html dom pos
-* @param {string} image source
-* @param {integer}image width
-* @return {string} <img/> tag form of parsed img string
-*/
+/**
+ * loads an image at a give html dom pos
+ * @param {string} image source
+ * @param {integer}image width
+ * @return {string} <img/> tag form of parsed img string
+ */
 function insertImage(image, width) {
     return '<img src='+'"'+image+'"'+'width='+width+'/>';
 }
 
 
-/*
+/**
  * Give images on home page a random rotation.
  */
  function rotateImages() {
@@ -52,8 +52,8 @@ function insertImage(image, width) {
  }
 
 /* 
-* Timer and blur effect
-*/
+ * Timer and blur effect
+ */
 function start() {
     var elem = document.getElementById("timePassed");
     var width = 0;
@@ -73,8 +73,8 @@ function start() {
     }
 }
 /*
-*Overlay
-*/
+ * Overlay
+ */
 function on() {
     document.getElementById("overlay").style.display = "block";
 }
