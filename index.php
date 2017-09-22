@@ -13,8 +13,8 @@
         <meta property="og:image" content="">
         <meta property="og:description" content="">
         <!--CSS Stylesheets-->
-        <link rel="stylesheet" type="text/css" media="screen" href="/css/cssResetHTML5.min.css" />
-        <link rel="stylesheet" type="text/css" media="screen" href="/css/style.css" />
+        <link rel="stylesheet" type="text/css" media="screen" href="./css/cssResetHTML5.min.css"/>
+        <link rel="stylesheet" type="text/css" media="screen" href="./css/site-style.css"/>
         <!--FavIcons-->
         <link rel="apple-touch-icon" sizes="180x180" href="/img/favicons/180pxfaviconApple.png">
         <link rel="icon" type="image/png" sizes="32x32" href="/img/favicons/32pxfavicon.png">
