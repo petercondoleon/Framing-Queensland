@@ -1,0 +1,10 @@
+Name {
+	Framing Queensland
+}
+
+Colour Palette {
+	blue: #8dd2e8
+	deep-blue: #82c2d9
+	red: #f85987
+	black: #393e48
+}
