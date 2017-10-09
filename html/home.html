@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Framing Queensland - Gameover!</title>
+        <title>Framing Queensland - Homepage</title>
         <!--Basic Meta Tags-->
         <meta charset="UTF-8">
         <meta name="description" content="">
@@ -13,8 +13,8 @@
         <meta property="og:image" content="">
         <meta property="og:description" content="">
         <!--CSS Stylesheets-->
-        <link rel="stylesheet" type="text/css" media="screen" href="/css/cssResetHTML5.min.css" />
-        <link rel="stylesheet" type="text/css" media="screen" href="/css/site-style.css" />
+        <link rel="stylesheet" type="text/css" media="screen" href="./css/cssResetHTML5.min.css"/>
+        <link rel="stylesheet" type="text/css" media="screen" href="./css/site-style.css"/>
         <!--FavIcons-->
         <link rel="apple-touch-icon" sizes="180x180" href="/img/favicons/180pxfaviconApple.png">
         <link rel="icon" type="image/png" sizes="32x32" href="/img/favicons/32pxfavicon.png">
@@ -25,21 +25,31 @@
     </head>
     <body>
         <section>
-            <!--Every page except the hompage has this Nav.
-            Either we copy or paste, or just JS in the html
-            to save loading times-->
-            <nav class="universalNav"></nav>
-
-            <div id="photosFromGame">
-                <img id="gameOverFrame" class="gameOverFrame" src="/img/framePlaceholder.jpg" alt="placeholder for images" width="350px"/>
+            <div id="skyDesignLogo">
+                <a href="html/skydesign.html"><img src="/img/img(png)/logo_blink_02.gif" alt="placeholder logo link" width="200px"/></a>
             </div>
-            <div id="parentGameOver">
-                <div id="playAgain">
-                    <a href="/php/game.php"><button>Play Again!</button></a>
+            <h1>
+                Framing Queensland
+            </h1>
+
+            <img id="helpButton" src="/img/img(png)/instruction_01.png">
+            <img id="socialMediaButton" src="/img/img(png)/FBlogo_01.png">
+
+            <div id="photoStack">
+                <div id="photoCall">
+                    <img src="" alt="The SLQ database cannot be contacted!" width="500px"/>
                 </div>
-                <div id="leaderBoard">
-                    <a href="/php/leaderboard.php"><button>Check the leaderboards!</button></a>
-                </div>
+            </div>
+            <div id="greetingMsg">
+                <p>Hey you! Welcome to Framing Queensland!</p>
+                <a href="/html/account.html">Signed in? Click here to check your account</a>
+            </div>
+            <div id="start">
+                <a href="/php/game.php">
+                    <button>
+                        Start
+                    </button>
+                </a>
             </div>
         </section>
         <footer>
@@ -49,7 +59,6 @@
             <script type="text/javascript" src="/js/jquery-3.2.1.min.js"></script>
             <script type="text/javascript" src="/js/api-ajax-handling.js"></script>
             <script type="text/javascript" src="/js/javascript.js"></script>
-            <script type="text/javascript" src="/js/gameOver.js"></script>
         </div>
     </body>
 </html>
