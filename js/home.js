@@ -14,13 +14,13 @@ function animateLogo() {
     $('#skyDesignLogo img').attr("src", "/svg/logo2.svg");
     setTimeout(function() {
         $('#skyDesignLogo img').attr("src", "/svg/logo3.svg");
-    }, 20);
+    }, 40);
     setTimeout(function() {
         $('#skyDesignLogo img').attr("src", "/svg/logo2.svg");
-    }, 55);
+    }, 110);
     setTimeout(function() {
         $('#skyDesignLogo img').attr("src", "/svg/logo1.svg");
-    }, 75);
+    }, 150);
     // Generate random repeat time between 5s and 15s
     var timeout = Math.floor(Math.random() * 10000) + 5000;
     setTimeout(animateLogo, timeout);
