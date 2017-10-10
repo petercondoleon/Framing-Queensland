@@ -1,4 +1,7 @@
 <?php
+    // Include meta tags
+    include $_SERVER['DOCUMENT_ROOT'].'/html/meta.html';
+
     // First display the loading screen
     include $_SERVER['DOCUMENT_ROOT'].'/html/loadingscreen.html';
 
