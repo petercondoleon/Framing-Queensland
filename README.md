@@ -11,7 +11,7 @@ TODO:
 - Create a main logo for the website that can be scaled on a 1:1 scale and the
   width = height in pixels. The logo needs to have transparency and still be
   readable in a silhouette form (for converting later on). This logo is used
-  for the page icon, etc. (I named it "webpage.png" for now)
+  for the page icon, etc. (I named it "mainlogo.png" for now)
 - Convert main logo to favicons (I can do this after the logo is done as I have
 experience in this - @Jayden)
 - Refine any existing PNG and SVG files.
