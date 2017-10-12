@@ -2,7 +2,8 @@
  * Executes when the document is ready.
  */
 $(document).ready(function() {
-    loadSLQImagesHomepage(6);
+    homepageImagesSetup(loadSLQImages(6,[0]));
+    rotateImages();
     });
 
 /**

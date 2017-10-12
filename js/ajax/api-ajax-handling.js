@@ -81,41 +81,36 @@ function loadSLQImagesGame(count, rounds, exclusionData) {
     }
     var imageData = [],
         data = {resource_id:slq_data_id,limit:count};
-    if (localStorage.getItem("slqDataImages")) {
-        imageData = JSON.parse(localStorage.getItem('slqDataImages'));
-        setupGamePage(rounds, imageData, count);
-    } else {
-        $.ajax({
-            url: 'https://data.gov.au/api/action/datastore_search',
-            data: data,
-            dataType: 'jsonp',
-            cache: true,
-            async: true,
-            type: "POST",
-            success: function(data) {
-             function dataIsHere() {
-                // Keep looping until the API has returned the specified data.
-                setTimeout(function() {
-                    // The number of records = the parsed limit.
-                    if (data.result.records.length >= count) {
-                        imageData = [];
-                        for (var i = 0; i < data.result.records.length; i++) {
-                            // TODO: check for exclusionData
-                            imageData.push(buildJSON(data.result.records[i]));
-                        }
-                        // Callback
-                        data = JSON.stringify(imageData);
-                        localStorage.setItem('slqDataImages', data);
-                        setupGamePage(rounds, imageData, count);
-                    } else {
-                        dataIsHere();
+
+    $.ajax({
+        url: 'https://data.gov.au/api/action/datastore_search',
+        data: data,
+        dataType: 'jsonp',
+        cache: true,
+        async: true,
+        type: "POST",
+        success: function(data) {
+         function dataIsHere() {
+            // Keep looping until the API has returned the specified data.
+            setTimeout(function() {
+                // The number of records = the parsed limit.
+                if (data.result.records.length >= count) {
+                    imageData = [];
+                    for (var i = 0; i < data.result.records.length; i++) {
+                        // TODO: check for exclusionData
+                        imageData.push(buildJSON(data.result.records[i]));
                     }
-                }, 1000);
-             }
-             dataIsHere();
-            }
-        });
-    }
+                    // Callback
+                    console.log(imageData);
+                    setupGamePage(rounds, imageData, count);
+                } else {
+                    dataIsHere();
+                }
+            }, 1000);
+         }
+         dataIsHere();
+        }
+    });
 }
 
 /**

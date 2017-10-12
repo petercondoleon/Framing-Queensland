@@ -27,8 +27,7 @@ var slq_data_id = resourceInfo.slq.data_id,
  * @param {Number[]} array of id's that will NOT be returned.
  * @return {Object[]} an array of json objects.
  */
-function loadSLQImagesHomepage(count) {
-    console.log("loadSLQ HOME");
+function loadSLQImages(count, exclusionData) {
     // if the count is under 1, return 1.
     if (count < 1) {
         count = slq_limit;
@@ -41,21 +40,28 @@ function loadSLQImagesHomepage(count) {
         data: data,
         dataType: 'jsonp',
         cache: true,
-        async: true,
+        async: false,
         type: "POST",
         success: function(data) {
-         function dataIsHere() {
+            var loop = 0;
+            function dataIsHere() {
             // Keep looping until the API has returned the specified data.
             setTimeout(function() {
+                loop++;
+                if (loop > 20) {
+                    console.log("Data call has lasted too long, ending call");
+                    imageData = [];
+                }
                 // The number of records = the parsed limit.
-                if (data.result.records.length >= count) {
+                else if (data.result.records.length >= count) {
+                    console.log(data.result.records);
                     imageData = [];
                     for (var i = 0; i < data.result.records.length; i++) {
+                        // TODO: check for exclusionData
                         imageData.push(buildJSON(data.result.records[i]));
                     }
-                    // Callback
-                    homepageImagesSetup(imageData);
-                    rotateImages();
+                    data = JSON.stringify(imageData);
+                    localStorage.setItem('slqDataImages', data);
                 } else {
                     dataIsHere();
                 }
@@ -64,58 +70,11 @@ function loadSLQImagesHomepage(count) {
          dataIsHere();
         }
     });
-}
 
-/**
- * Accesses data.gov api to return an array json objects with filtered
- * attributes: '1000_pixel_jpg', 'id'.
- * @param {Number} count of images that will be returned
- * @param {Number[]} array of id's that will NOT be returned.
- * @return {Object[]} an array of json objects.
- */
-function loadSLQImagesGame(count, rounds, exclusionData) {
-    // if the count is under 1, return 1.
-    console.log("loadSLQ GAME");
-    if (count < 1) {
-        count = slq_limit;
-    }
-    var imageData = [],
-        data = {resource_id:slq_data_id,limit:count};
-    if (localStorage.getItem("slqDataImages")) {
-        imageData = JSON.parse(localStorage.getItem('slqDataImages'));
-        setupGamePage(rounds, imageData, count);
-    } else {
-        $.ajax({
-            url: 'https://data.gov.au/api/action/datastore_search',
-            data: data,
-            dataType: 'jsonp',
-            cache: true,
-            async: true,
-            type: "POST",
-            success: function(data) {
-             function dataIsHere() {
-                // Keep looping until the API has returned the specified data.
-                setTimeout(function() {
-                    // The number of records = the parsed limit.
-                    if (data.result.records.length >= count) {
-                        imageData = [];
-                        for (var i = 0; i < data.result.records.length; i++) {
-                            // TODO: check for exclusionData
-                            imageData.push(buildJSON(data.result.records[i]));
-                        }
-                        // Callback
-                        data = JSON.stringify(imageData);
-                        localStorage.setItem('slqDataImages', data);
-                        setupGamePage(rounds, imageData, count);
-                    } else {
-                        dataIsHere();
-                    }
-                }, 1000);
-             }
-             dataIsHere();
-            }
-        });
-    }
+    //console.log(localStorage.getItem('slqDataImages'));
+    imageData = JSON.parse(localStorage.getItem('slqDataImages'));
+    console.log(imageData);
+    return imageData;
 }
 
 /**
@@ -127,12 +86,10 @@ function loadSLQImagesGame(count, rounds, exclusionData) {
 function buildJSON(imageData) {
     var jsonObject = {},
         recordImage = imageData["1000_pixel_jpg"];
-        //recordID = imageData["id"];
     // check if record image
     if (recordImage) {
         jsonObject = {
             image:recordImage
-            //id:recordID
         }
     }
     else {
