@@ -1,19 +1,19 @@
 $(document).ready(function() {
-    setupGamePage(6, loadSLQImages(40000,[0]));
+    loadSLQImagesGame(40000,6,[0]);
 });
 
 /**
  * Sets up gamepage with an image.
  * @param {integer} #rounds that a user will play
  */
-function setupGamePage(rounds, slqImages) {
+function setupGamePage(rounds, slqImages, imageCount) {
     // list of images for the game
     var gameImages = [];
 
     // grab images for game
     for (var i = 0; i < rounds; i++) {
         // Generate image index
-        var index = Math.floor(Math.random() * slqImages.length);
+        var index = Math.floor(Math.random() * imageCount);
         gameImages.push(slqImages[index]);
     }
     for (var i = 0; i < rounds; i++) {

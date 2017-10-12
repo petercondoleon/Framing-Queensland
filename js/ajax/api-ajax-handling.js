@@ -27,7 +27,8 @@ var slq_data_id = resourceInfo.slq.data_id,
  * @param {Number[]} array of id's that will NOT be returned.
  * @return {Object[]} an array of json objects.
  */
-function loadSLQImages(count, exclusionData) {
+function loadSLQImagesHomepage(count) {
+    console.log("loadSLQ HOME");
     // if the count is under 1, return 1.
     if (count < 1) {
         count = slq_limit;
@@ -40,7 +41,53 @@ function loadSLQImages(count, exclusionData) {
         data: data,
         dataType: 'jsonp',
         cache: true,
-        async: false,
+        async: true,
+        type: "POST",
+        success: function(data) {
+         function dataIsHere() {
+            // Keep looping until the API has returned the specified data.
+            setTimeout(function() {
+                // The number of records = the parsed limit.
+                if (data.result.records.length >= count) {
+                    imageData = [];
+                    for (var i = 0; i < data.result.records.length; i++) {
+                        imageData.push(buildJSON(data.result.records[i]));
+                    }
+                    // Callback
+                    homepageImagesSetup(imageData);
+                    rotateImages();
+                } else {
+                    dataIsHere();
+                }
+            }, 1000);
+         }
+         dataIsHere();
+        }
+    });
+}
+
+/**
+ * Accesses data.gov api to return an array json objects with filtered
+ * attributes: '1000_pixel_jpg', 'id'.
+ * @param {Number} count of images that will be returned
+ * @param {Number[]} array of id's that will NOT be returned.
+ * @return {Object[]} an array of json objects.
+ */
+function loadSLQImagesGame(count, rounds, exclusionData) {
+    // if the count is under 1, return 1.
+    console.log("loadSLQ GAME");
+    if (count < 1) {
+        count = slq_limit;
+    }
+    var imageData = [],
+        data = {resource_id:slq_data_id,limit:count};
+
+    $.ajax({
+        url: 'https://data.gov.au/api/action/datastore_search',
+        data: data,
+        dataType: 'jsonp',
+        cache: true,
+        async: true,
         type: "POST",
         success: function(data) {
          function dataIsHere() {
@@ -53,8 +100,9 @@ function loadSLQImages(count, exclusionData) {
                         // TODO: check for exclusionData
                         imageData.push(buildJSON(data.result.records[i]));
                     }
-                    data = JSON.stringify(imageData);
-                    localStorage.setItem('slqDataImages', data);
+                    // Callback
+                    console.log(imageData);
+                    setupGamePage(rounds, imageData, count);
                 } else {
                     dataIsHere();
                 }
@@ -63,11 +111,6 @@ function loadSLQImages(count, exclusionData) {
          dataIsHere();
         }
     });
-
-    //console.log(localStorage.getItem('slqDataImages'));
-    imageData = JSON.parse(localStorage.getItem('slqDataImages'));
-    console.log(imageData);
-    return imageData;
 }
 
 /**
@@ -79,10 +122,12 @@ function loadSLQImages(count, exclusionData) {
 function buildJSON(imageData) {
     var jsonObject = {},
         recordImage = imageData["1000_pixel_jpg"];
+        //recordID = imageData["id"];
     // check if record image
     if (recordImage) {
         jsonObject = {
             image:recordImage
+            //id:recordID
         }
     }
     else {
