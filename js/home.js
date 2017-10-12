@@ -1,9 +1,17 @@
-/* Home Page JavaScript */
+/*************************************
+Homepage handling
 
+Institution: The University of
+Queensland
+
+Course: DECO1800 Semester 2 - 2017
+
+Author: Sky Design
+*************************************/
 /**
  * Executes when the document is ready.
  */
-$(document).ready(function() {
+$(document).ready(function () {
     loadSLQImagesHomepage(6);
     animateLogo();
 });
@@ -13,13 +21,13 @@ $(document).ready(function() {
  */
 function animateLogo() {
     $('#skyDesignLogo img').attr("src", "../img/svg/logo2.svg");
-    setTimeout(function() {
+    setTimeout(function () {
         $('#skyDesignLogo img').attr("src", "../img/svg/logo3.svg");
     }, 40);
-    setTimeout(function() {
+    setTimeout(function () {
         $('#skyDesignLogo img').attr("src", "../img/svg/logo2.svg");
     }, 110);
-    setTimeout(function() {
+    setTimeout(function () {
         $('#skyDesignLogo img').attr("src", "../img/svg/logo1.svg");
     }, 150);
     // Generate random repeat time between 5s and 15s
@@ -29,14 +37,14 @@ function animateLogo() {
 
 /**
  * Sets up homepage with images.
- * @param {Object[]} an array of objects containing images
+ * @param {Object[]} jsonImages array of objects containing images
  */
 function homepageImagesSetup(jsonImages) {
     $("#photoCall img").replaceWith("<ul></ul>");
     for (var i = 0; i < jsonImages.length; i++) {
         console.log(jsonImages[i].image);
         $("#photoCall ul").append(
-            "<li>"+insertImage(jsonImages[i].image,200)+"</li>"
+            "<li>" + insertImage(jsonImages[i].image, 200) + "</li>"
         )
     }
 }
