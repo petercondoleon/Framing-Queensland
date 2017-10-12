@@ -1,6 +1,6 @@
 /* Loading Screen */
 
-#loadingScreen {
+.loadingScreen {
   background-color: white;
   position: absolute;
   z-index: 1000;
@@ -8,7 +8,7 @@
   height: 100%;
 }
 
-#loadingScreen div {
+.loadingScreen div {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -16,28 +16,28 @@
   transform: translate(-50%, -50%);
 }
 
-#loadingScreen h1 {
+.loadingScreen h1 {
   text-align: center;
   color: #8AD2E8;
   font-size: 72px;
   padding: 50px
 }
 
-#loadingScreen img {
+.loadingScreen img {
   display: block;
   margin: 0 auto;
   padding: 50px;
   height: 200px;
 }
 
-#loadingScreen h2 {
+.loadingScreen h2 {
   text-align: center;
   color: #8AD2E8;
   font-size: 32px;
   padding: 16px
 }
 
-#loadingScreen p {
+.loadingScreen p {
   text-align: center;
   color: #8AD2E8;
   font-size: 24px;

@@ -50,3 +50,36 @@ function startRound() {
     // Starts Round
     // keywords, powerups, etc
 }
+
+/*
+ * Timer and blur effect
+ */
+function start() {
+    var elem = document.getElementById("timePassed");
+    var width = 0;
+    var id = setInterval(frame, 1000);
+    function frame() {
+        if (width == 50) {
+            elem.style.backgroundColor  = "yellow";
+        }
+        if (width >= 100) {
+            elem.style.backgroundColor  = "red";
+            clearInterval(id);
+        } else {
+            width = width + 5;
+            elem.style.width = width + '%';
+            document.getElementById("gameFrame").style.filter = "blur(" + (100 - width)/5 + 'px' + ")";
+        }
+    }
+}
+
+/*
+ * Overlay
+ */
+function on() {
+    document.getElementById("overlay").style.display = "block";
+}
+function off() {
+    document.getElementById("overlay").style.display = "none";
+    start()
+}

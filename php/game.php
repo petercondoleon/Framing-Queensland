@@ -5,6 +5,9 @@
     // First display the loading screen
     include $_SERVER['DOCUMENT_ROOT'].'/html/loadingscreen.html';
 
+    // Show game instructions on loading screen
+    include $_SERVER['DOCUMENT_ROOT'].'/html/instructions.html';
+
     // Add the navigation bar to the top of the page
     include $_SERVER['DOCUMENT_ROOT'].'/html/navigation.html';
 
