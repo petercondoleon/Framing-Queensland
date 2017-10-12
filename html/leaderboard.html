@@ -15,6 +15,7 @@
         <!--CSS Stylesheets-->
         <link rel="stylesheet" type="text/css" media="screen" href="../css/cssResetHTML5.min.css" />
         <link rel="stylesheet" type="text/css" media="screen" href="../css/site-style.css"/>
+        <link rel="stylesheet" type="text/css" media="screen" href="../css/leaderboard.css"/>
         <!--FavIcons-->
         <link rel="apple-touch-icon" sizes="180x180" href="../img/favicons/180pxfaviconApple.png">
         <link rel="icon" type="image/png" sizes="32x32" href="../img/favicons/32pxfavicon.png">
@@ -31,7 +32,8 @@
             <nav class="universalNav"></nav>
             <div id="parentLeaderBoard">
             <div id="leaderBoardOuter">
-                <div id="leaderBoardInner">
+                <div id="leaderBoardPlayers">
+                	<h1>Top players</h1>
                     <p>
                     #1 - Player1 - 148
                     </p>
@@ -41,17 +43,42 @@
                                         <p>
                     #3 - Player2 - 94
                     </p>
+                    
+                    <div id="morerank">
+                    <p>
+                    #4 - Player2 - 80
+                    </p>
+                    <p>
+                    #5 - Player2 - 74
+                    </p>
+                    </div>
+                    <img id = 'more' src="../img/img(png)/more_01.png" alt="facebooklogo" width="40px"/>
+                    
                 </div>
             </div>
             <!--Aside?-->
-            <div>
-                <img src="../img/framePlaceholder.jpg" alt="Placeholder for selected player" width="150px"/>
-            </div>
-            <div id="returnHome">
-                <a href="/index.php">
-                    <button>
-                        Home
-                    </button>
+            <div id= 'Playerinformation'>
+            	<h1>Leaderboard</h1>
+            <p>
+                    #1  user
+                    </p>
+                                        <p>
+                    Best result:
+                    </p>
+                                        <p>
+                    94
+                    </p>
+                    </div>
+                    <div id="facebook">
+                <p>
+                    Share your rank on </p>
+                    
+                <a href="https://www.facebook.com">
+                <img src="../img/img(png)/FBlogo_01.png" alt="facebooklogo" width="150px"/>
+                </a>
+                
+            	</div>
+            
                 </a>
             </div>
             </div>
@@ -63,6 +90,7 @@
             <script type="text/javascript" src="../js/jquery-3.2.1.min.js"></script>
             <script type="text/javascript" src="../js/api-ajax-handling.js"></script>
             <script type="text/javascript" src="../js/javascript.js"></script>
+            <script type="text/javascript" src="../js/leaderboard.js"></script>
         </div>
     </body>
 </html>
