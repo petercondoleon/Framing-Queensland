@@ -12,8 +12,9 @@ Author: Sky Design
  * Executes when the document is ready.
  */
 $(document).ready(function () {
+    var datasetSize = 300;
     loadingScreenSetup(true);
-    loadSLQImagesGame(40000, 6, [0]);
+    loadSLQImagesGame(datasetSize, 6, [0]);
 });
 
 /**
@@ -24,6 +25,7 @@ $(document).ready(function () {
  * @return {undefined}
  */
 function setupGamePage(rounds, imageCount, slqImages) {
+    console.log(slqImages)
     // list of images for the game
     var gameImages = [];
     // grab images for game
@@ -42,9 +44,22 @@ function setupGamePage(rounds, imageCount, slqImages) {
  * @return {undefined}
  */
 function startGame(rounds, gameImages) {
-    for (var round = rounds - 1; round < rounds; round++) {
-        loadgameImage(round, gameImages);
-        // loadavailablePowerups();
+    console.log(rounds);
+    // alows for proper indexing of elements
+    var round = -1;
+    while (round < rounds) {
+        round++;
+        console.log("Round: "+round);
+        if (round == rounds) {
+            console.log("Gameover!");
+            break;
+        } else {
+            console.log(gameImages);
+            loadgameImage(round, gameImages);
+            // TODO:
+            // loadavailablePowerups();
+            // jquery selector $.(this)
+        }
     }
 }
 

@@ -100,7 +100,7 @@ function loadSLQImagesGame(count, rounds, exclusionData) {
         };
     if (localStorage.getItem("slqDataImages")) {
         imageData = JSON.parse(localStorage.getItem('slqDataImages'));
-        setupGamePage(rounds, imageData, count);
+        setupGamePage(rounds, count, imageData);
     } else {
         $.ajax({
             url: 'https://data.gov.au/api/action/datastore_search',
