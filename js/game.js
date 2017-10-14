@@ -11,9 +11,14 @@ Author: Sky Design
 /**
  * Executes when the document is ready.
  */
-$(document).ready(function () {
-    var datasetSize = 300;
+$(document).ready(function() {
+
+    //let loadingScreenElement = document.createRange().
+    //createContextualFragment('<div class="loadingScreen">');
+    //if (document.body.contains(loadingScreenElement)) {
     loadingScreenSetup(true);
+    //}
+    var datasetSize = 300;
     loadSLQImagesGame(datasetSize, 6, [0]);
 });
 
@@ -25,7 +30,6 @@ $(document).ready(function () {
  * @return {undefined}
  */
 function setupGamePage(rounds, imageCount, slqImages) {
-    console.log(slqImages)
     // list of images for the game
     var gameImages = [];
     // grab images for game
@@ -40,22 +44,22 @@ function setupGamePage(rounds, imageCount, slqImages) {
 /**
  * Starts Game
  * @param  {integer} rounds number of rounds
- * @param  {Object[]} gameImages an Array containing the game images
+ * @param  {Array} gameImages an Array containing the game images
  * @return {undefined}
  */
 function startGame(rounds, gameImages) {
-    console.log(rounds);
     // alows for proper indexing of elements
     var round = -1;
     while (round < rounds) {
         round++;
-        console.log("Round: "+round);
+        console.log("Round: " + round);
         if (round == rounds) {
             console.log("Gameover!");
             break;
         } else {
-            console.log(gameImages);
             loadgameImage(round, gameImages);
+            //function waitForLoadingScreen() {
+                //if (!)
             // TODO:
             // loadavailablePowerups();
             // jquery selector $.(this)
@@ -66,56 +70,55 @@ function startGame(rounds, gameImages) {
 /**
  * loads the image for the corresponding round
  * @param {integer} round number
- * @param {Object[]} images an array of objects containing images
- * @requre -1 < round < jsonImages.length
+ * @param {Array} images an array of objects containing images
  */
 function loadgameImage(round, images) {
-    try {
-        var photo = insertImage(images[round].image, 400);
-        $("#gameFrame").attr("src", $(photo).attr("src"));
-        // store image in local storage
-        sessionStorage.setItem("lastGameImage", photo);
-    } catch (err) {
-        console.log("Error: Cannot set gameFrame source to the game image.")
-        // @Peter not sure what this is doing?
-        var photo = insertImage(images[round].image, 400);
-        $("#gameFrame").attr("src", $(photo).attr("src"));
-        // store image in local storage
-        sessionStorage.setItem("lastGameImage", photo);
-    }
-}
-
-/** Timer and blur effect */
-function startBlurTimer() {
-    var elem = document.getElementById("timePassed"),
-        width = 0,
-        id = setInterval(frame, 1000);
-
-    function frame() {
-        if (width == 50) {
-            elem.style.backgroundColor = "yellow";
-        }
-        if (width >= 100) {
-            elem.style.backgroundColor = "red";
-            clearInterval(id);
-        } else {
-            width = width + 5;
-            elem.style.width = width + '%';
-            document.getElementById("gameFrame").style.filter = "blur(" + (100 -
-                width) / 5 + 'px' + ")";
+    // @requre -1 < round < images.length
+    if (round < 0 || round > images.length) {
+        console.log("Error: Round must be greater than -1 and less than the " +
+        "images array length");
+    } else {
+        try {
+            var photo = insertImage(images[round].image, 400);
+            $("#gameFrame").attr("src", $(photo).attr("src"));
+            // store image in local storage
+            sessionStorage.setItem("lastGameImage", photo);
+        } catch (err) {
+            console.log("Error: Cannot set gameFrame source to the game image.")
+            // @Peter not sure what this is doing?
+            //var photo = insertImage(images[round].image, 400);
+            //$("#gameFrame").attr("src", $(photo).attr("src"));
+            // store image in local storage
+            //sessionStorage.setItem("lastGameImage", photo);
         }
     }
 }
 
 /**
- * Overlay
- * @return {undefined}
+ * Starts Blur and timer!
+ * @param  {integer} time how long the user has to guess in milliseconds.
+ * @return {Boolean}
  */
-function on() {
-    document.getElementById("overlay").style.display = "block";
-}
-
-function off() {
-    document.getElementById("overlay").style.display = "none";
-    startBlurTimer();
+function startBlurTimer(time) {
+    var elem = document.getElementById("timePassed"),
+        width = 0,
+        maxwidth = 100,
+        intervals = 5,
+        intervalTime = time / (maxwidth / intervals),
+        id = setInterval(frame, intervalTime);
+        timerComplete = false;
+    function frame() {
+        if (width >= maxwidth) {
+            elem.style.backgroundColor = "red";
+            clearInterval(id);
+            return timerComplete;
+        } else if (width == (maxwidth / 2)) {
+            elem.style.backgroundColor = "yellow";
+        } else {
+            width = width + intervals;
+            elem.style.width = width + '%';
+            document.getElementById("gameFrame").style.filter = "blur(" +
+                (maxwidth - width) / intervals + 'px' + ")";
+        }
+    }
 }
