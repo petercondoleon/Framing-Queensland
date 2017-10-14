@@ -1,3 +1,4 @@
+
 /*************************************
 universal functions and/or global variables
 
@@ -8,11 +9,17 @@ Course: DECO1800 Semester 2 - 2017
 
 Author: Sky Design
 *************************************/
+var isLoading = true;
+
 /**
  * Executes when the document is ready.
  */
 $(document).ready(function () {
+    //let loadingScreenElement = document.createRange().createContextualFragment
+    //('<div class="loadingScreen">');
+    //if (document.contains(loadingScreenElement)) {
     loadingScreenSetup(false);
+    // Used to notify a page that loading screen has been removed.
 });
 
 /**
@@ -45,12 +52,19 @@ function rotateImages(htmlElement) {
  * @return {undefined}
  */
 function loadingScreenSetup(isGamepage) {
-    $(".loadingScreen").click(function () {
-        $(this).animate({
-            bottom: "100%"
-        }, 500);
-        if (isGamepage) {
-            startBlurTimer();
-        }
-    });
+    setTimeout(function () {
+        if (!isLoading) {
+            $("#loadingSpinner").attr("src", "../img/png/loaded.png");
+            $(".loadingScreen").click(function () {
+               $(this).animate({
+                   bottom: "100%"
+               }, 500);
+               if (isGamepage) {
+                   startBlurTimer(10000);
+               }
+           });
+       } else {
+           loadingScreen(isGamepage);
+       }
+   },1000 );
 }
