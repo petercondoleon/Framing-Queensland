@@ -1,7 +1,1 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg width="100%" height="100%" viewBox="0 0 546 356" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
-    <g id="Play" transform="matrix(1,0,0,1,-3128.54,-200.025)">
-        <path d="M3577.77,203.15C3629.12,203.15 3670.82,233.542 3670.82,284.899L3670.82,471.007C3670.82,522.365 3629.12,552.756 3577.77,552.756L3224.72,552.756C3173.36,552.756 3131.66,522.365 3131.66,471.007L3131.66,284.899C3131.66,233.542 3173.36,203.15 3224.72,203.15L3577.77,203.15ZM3493.73,377.953L3309.42,473.181L3309.42,282.725L3493.73,377.953Z" style="stroke:black;stroke-width:6.25px;"/>
-    </g>
-</svg>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg width="100%" height="100%" viewBox="0 0 130 84" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;"><path id="Play" d="M107.224,0.036c12.326,0 22.333,7.294 22.333,19.62l0,44.666c0,12.326 -10.007,19.619 -22.333,19.619l-84.732,0c-12.326,0 -22.333,-7.293 -22.333,-19.619l0,-44.666c0,-12.326 10.007,-19.62 22.333,-19.62l84.732,0Zm-20.169,41.953l-44.234,22.854l0,-45.709l44.234,22.855Z" style="fill:#7b7b7b;"/></svg>

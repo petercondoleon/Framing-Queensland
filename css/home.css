@@ -27,17 +27,24 @@
     position: absolute;
     left: 3%;
     top: 10%;
-    width: 128px;
-    height: 128px;
-    text-shadow: -9px 9px #86C7DC;
+    width: 32px;
+    height: 32px;
+    padding: 12px;
+    background-color: white;
+    border-radius: 100px;
+    box-shadow: -9px 9px #86C7DC;
 }
 
-#socialMediaButton {
+#facebookButton {
     position: absolute;
     right: 3%;
     top: 10%;
-    width: 128px;
-    height: 128px;
+    width: 32px;
+    height: 32px;
+    padding: 12px;
+    background-color: white;
+    border-radius: 100px;
+    box-shadow: -9px 9px #86C7DC;
 }
 
 #photoStack::before {
