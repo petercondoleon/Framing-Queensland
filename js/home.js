@@ -12,7 +12,7 @@ Author: Sky Design
  * Executes when the document is ready.
  */
 $(document).ready(function () {
-    loadSLQImagesHomepage(3);
+    loadSLQImagesHomepage(6);
     animateLogo();
     setupHelpMenu();
 });
@@ -63,7 +63,6 @@ function homepageImagesSetup(jsonImages) {
      $("#instructionsContainer").click(function () {
          setHelpMenu(true);
      });
-     $("#instructionsContainer").css("bottom","100%");
  }
 
 /**
