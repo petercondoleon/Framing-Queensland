@@ -1,14 +1,11 @@
 /* Home Page CSS Styling */
 
-#title {
-
-}
-
 #title a {
     color: white;
     font-size: 5em;
     text-align: center;
     text-decoration: none;
+    text-shadow: -9px 9px #86C7DC;
 
     position: absolute;
     left: 50%;
@@ -24,6 +21,7 @@
 }
 
 #helpButton {
+    cursor: pointer;
     position: absolute;
     left: 3%;
     top: 10%;
@@ -33,6 +31,11 @@
     background-color: white;
     border-radius: 100px;
     box-shadow: -9px 9px #86C7DC;
+    transition: 0.1s;
+}
+
+#helpButton:hover {
+    box-shadow: -9px 12px #86C7DC;
 }
 
 #facebookButton {
@@ -45,6 +48,11 @@
     background-color: white;
     border-radius: 100px;
     box-shadow: -9px 9px #86C7DC;
+    transition: 0.1s;
+}
+
+#facebookButton:hover {
+    box-shadow: -9px 12px #86C7DC;
 }
 
 #photoStack::before {

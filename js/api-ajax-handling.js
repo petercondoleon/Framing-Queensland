@@ -161,7 +161,7 @@ function buildJSON(rawajaxObject) {
     // check if record image and id exists
     if (recordImage && recordId) {
         jsonObject = {
-            image: recordImage
+            image: recordImage,
             id:recordId
         }
     // all images should have an image and id, if not something has gone wrong.

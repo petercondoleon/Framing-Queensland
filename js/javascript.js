@@ -68,3 +68,24 @@ function loadingScreenSetup(isGamepage) {
        }
    },1000 );
 }
+
+/**
+ * Blur objects
+ * @param  {Object} object the jquery object
+ * @param  {Number} radius the blur radius to set
+ * @param  {Number} duration the time taken to blur
+ * @return {undefined}
+ */
+function blur(object, radius, duration){
+  var filterValue = 'blur(' + radius + 'px)';
+  var transitionValue = 'all ' + duration + 's ease-out';
+  object.css({
+      'filter': filterValue,
+      'webkitFilter': filterValue,
+      'mozFilter': filterValue,
+      'transition': transitionValue,
+      '-webkit-transition': transitionValue,
+      '-moz-transition': transitionValue
+  });
+
+}

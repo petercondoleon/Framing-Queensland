@@ -12,8 +12,9 @@ Author: Sky Design
  * Executes when the document is ready.
  */
 $(document).ready(function () {
-    loadSLQImagesHomepage(6);
+    loadSLQImagesHomepage(3);
     animateLogo();
+    setupHelpMenu();
 });
 
 /*
@@ -46,5 +47,41 @@ function homepageImagesSetup(jsonImages) {
         $("#photoCall ul").append(
             "<li>" + insertImage(jsonImages[i].image, 200) + "</li>"
         )
+    }
+}
+
+/**
+ * Provides handlers for opening and closing the help menu.
+ */
+ function setupHelpMenu() {
+     // Handle the help button being pressed
+     $("#helpButton").click(function () {
+         setHelpMenu(false);
+     });
+
+     // Handle canceling the help screen
+     $("#instructionsContainer").click(function () {
+         setHelpMenu(true);
+     });
+     $("#instructionsContainer").css("bottom","100%");
+ }
+
+/**
+ * Set the appearance of the help menu on the home page.
+ * @param {Boolean} hidden false will show the menu, true will hide the menu
+ */
+function setHelpMenu(hidden) {
+    if (hidden) {
+        // Hide the menu
+        $("#instructionsContainer").animate({
+            bottom: "100%"
+        }, 300);
+        blur($("#home"), 0, 0.3);
+    } else {
+        // Show the menu
+        $("#instructionsContainer").animate({
+            bottom: "0%"
+        }, 300);
+        blur($("#home"), 10, 0.3);
     }
 }
