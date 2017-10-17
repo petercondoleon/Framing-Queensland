@@ -28,3 +28,21 @@
 	font-family:times; /*not the right style*/
 
 }
+
+#facebookButton {
+    position: inherit;
+    right: 50%;
+    top: 50%;
+    width: 32px;
+    height: 32px;
+    padding: 12px;
+    margin: 10px;
+    background-color: white;
+    border-radius: 100px;
+    box-shadow: -9px 9px #86C7DC;
+    transition: 0.1s;
+}
+
+#facebookButton:hover {
+    box-shadow: -9px 12px #86C7DC;
+}
