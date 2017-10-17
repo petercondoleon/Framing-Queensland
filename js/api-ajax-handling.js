@@ -49,11 +49,13 @@ function loadSLQImagesHomepage(count) {
             limit: count
         };
     if (localStorage.getItem("slqDataImagesHomepage")) {
+        console.log("Data is on local storage.");
         imageData = JSON.parse(localStorage.getItem('slqDataImagesHomepage'));
         homepageImagesSetup(imageData);
         rotateImages("#photoStack ul li img");
     }
     else {
+        console.log("Data isn't on local storage. Grabbing from server.");
         $.ajax({
             url: 'https://data.gov.au/api/action/datastore_search',
             data: data,
@@ -63,13 +65,15 @@ function loadSLQImagesHomepage(count) {
             type: "POST",
             success: function (data) {
                 function dataIsHere() {
-                    // Keep looping until the API has returned the specified data.
+                    // Loop until the API has returned the specified data.
                     setTimeout(function () {
                         // The number of records = the parsed limit.
                         if (data.result.records.length >= count) {
                             imageData = [];
-                            for (var i = 0; i < data.result.records.length; i++) {
-                                imageData.push(buildJSON(data.result.records[i]));
+                            for (var i = 0; i < data.result.records.length; i++)
+                            {
+                                imageData.push(buildJSON(data
+                                    .result.records[i]));
                             }
                             // Callback
                             data = JSON.stringify(imageData);
@@ -77,6 +81,8 @@ function loadSLQImagesHomepage(count) {
                             homepageImagesSetup(imageData);
                             rotateImages("#photoStack ul li img");
                         } else {
+                            console.log("Error: SLQ database cannot provide "+
+                            "the requested data. Retrying...")
                             dataIsHere();
                         }
                     }, 1000);
@@ -108,10 +114,12 @@ function loadSLQImagesGame(count, rounds, exclusionData) {
         };
 
     if (localStorage.getItem("slqDataImages")) {
+        console.log("Data is on local storage.");
         imageData = JSON.parse(localStorage.getItem('slqDataImages'));
         setupGamePage(rounds, count, imageData);
         isLoading = false;
     } else {
+        console.log("Data isn't on local storage. Grabbing from server.");
         $.ajax({
             url: 'https://data.gov.au/api/action/datastore_search',
             data: data,
@@ -157,7 +165,9 @@ function loadSLQImagesGame(count, rounds, exclusionData) {
 function buildJSON(rawajaxObject) {
     var jsonObject = {},
         recordImage = rawajaxObject["1000_pixel_jpg"],
-        recordId = rawajaxObject["id"];
+        recordId = rawajaxObject["_id"];
+    console.log(recordId);
+    console.log(recordImage);
     // check if record image and id exists
     if (recordImage && recordId) {
         jsonObject = {

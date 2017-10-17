@@ -58,7 +58,6 @@ function homepageImagesSetup(jsonImages) {
      $("#helpButton").click(function () {
          setHelpMenu(false);
      });
-
      // Handle canceling the help screen
      $("#instructionsContainer").click(function () {
          setHelpMenu(true);

@@ -85,11 +85,6 @@ function loadgameImage(round, images) {
             sessionStorage.setItem("lastGameImage", photo);
         } catch (err) {
             console.log("Error: Cannot set gameFrame source to the game image.")
-            // @Peter not sure what this is doing?
-            //var photo = insertImage(images[round].image, 400);
-            //$("#gameFrame").attr("src", $(photo).attr("src"));
-            // store image in local storage
-            //sessionStorage.setItem("lastGameImage", photo);
         }
     }
 }
@@ -97,7 +92,7 @@ function loadgameImage(round, images) {
 /**
  * Starts Blur and timer!
  * @param  {integer} time how long the user has to guess in milliseconds.
- * @return {Boolean}
+ * @return {undefined}
  */
 function startBlurTimer(time) {
     var elem = document.getElementById("timePassed"),
@@ -106,7 +101,6 @@ function startBlurTimer(time) {
         intervals = 5,
         intervalTime = time / (maxwidth / intervals),
         id = setInterval(frame, intervalTime);
-        timerComplete = false;
     function frame() {
         if (width >= maxwidth) {
             elem.style.backgroundColor = "red";
