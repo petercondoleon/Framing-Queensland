@@ -166,8 +166,6 @@ function buildJSON(rawajaxObject) {
     var jsonObject = {},
         recordImage = rawajaxObject["1000_pixel_jpg"],
         recordId = rawajaxObject["_id"];
-    console.log(recordId);
-    console.log(recordImage);
     // check if record image and id exists
     if (recordImage && recordId) {
         jsonObject = {

@@ -12,12 +12,7 @@ Author: Sky Design
  * Executes when the document is ready.
  */
 $(document).ready(function() {
-
-    //let loadingScreenElement = document.createRange().
-    //createContextualFragment('<div class="loadingScreen">');
-    //if (document.body.contains(loadingScreenElement)) {
     loadingScreenSetup(true);
-    //}
     var datasetSize = 300;
     loadSLQImagesGame(datasetSize, 6, [0]);
 });
@@ -102,12 +97,12 @@ function startBlurTimer(time) {
         intervalTime = time / (maxwidth / intervals),
         id = setInterval(frame, intervalTime);
     function frame() {
+        if (width == (maxwidth / 2)) {
+            elem.style.backgroundColor = "yellow";
+        }
         if (width >= maxwidth) {
             elem.style.backgroundColor = "red";
             clearInterval(id);
-            return timerComplete;
-        } else if (width == (maxwidth / 2)) {
-            elem.style.backgroundColor = "yellow";
         } else {
             width = width + intervals;
             elem.style.width = width + '%';
