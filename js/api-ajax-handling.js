@@ -53,8 +53,7 @@ function loadSLQImagesHomepage(count) {
         imageData = JSON.parse(localStorage.getItem('slqDataImagesHomepage'));
         homepageImagesSetup(imageData);
         rotateImages("#photoStack ul li img");
-    }
-    else {
+    } else {
         console.log("Data isn't on local storage. Grabbing from server.");
         $.ajax({
             url: 'https://data.gov.au/api/action/datastore_search',
@@ -68,21 +67,36 @@ function loadSLQImagesHomepage(count) {
                     // Loop until the API has returned the specified data.
                     setTimeout(function () {
                         // The number of records = the parsed limit.
-                        if (data.result.records.length >= count) {
+                        if (data.result.records.length >=
+                            count) {
                             imageData = [];
-                            for (var i = 0; i < data.result.records.length; i++)
-                            {
-                                imageData.push(buildJSON(data
-                                    .result.records[i]));
+                            for (var i = 0; i <
+                                data.result.records
+                                .length; i++) {
+                                imageData.push(
+                                    buildJSON(
+                                        data
+                                        .result
+                                        .records[
+                                            i])
+                                );
                             }
                             // Callback
-                            data = JSON.stringify(imageData);
-                            localStorage.setItem('slqDataImagesHomepage', data);
-                            homepageImagesSetup(imageData);
-                            rotateImages("#photoStack ul li img");
+                            data = JSON.stringify(
+                                imageData);
+                            localStorage.setItem(
+                                'slqDataImagesHomepage',
+                                data);
+                            homepageImagesSetup(
+                                imageData);
+                            rotateImages(
+                                "#photoStack ul li img"
+                            );
                         } else {
-                            console.log("Error: SLQ database cannot provide "+
-                            "the requested data. Retrying...")
+                            console.log(
+                                "Error: SLQ database cannot provide " +
+                                "the requested data. Retrying..."
+                            )
                             dataIsHere();
                         }
                     }, 1000);
@@ -132,18 +146,29 @@ function loadSLQImagesGame(count, rounds, exclusionData) {
                     // Keep looping until API returns the specified data.
                     setTimeout(function () {
                         // The number of records = the parsed limit.
-                        if (data.result.records.length >= count) {
+                        if (data.result.records.length >=
+                            count) {
                             imageData = [];
-                            for (var i = 0; i < data.result.records.length;
-                                i++) {
+                            for (var i = 0; i <
+                                data.result.records
+                                .length; i++) {
                                 // TODO: check for exclusionData
-                                imageData.push(buildJSON(data.result.
-                                    records[i]));
+                                imageData.push(
+                                    buildJSON(
+                                        data.result
+                                        .records[
+                                            i])
+                                );
                             }
                             // Callback
-                            data = JSON.stringify(imageData);
-                            localStorage.setItem('slqDataImages', data);
-                            setupGamePage(rounds, count, imageData);
+                            data = JSON.stringify(
+                                imageData);
+                            localStorage.setItem(
+                                'slqDataImages',
+                                data);
+                            setupGamePage(rounds,
+                                count,
+                                imageData);
                             isLoading = false;
                         } else {
                             dataIsHere();
@@ -169,10 +194,10 @@ function buildJSON(rawajaxObject) {
     // check if record image and id exists
     if (recordImage && recordId) {
         jsonObject = {
-            image: recordImage,
-            id:recordId
-        }
-    // all images should have an image and id, if not something has gone wrong.
+                image: recordImage,
+                id: recordId
+            }
+            // all images should have an image and id, if not something has gone wrong.
     } else {
         jsonObject = {
             help: "an error has occured!"
@@ -191,15 +216,18 @@ function buildJSON(rawajaxObject) {
 function keywordAPICall(imageURL) {
     var keywords = [],
         data = {
-            url: imageUrl,
-            api_key: keywords_api_key
-        }
+            url: imageURL
+        };
     $.ajax({
-        url: 'localhost',
+        url: 'https://api.imagga.com/v1/tagging',
+        type: "GET",
         data: data,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Basic YWNjXzVmMmI3MjVkODI3OTQ5ZDpiY2I1YzVjNjg4ZmNiODMzMjVkY2EzYTg2ZDExMjliOQ== acc_5f2b725d827949d");
+        },
         success: function (data) {
+            console.log(data);
             keywords = data;
         }
     });
-    return keywords;
 }

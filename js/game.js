@@ -11,7 +11,7 @@ Author: Sky Design
 /**
  * Executes when the document is ready.
  */
-$(document).ready(function() {
+$(document).ready(function () {
     loadingScreenSetup(true);
     var datasetSize = 300;
     loadSLQImagesGame(datasetSize, 6, [0]);
@@ -52,9 +52,10 @@ function startGame(rounds, gameImages) {
             console.log("Gameover!");
             break;
         } else {
-            loadgameImage(round, gameImages);
+            loadgameImage(gameImages[round]);
+            keywordAPICall(gameImages[round]);
             //function waitForLoadingScreen() {
-                //if (!)
+            //if (!)
             // TODO:
             // loadavailablePowerups();
             // jquery selector $.(this)
@@ -63,25 +64,19 @@ function startGame(rounds, gameImages) {
 }
 
 /**
- * loads the image for the corresponding round
- * @param {integer} round number
- * @param {Array} images an array of objects containing images
+ * loads an image object into the gameframe
+ * @param {string} image an imageURL
  */
-function loadgameImage(round, images) {
-    // @requre -1 < round < images.length
-    if (round < 0 || round > images.length) {
-        console.log("Error: Round must be greater than -1 and less than the " +
-        "images array length");
-    } else {
-        try {
-            var photo = insertImage(images[round].image, 400);
-            $("#gameFrame").attr("src", $(photo).attr("src"));
-            // store image in local storage
-            sessionStorage.setItem("lastGameImage", photo);
-        } catch (err) {
-            console.log("Error: Cannot set gameFrame source to the game image.")
-        }
+function loadgameImage(image) {
+    try {
+        var photo = insertImage(image.image, 400);
+        $("#gameFrame").attr("src", $(photo).attr("src"));
+        // store image in local storage
+        sessionStorage.setItem("lastGameImage", photo);
+    } catch (err) {
+        console.log("Error: Cannot set gameFrame source to the game image.")
     }
+}
 }
 
 /**
@@ -96,6 +91,7 @@ function startBlurTimer(time) {
         intervals = 5,
         intervalTime = time / (maxwidth / intervals),
         id = setInterval(frame, intervalTime);
+
     function frame() {
         if (width == (maxwidth / 2)) {
             elem.style.backgroundColor = "yellow";
