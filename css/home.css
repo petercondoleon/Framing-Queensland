@@ -13,6 +13,10 @@
     transform: translate(-50%, 0);
 }
 
+#title a:hover {
+    text-shadow: -9px 12px #86C7DC;
+}
+
 #skyDesignLogo {
     position: absolute;
     left: 1%;

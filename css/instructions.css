@@ -7,7 +7,6 @@
     height: 100%;
     bottom: 100%;
 }
-
 #instructions {
     background-color: white;
     position: absolute;
@@ -20,29 +19,24 @@
     padding: 10px;
     text-align: center;
 }
-
 #instructions h1 {
     font-size: 64px;
     color: #8AD2E8;
 }
-
 #instructions h2 {
     font-size: 48px;
     color: #8AD2E8;
 }
-
 #instructions p {
     font-size: 32px;
     color: #8AD2E8;
     padding: 16px;
 }
-
 #instructions aside {
     font-size: 32px;
     padding: 10px;
     color: #8AD2E8;
 }
-
 #instructions button {
     font-size: 24px;
     text-decoration: none;

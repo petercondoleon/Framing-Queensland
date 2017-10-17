@@ -1,44 +1,43 @@
 /* General */
+
 body {
-  background-color: #8AD2E8;
-  font-family: 'Permanent Marker', cursive;
+    background-color: #8AD2E8;
+    font-family: 'Permanent Marker', cursive;
 }
-
 /* latin */
-@font-face {
-  font-family: 'Permanent Marker';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Permanent Marker Regular'), local('PermanentMarker-Regular'), url(https://fonts.gstatic.com/s/permanentmarker/v6/9vYsg5VgPHKK8SXYbf3sMio-5Z6V1O0VBgfXWFfbB4c.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
-}
 
-/*Timer and Timer initiating instructions*/
-#totalTime{
-  margin: auto;
-  width: 40%;
-  background-color: grey;
-  border-radius: 5px;
-}
-#timePassed {
-    width: 0%;
-    height: 30px;
-    background-color: lightgreen;
-    border-radius: 5px;
-    transition: all 1s;
+@font-face {
+    font-family: 'Permanent Marker';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Permanent Marker Regular'), local('PermanentMarker-Regular'), url(https://fonts.gstatic.com/s/permanentmarker/v6/9vYsg5VgPHKK8SXYbf3sMio-5Z6V1O0VBgfXWFfbB4c.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
 }
 #overlay {
-    position: fixed; /* Sit on top of the page content */
-    display: block; /* Hidden by default */
-    width: 100%; /* Full width (cover the whole page) */
-    height: 100%; /* Full height (cover the whole page) */
+    position: fixed;
+    /* Sit on top of the page content */
+
+    display: block;
+    /* Hidden by default */
+
+    width: 100%;
+    /* Full width (cover the whole page) */
+
+    height: 100%;
+    /* Full height (cover the whole page) */
+
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0,0,0,0.5); /* Black background with opacity */
-    z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
-    cursor: pointer; /* Add a pointer on hover */
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Black background with opacity */
+
+    z-index: 2;
+    /* Specify a stack order in case you're using a different order for other elements */
+
+    cursor: pointer;
+    /* Add a pointer on hover */
 }
 /*
 #Instructions{
@@ -52,134 +51,84 @@ body {
     -ms-transform: translate(-50%,-50%);
 }
 */
-/* Game Page */
-#endGame {
-  text-align: center;
-  padding: 20px;
-  padding-bottom: 200px;
-}
 
-#endGame button {
-  display: inline-block;
-  padding: 15px 25px;
-  font-size: 24px;
-  cursor: pointer;
-  text-align: center;
-  text-decoration: none;
-  outline: none;
-  color: #8AD2E8;
-  background-color: white;
-  border: none;
-  border-radius: 15px;
-  box-shadow: -9px 9px #86C7DC;
-  transition: 0.1s;
-}
-
-#endGame button:hover {
-  box-shadow: -9px 12px #86C7DC;
-}
-
-input[type=text], select {
+input[type=text],
+select {
     width: 30%;
-	height: 20px;
+    height: 20px;
     margin: center;
 }
-
 input[type=submit] {
     width: 30%;
     color: white;
     margin: center;
 }
-
-input[type=submit]:hover {
-
-}
-#guess
-{
-margin: 0 auto;
-margin-left: auto;
-margin-right: auto;
-text-align:center;
-padding: 20px;
-}
-
-
-img.gameFrame {
-    display: block;
-    margin: auto;
-    width: 40%;
-    filter: blur(20px);
+input[type=submit]:hover {} #playAgain,
+#leaderBoard {
+    display: inline-block;
+    text-align: center;
     padding: 20px;
+    padding-bottom: 200px;
 }
-/*game over page*/
-img.gameOverFrame {
-  display: block;
-  margin: auto;
-  width: 40%;
-  padding: 20px;
+#playAgain button,
+#leaderBoard button {
+    display: inline-block;
+    padding: 15px 25px;
+    font-size: 24px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #8AD2E8;
+    background-color: white;
+    border: none;
+    border-radius: 15px;
+    box-shadow: -9px 9px #86C7DC;
+    transition: 0.1s;
 }
-#playAgain , #leaderBoard {
-display:inline-block;
-text-align: center;
-padding: 20px;
-padding-bottom: 200px;
-}
-
-#playAgain button, #leaderBoard button {
-  display: inline-block;
-  padding: 15px 25px;
-  font-size: 24px;
-  cursor: pointer;
-  text-align: center;
-  text-decoration: none;
-  outline: none;
-  color: #8AD2E8;
-  background-color: white;
-  border: none;
-  border-radius: 15px;
-  box-shadow: -9px 9px #86C7DC;
-  transition: 0.1s;
-}
-
-#playAgain button:hover, #leaderBoard button:hover, {
-  box-shadow: -9px 12px #86C7DC;
+#playAgain button:hover,
+#leaderBoard button:hover,
+{
+    box-shadow: -9px 12px #86C7DC;
 }
 #parentGameOver {
-  margin: center;
-  text-align: center;
+    margin: center;
+    text-align: center;
 }
 /*sky design page*/
+
 #returnHome {
-display:inline-block;
-text-align: center;
-padding: 20px;
-padding-bottom: 200px;
+    display: inline-block;
+    text-align: center;
+    padding: 20px;
+    padding-bottom: 200px;
 }
 #returnHome button {
-  display: inline-block;
-  padding: 15px 25px;
-  font-size: 24px;
-  cursor: pointer;
-  text-align: center;
-  text-decoration: none;
-  outline: none;
-  color: #8AD2E8;
-  background-color: white;
-  border: none;
-  border-radius: 15px;
-  box-shadow: -9px 9px #86C7DC;
-  transition: 0.1s;
+    display: inline-block;
+    padding: 15px 25px;
+    font-size: 24px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #8AD2E8;
+    background-color: white;
+    border: none;
+    border-radius: 15px;
+    box-shadow: -9px 9px #86C7DC;
+    transition: 0.1s;
 }
 #information {
-  margin: center;
-  text-align: center;
+    margin: center;
+    text-align: center;
 }
 #parentSkyDesign {
-  margin: center;
-  text-align: center;
+    margin: center;
+    text-align: center;
 }
 /*Leaderboard*/
+
 #parentLeaderBoard {
-  margin: center;
-  text-align: center;
+    margin: center;
+    text-align: center;
 }

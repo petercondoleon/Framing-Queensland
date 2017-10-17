@@ -1,0 +1,59 @@
+/*Timer and Timer initiating instructions*/
+#totalTime {
+    margin: auto;
+    width: 40%;
+    background-color: grey;
+    border-radius: 5px;
+}
+#timePassed {
+    width: 0%;
+    height: 30px;
+    background-color: lightgreen;
+    border-radius: 5px;
+    transition: all 1s;
+}
+#endGame {
+    text-align: center;
+    padding: 20px;
+    padding-bottom: 200px;
+}
+#endGame button {
+    display: inline-block;
+    padding: 15px 25px;
+    font-size: 24px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #8AD2E8;
+    background-color: white;
+    border: none;
+    border-radius: 15px;
+    box-shadow: -9px 9px #86C7DC;
+    transition: 0.1s;
+}
+#endGame button:hover {
+    box-shadow: -9px 12px #86C7DC;
+}
+#guess {
+    margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    padding: 20px;
+}
+img.gameFrame {
+    display: block;
+    margin: auto;
+    width: 40%;
+    filter: blur(20px);
+    padding: 20px;
+}
+
+/*game over page*/
+img.gameOverFrame {
+    display: block;
+    margin: auto;
+    width: 40%;
+    padding: 20px;
+}
