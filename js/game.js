@@ -77,7 +77,6 @@ function loadgameImage(image) {
         console.log("Error: Cannot set gameFrame source to the game image.")
     }
 }
-}
 
 /**
  * Starts Blur and timer!
