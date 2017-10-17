@@ -64,7 +64,7 @@ function loadingScreenSetup(isGamepage) {
                }
            });
        } else {
-           loadingScreen(isGamepage);
+           loadingScreenSetup(isGamepage);
        }
    },1000 );
 }
