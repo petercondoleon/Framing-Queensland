@@ -221,9 +221,10 @@ function keywordAPICall(imageURL) {
     $.ajax({
         url: 'https://api.imagga.com/v1/tagging',
         type: "GET",
+        dataType : 'jsonp',
         data: data,
         beforeSend: function (xhr) {
-            xhr.setRequestHeader("Authorization", "Basic YWNjXzVmMmI3MjVkODI3OTQ5ZDpiY2I1YzVjNjg4ZmNiODMzMjVkY2EzYTg2ZDExMjliOQ== acc_5f2b725d827949d");
+            xhr.setRequestHeader("Authorization", "Basic acc_5f2b725d827949dbcb5c5c688fcb83325dca3a86d1129b9");
         },
         success: function (data) {
             console.log(data);
