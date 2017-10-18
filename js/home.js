@@ -71,12 +71,17 @@ function homepageImagesSetup(jsonImages) {
 function setHelpMenu(hidden) {
     if (hidden) {
         // Hide the menu
+
         $("#instructionsContainer").animate({
             bottom: "100%"
+        }, 300);
+        setTimeout(function () {
+            $("#instructionsContainer").css('visibility', "hidden");
         }, 300);
         blur($("#home"), 0, 0.3);
     } else {
         // Show the menu
+        $("#instructionsContainer").css('visibility', "visible");
         $("#instructionsContainer").animate({
             bottom: "0%"
         }, 300);
