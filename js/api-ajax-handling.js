@@ -67,36 +67,21 @@ function loadSLQImagesHomepage(count) {
                     // Loop until the API has returned the specified data.
                     setTimeout(function () {
                         // The number of records = the parsed limit.
-                        if (data.result.records.length >=
-                            count) {
+                        if (data.result.records.length >= count) {
                             imageData = [];
-                            for (var i = 0; i <
-                                data.result.records
-                                .length; i++) {
-                                imageData.push(
-                                    buildJSON(
-                                        data
-                                        .result
-                                        .records[
-                                            i])
-                                );
+                            for (var i = 0; i < data.result.records.length; i++) {
+                                imageData.push(buildJSON(data.result.records[i]));
                             }
                             // Callback
-                            data = JSON.stringify(
-                                imageData);
-                            localStorage.setItem(
-                                'slqDataImagesHomepage',
-                                data);
-                            homepageImagesSetup(
-                                imageData);
-                            rotateImages(
-                                "#photoStack ul li img"
-                            );
+                            data = JSON.stringify(imageData);
+                            localStorage.setItem('slqDataImagesHomepage', data);
+                            homepageImagesSetup(imageData);
+                            rotateImages("#photoStack ul li img");
                         } else {
                             console.log(
                                 "Error: SLQ database cannot provide " +
                                 "the requested data. Retrying..."
-                            )
+                            );
                             dataIsHere();
                         }
                     }, 1000);
