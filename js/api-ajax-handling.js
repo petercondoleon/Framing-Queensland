@@ -218,17 +218,38 @@ function keywordAPICall(imageURL) {
         data = {
             url: imageURL
         };
-    $.ajax({
-        url: 'https://api.imagga.com/v1/tagging',
-        type: "GET",
-        dataType : 'jsonp',
-        data: data,
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader("Authorization", "Basic acc_5f2b725d827949dbcb5c5c688fcb83325dca3a86d1129b9");
-        },
-        success: function (data) {
-            console.log(data);
-            keywords = data;
-        }
-    });
+        // The following comments won't work as an implementation fix is needed.
+        // I have failed the AUTH by intent, so we don't use quota.
+        // Remove "fail" and replace with following string
+    var username = "Fail"//"acc_5f2b725d827949d",
+        password = "Fail"//"bcb5c5c688fcb83325dca3a86d1129b9";
+    // $.ajax({
+    //     type: "GET",
+    //     username: username,
+    //     password: password,
+    //     url:"localhost",
+    //     //url: 'https://'+username + ":" + password+'@api.imagga.com/v1/tagging',
+    //     dataType : 'jsonp',
+    //     data: data,
+    //     //headers: {
+    //     //    "Authorization": "Basic " + btoa(username + ":" + password)
+    //     //},
+    //     success: function (data) {
+    //         console.log("success!")
+    //         function dataIsHere() {
+    //             setTimeout(function () {
+    //                 if (data.results){
+    //                     console.log("data.results:")
+    //                     console.log(results);
+    //                 } else {
+    //                     console.log("data:")
+    //                     console.log(data);
+    //                     dataIsHere();
+    //                 }
+    //             },1000);
+    //
+    //         }
+    //         dataIsHere();
+    //     }
+    // });
 }

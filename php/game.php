@@ -14,4 +14,7 @@
 
     // Include the html of the game page
     include $_SERVER['DOCUMENT_ROOT'].'/html/game.html';
+
+    // Include the html of the game page
+    include $_SERVER['DOCUMENT_ROOT'].'/html/roundover.html';
 ?>

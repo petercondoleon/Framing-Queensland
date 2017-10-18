@@ -53,7 +53,7 @@ function startGame(rounds, gameImages) {
             break;
         } else {
             loadgameImage(gameImages[round]);
-            keywordAPICall(gameImages[round]);
+            keywordAPICall($("#gameFrame").attr("src"));
             //function waitForLoadingScreen() {
             //if (!)
             // TODO:

@@ -54,7 +54,8 @@ function rotateImages(htmlElement) {
 function loadingScreenSetup(isGamepage) {
     setTimeout(function () {
         if (!isLoading) {
-            $("#loadingSpinner").attr("src", "../img/png/loaded.png");
+            $("#loadingText").text("Loaded");
+            $("#loadingSpinner").attr("src", "../img/gif/loaded.gif");
             $(".loadingScreen").click(function () {
                $(this).animate({
                    bottom: "100%"
