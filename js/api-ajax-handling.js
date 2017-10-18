@@ -131,29 +131,16 @@ function loadSLQImagesGame(count, rounds, exclusionData) {
                     // Keep looping until API returns the specified data.
                     setTimeout(function () {
                         // The number of records = the parsed limit.
-                        if (data.result.records.length >=
-                            count) {
+                        if (data.result.records.length >= count) {
                             imageData = [];
-                            for (var i = 0; i <
-                                data.result.records
-                                .length; i++) {
+                            for (var i = 0; i < data.result.records.length; i++) {
                                 // TODO: check for exclusionData
-                                imageData.push(
-                                    buildJSON(
-                                        data.result
-                                        .records[
-                                            i])
-                                );
+                                imageData.push(buildJSON(data.result.records[i]));
                             }
                             // Callback
-                            data = JSON.stringify(
-                                imageData);
-                            localStorage.setItem(
-                                'slqDataImages',
-                                data);
-                            setupGamePage(rounds,
-                                count,
-                                imageData);
+                            data = JSON.stringify(imageData);
+                            localStorage.setItem('slqDataImages', data);
+                            setupGamePage(rounds, count, imageData);
                             isLoading = false;
                         } else {
                             dataIsHere();
@@ -179,10 +166,10 @@ function buildJSON(rawajaxObject) {
     // check if record image and id exists
     if (recordImage && recordId) {
         jsonObject = {
-                image: recordImage,
-                id: recordId
-            }
-            // all images should have an image and id, if not something has gone wrong.
+            image: recordImage,
+            id: recordId
+        }
+        // all images should have an image and id, if not something has gone wrong.
     } else {
         jsonObject = {
             help: "an error has occured!"
