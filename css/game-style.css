@@ -8,9 +8,8 @@
 #timePassed {
     width: 0%;
     height: 30px;
-    background-color: lightgreen;
     border-radius: 5px;
-    transition: all 1s;
+    transition-timing-function: linear;
 }
 #endGame {
     text-align: center;

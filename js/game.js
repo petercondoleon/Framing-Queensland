@@ -78,6 +78,7 @@ function loadgameImage(image) {
     try {
         var photo = insertImage(image.image, 400);
         $("#gameFrame").attr("src", $(photo).attr("src"));
+        $("#roundImage").attr("src", $(photo).attr("src"));
         // store image in local storage
         sessionStorage.setItem("lastGameImage", photo);
     } catch (err) {
@@ -91,27 +92,39 @@ function loadgameImage(image) {
  * @return {undefined}
  */
 function startBlurTimer(time) {
+    //var elem = $("#timePassed"),
     var elem = document.getElementById("timePassed"),
         width = 0,
         maxwidth = 100,
-        intervals = 5,
+        intervals = 0.5,
         intervalTime = time / (maxwidth / intervals),
         id = setInterval(frame, intervalTime);
-
+        elem.style.backgroundColor = "lightgreen";
+        elem.style.transition = "all " + (intervalTime/1000) + "s";
+        console.log("ooo");
     function frame() {
-        if (width == (maxwidth / 2)) {
-            elem.style.backgroundColor = "yellow";
+        if (width == ((maxwidth / 2)*0.9)) {
+            animateColourChange("#timePassed","yellow",1000);
+            //elem.animate({
+            //    backgroundColor: "red"
+            //},1000);
+        }
+        if (width >= maxwidth*0.9) {
+            animateColourChange("#timePassed","orange",1000);
         }
         if (width >= maxwidth) {
-            elem.style.backgroundColor = "red";
-            clearInterval(id);
+            animateColourChange("#timePassed","red",1000);
+            //elem.style.backgroundColor = "red";
             console.log("Round Over!")
             setupGameoverScreen();
+            clearInterval(id);
         } else {
+
             width = width + intervals;
             elem.style.width = width + '%';
-            document.getElementById("gameFrame").style.filter = "blur(" +
-                (maxwidth - width) / intervals + 'px' + ")";
+            blur($("#gameFrame"),((maxwidth - width) / intervals)/(8/intervals),0.1);
+            //document.getElementById("gameFrame").style.filter = "blur(" +
+            //    (maxwidth - width) / intervals + 'px' + ")";
         }
     }
 }
@@ -122,6 +135,7 @@ function startBlurTimer(time) {
  */
 function setupGameoverScreen () {
     $("#nextRound button").on("click.startNextRound", function() {
+        // Unbind action as soon as clicked to prevent ending the round early
         $("#nextRound button").off("click.startNextRound");
         startGame.startRound();
     });

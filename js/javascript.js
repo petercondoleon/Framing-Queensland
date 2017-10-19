@@ -93,5 +93,24 @@ function blur(object, radius, duration){
   });
 }
 
+/**
+ *
+ */
+function animateColourChange(object , colour, duration){
+    try {
+        $(object).animate({
+            backgroundColor: colour
+        }, duration);
+    } catch (err) {
+        console.log("Error: cannot transition timer colour"+
+         "because the browser doesn't support it!");
+    }
+    setTimeout(function () {
+        console.log("change!");
+        object.style.backgroundColor = colour;
+    }, duration);
+}
+
+
 // TODO:
 // function compareHits(){}
