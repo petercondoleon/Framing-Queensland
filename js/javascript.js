@@ -9,7 +9,9 @@ Course: DECO1800 Semester 2 - 2017
 
 Author: Sky Design
 *************************************/
+// global variables
 var isLoading = true;
+var imageLoaded = false;
 
 /**
  * Executes when the document is ready.
@@ -53,7 +55,7 @@ function rotateImages(htmlElement) {
  */
 function loadingScreenSetup(isGamepage) {
     setTimeout(function () {
-        if (!isLoading) {
+        if (!isLoading && imageLoaded) {
             $("#loadingText").text("Loaded");
             $("#loadingSpinner").attr("src", "../img/gif/loaded.gif");
             $(".loadingScreen").click(function () {
@@ -67,7 +69,8 @@ function loadingScreenSetup(isGamepage) {
        } else {
            loadingScreenSetup(isGamepage);
        }
-   },1000 );
+    // how often the loading screen checks if the data is loaded
+    },2000 );
 }
 
 /**
@@ -88,5 +91,7 @@ function blur(object, radius, duration){
       '-webkit-transition': transitionValue,
       '-moz-transition': transitionValue
   });
-
 }
+
+// TODO:
+// function compareHits(){}

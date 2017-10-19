@@ -45,22 +45,28 @@ function setupGamePage(rounds, imageCount, slqImages) {
 function startGame(rounds, gameImages) {
     // alows for proper indexing of elements
     var round = -1;
-    while (round < rounds) {
+    function startRound() {
         round++;
-        console.log("Round: " + round);
-        if (round == rounds) {
-            console.log("Gameover!");
-            break;
-        } else {
+        if (round < rounds) {
+            console.log("Round: " + round);
             loadgameImage(gameImages[round]);
+            // Loads from gameframe over the array.src to ensure
+            // that the correct url is passed instead of a delivery url
             keywordAPICall($("#gameFrame").attr("src"));
-            //function waitForLoadingScreen() {
-            //if (!)
-            // TODO:
+            if (!isLoading && imageLoaded) {
+                startBlurTimer(10000);
+            } else {
+                imageLoaded = true;
+            }
+                        // TODO:
             // loadavailablePowerups();
-            // jquery selector $.(this)
+
+            }
         }
+        else if (round == rounds) {
+            // GameOver
     }
+    startRound();
 }
 
 /**
@@ -98,6 +104,8 @@ function startBlurTimer(time) {
         if (width >= maxwidth) {
             elem.style.backgroundColor = "red";
             clearInterval(id);
+            console.log("Round Over!")
+            setupGameoverScreen();
         } else {
             width = width + intervals;
             elem.style.width = width + '%';
@@ -105,4 +113,14 @@ function startBlurTimer(time) {
                 (maxwidth - width) / intervals + 'px' + ")";
         }
     }
+}
+
+/**
+ * Sets up gameover screen functionality
+ * @return {undefined}
+ */
+function setupGameoverScreen () {
+    $("#nextRound button").click(function () {
+        startRound();
+    });
 }
