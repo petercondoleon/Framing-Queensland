@@ -61,11 +61,12 @@ function startGame(rounds, gameImages) {
                         // TODO:
             // loadavailablePowerups();
 
-            }
+        } else if (round == rounds) {
+                // GameOver
+                console.log("Game Over!");
         }
-        else if (round == rounds) {
-            // GameOver
     }
+    startGame.startRound = startRound;
     startRound();
 }
 
@@ -120,7 +121,8 @@ function startBlurTimer(time) {
  * @return {undefined}
  */
 function setupGameoverScreen () {
-    $("#nextRound button").click(function () {
-        startRound();
+    $("#nextRound button").on("click.startNextRound", function() {
+        $("#nextRound button").off("click.startNextRound");
+        startGame.startRound();
     });
 }
