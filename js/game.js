@@ -103,18 +103,14 @@ function startBlurTimer(time) {
         elem.style.transition = "all " + (intervalTime/1000) + "s";
         console.log("ooo");
     function frame() {
-        if (width == ((maxwidth / 2)*0.9)) {
-            animateColourChange("#timePassed","yellow",1000);
-            //elem.animate({
-            //    backgroundColor: "red"
-            //},1000);
+        if (width == ((maxwidth / 2)*0.8)) {
+            animateColourChange(elem,"yellow",2000);
         }
-        if (width >= maxwidth*0.9) {
-            animateColourChange("#timePassed","orange",1000);
+        if (width >= maxwidth*0.8) {
+            animateColourChange(elem,"orange",2000);
         }
         if (width >= maxwidth) {
-            animateColourChange("#timePassed","red",1000);
-            //elem.style.backgroundColor = "red";
+            animateColourChange(elem,"red",2000);
             console.log("Round Over!")
             setupGameoverScreen();
             clearInterval(id);

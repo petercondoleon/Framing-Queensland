@@ -96,9 +96,10 @@ function blur(object, radius, duration){
 /**
  *
  */
-function animateColourChange(object , colour, duration){
+function animateColourChange(htmlElement , colour, duration){
+    var JQObject = $(htmlElement);
     try {
-        $(object).animate({
+        JQObject.animate({
             backgroundColor: colour
         }, duration);
     } catch (err) {
@@ -107,7 +108,7 @@ function animateColourChange(object , colour, duration){
     }
     setTimeout(function () {
         console.log("change!");
-        object.style.backgroundColor = colour;
+        htmlElement.style.backgroundColor = colour;
     }, duration);
 }
 
