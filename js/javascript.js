@@ -98,18 +98,18 @@ function blur(object, radius, duration){
  */
 function animateColourChange(htmlElement , colour, duration){
     var JQObject = $(htmlElement);
+    console.log(colour);
     try {
         JQObject.animate({
             backgroundColor: colour
         }, duration);
     } catch (err) {
         console.log("Error: cannot transition timer colour"+
-         "because the browser doesn't support it!");
+         " over-time because the browser doesn't support it!");
+         setTimeout(function () {
+             htmlElement.style.backgroundColor = colour;
+         }, duration);
     }
-    setTimeout(function () {
-        console.log("change!");
-        htmlElement.style.backgroundColor = colour;
-    }, duration);
 }
 
 

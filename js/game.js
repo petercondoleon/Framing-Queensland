@@ -54,7 +54,8 @@ function startGame(rounds, gameImages) {
             // that the correct url is passed instead of a delivery url
             keywordAPICall($("#gameFrame").attr("src"));
             if (!isLoading && imageLoaded) {
-                startBlurTimer(10000);
+                //Time of the rounds following the first
+                startBlurTimer(5000);
             } else {
                 imageLoaded = true;
             }
@@ -96,31 +97,35 @@ function startBlurTimer(time) {
     var elem = document.getElementById("timePassed"),
         width = 0,
         maxwidth = 100,
-        intervals = 0.5,
+        intervals = 1,
         intervalTime = time / (maxwidth / intervals),
         id = setInterval(frame, intervalTime);
-        elem.style.backgroundColor = "lightgreen";
-        elem.style.transition = "all " + (intervalTime/1000) + "s";
-        console.log("ooo");
+        elem.style.transition = "all " + (intervalTime/1000)*2 + "s";
     function frame() {
-        if (width == ((maxwidth / 2)*0.8)) {
-            animateColourChange(elem,"yellow",2000);
+        if (width == 0) {
+            // sets correct colour and width (0px) for recalls
+            elem.style.backgroundColor = "lightgreen";
+            elem.style.width = width + '%';
         }
-        if (width >= maxwidth*0.8) {
-            animateColourChange(elem,"orange",2000);
+        // Floor 75% half width to the nearest interval
+        if (width == (Math.floor(((maxwidth / 2)*0.5)/intervals)*intervals)) {
+            console.log ("25%")
+            animateColourChange(elem,"yellow",(time*0.5));
         }
-        if (width >= maxwidth) {
-            animateColourChange(elem,"red",2000);
+        // Floor 75% max width to the nearest interval
+        if (width == (Math.floor((maxwidth*0.75)/intervals)*intervals)) {
+            console.log ("75%")
+            animateColourChange(elem,"#FF0000",(time*0.4));
+        }
+        if (width == maxwidth) {
+            //animateColourChange(elem,"#FF0000",(intervalTime*2));
             console.log("Round Over!")
             setupGameoverScreen();
             clearInterval(id);
         } else {
-
             width = width + intervals;
             elem.style.width = width + '%';
             blur($("#gameFrame"),((maxwidth - width) / intervals)/(8/intervals),0.1);
-            //document.getElementById("gameFrame").style.filter = "blur(" +
-            //    (maxwidth - width) / intervals + 'px' + ")";
         }
     }
 }
