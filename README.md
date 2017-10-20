@@ -29,6 +29,13 @@ TODO:
 - center FQ loading symbol on homepage
 - improve homepage animation for images
 - @Jayden reduced the timer interval back to 1 (looks less smooth but at 0.5 it
-  was lagging on  some systems). If we want to smooth out the timer we can look at implementing the jquery function called slideToggle() http://api.jquery.com/slidetoggle/, or an alternative.
+  was lagging on  some systems). If we want to smooth out the timer we can look
+  at implementing the jquery function called slideToggle()
+  http://api.jquery.com/slidetoggle/, or an alternative.
+- Create a basic speech flow for our presentation
+- Complete report for PART C
+- Design and make posters for presentation (pitch design to group before making)
+- build wiki for code (will go nicely in report but requires above the
+  commenting to be finalised).
 
 Facebook Page: https://www.facebook.com/Framing-Queensland-128382111225053/
