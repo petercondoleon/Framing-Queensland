@@ -196,14 +196,14 @@ function keywordAPICall(imageURL) {
         password = keywords_api_secret;
         $.ajax({
             type: "GET",
-            // username: username,
-            // password: password,
-            url: 'https://' + username + ":" + password + '@api.imagga.com/v1/tagging',
+            username: username,
+            password: password,
+            url: 'https://api.imagga.com/v1/tagging',
             dataType : 'jsonp',
             data: data,
-            // headers: {
-            //     "Authorization": "Basic " + btoa(username + ":" + password)
-            // },
+            headers: {
+                "Authorization": "Basic " + btoa(username + ":" + password)
+            },
             success: function (data) {
                 function dataIsHere() {
                     // wait until data is returned

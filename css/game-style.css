@@ -1,34 +1,34 @@
 /*Timer and Timer initiating instructions*/
+
 #totalTime {
-    margin: auto;
-    width: 40%;
     background-color: grey;
     border-radius: 5px;
+    margin: auto;
+    width: 40%;
 }
 #timePassed {
-    width: 0%;
-    height: 30px;
     border-radius: 5px;
+    height: 30px;
     transition-timing-function: linear;
+    width: 0;
 }
 #endGame {
-    text-align: center;
     padding: 20px;
     padding-bottom: 200px;
+    text-align: center;
 }
 #endGame button {
-    display: inline-block;
-    padding: 15px 25px;
-    font-size: 24px;
-    cursor: pointer;
-    text-align: center;
-    text-decoration: none;
-    outline: none;
-    color: #8AD2E8;
     background-color: white;
     border: none;
     border-radius: 15px;
     box-shadow: -9px 9px #86C7DC;
+    color: #8AD2E8;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 24px;
+    padding: 15px 25px;
+    text-align: center;
+    text-decoration: none;
     transition: 0.1s;
 }
 #endGame button:hover {
@@ -38,36 +38,35 @@
     margin: 0 auto;
     margin-left: auto;
     margin-right: auto;
+    padding: 20px;
     text-align: center;
-    padding: 20px;
 }
-img.gameFrame {
+.gameFrame {
     display: block;
-    margin: auto;
-    width: 40%;
     filter: blur(20px);
+    margin: auto;
     padding: 20px;
+    width: 40%;
 }
-
 .gameoverScreen {
     background-color: white;
-    position: absolute;
-    z-index: 1000;
-    width: 100%;
     height: 100%;
+    position: absolute;
+    width: 100%;
+    z-index: 1000;
 }
 .gameoverScreen div {
+    left: 50%;
     position: absolute;
     top: 50%;
-    left: 50%;
-    width: 100%;
     transform: translate(-50%, -50%);
+    width: 100%;
 }
-
 /*game over page*/
+
 img.gameOverFrame {
     display: block;
     margin: auto;
-    width: 40%;
     padding: 20px;
+    width: 40%;
 }

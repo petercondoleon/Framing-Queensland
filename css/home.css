@@ -3,130 +3,114 @@
 #title a {
     color: white;
     font-size: 5em;
+    left: 50%;
+    position: absolute;
     text-align: center;
     text-decoration: none;
     text-shadow: -9px 9px #86C7DC;
-
-    position: absolute;
-    left: 50%;
     top: 10%;
     transform: translate(-50%, 0);
 }
-
 #title a:hover {
     text-shadow: -9px 12px #86C7DC;
 }
-
 #skyDesignLogo {
-    position: absolute;
     left: 1%;
+    position: absolute;
     top: 1%;
     width: 64px;
 }
-
 #helpButton {
-    cursor: pointer;
-    position: absolute;
-    left: 3%;
-    top: 10%;
-    width: 32px;
-    height: 32px;
-    padding: 12px;
     background-color: white;
     border-radius: 100px;
     box-shadow: -9px 9px #86C7DC;
+    cursor: pointer;
+    height: 32px;
+    left: 3%;
+    padding: 12px;
+    position: absolute;
+    top: 10%;
     transition: 0.1s;
+    width: 32px;
 }
-
 #helpButton:hover {
     box-shadow: -9px 12px #86C7DC;
 }
-
 #facebookButton {
-    position: absolute;
-    right: 3%;
-    top: 10%;
-    width: 32px;
-    height: 32px;
-    padding: 12px;
     background-color: white;
     border-radius: 100px;
     box-shadow: -9px 9px #86C7DC;
+    height: 32px;
+    padding: 12px;
+    position: absolute;
+    right: 3%;
+    top: 10%;
     transition: 0.1s;
+    width: 32px;
 }
-
 #facebookButton:hover {
     box-shadow: -9px 12px #86C7DC;
 }
-
 #photoStack::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 100%;
     box-shadow: inset 0 0 100px 150px #8AD2E8;
+    content: '';
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
     z-index: 1;
 }
-
 #photoStack {
+    left: 50%;
+    max-height: 50%;
+    overflow: hidden;
     padding: 100px;
     position: absolute;
-    left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    max-height: 50%;
     width: 70%;
-    overflow: hidden;
     z-index: -10;
 }
-
 ul {
-  list-style-type: none;
+    list-style-type: none;
 }
-
 #photoStack img {
-    float: left;
     display: inline;
-    text-align: center;
+    float: left;
     padding: -10px;
+    text-align: center;
 }
-
 #greetingMsg {
+    bottom: 20%;
     color: white;
     font-size: 24px;
-    text-align: center;
-    position: absolute;
     left: 50%;
-    bottom: 20%;
+    position: absolute;
+    text-align: center;
     transform: translate(-50%, 0);
 }
-
 #start {
-    text-align: center;
-    position: absolute;
-    left: 50%;
     bottom: 10%;
+    left: 50%;
+    position: absolute;
+    text-align: center;
     transform: translate(-50%, 0);
 }
-
 #start button {
-    display: inline-block;
-    padding: 15px 25px;
-    font-size: 24px;
-    cursor: pointer;
-    text-align: center;
-    text-decoration: none;
-    outline: none;
-    color: #8AD2E8;
     background-color: white;
     border: none;
     border-radius: 15px;
     box-shadow: -9px 9px #86C7DC;
+    color: #8AD2E8;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 24px;
+    padding: 15px 25px;
+    text-align: center;
+    text-decoration: none;
     transition: 0.1s;
 }
-
 #start button:hover {
     box-shadow: -9px 12px #86C7DC;
 }

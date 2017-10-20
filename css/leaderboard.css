@@ -1,46 +1,45 @@
 /* Leaderboard Page CSS Styling */
 
-#leaderBoardPlayers {
-    padding: 15px 25px;
+#leaderboardPlayers {
     background-color: white;
-    display: inline-block;
-    box-shadow: -9px 9px #86C7DC;
     border-radius: 15px;
+    box-shadow: -9px 9px #86C7DC;
+    display: inline-block;
+    font-family: times;
+    height: 150%;
+    padding: 15px 25px;
     position: relative;
     right: 200px;
-    height: 150%;
     width: 30%;
-    font-family: times;
     /*not the right style*/
 }
-#Playerinformation {
-    padding: 10px 20px;
+#playerInformation {
     background-color: white;
-    display: inline-block;
-    box-shadow: -9px 9px #86C7DC;
     border-radius: 15px;
+    box-shadow: -9px 9px #86C7DC;
+    display: inline-block;
     font-family: times;
-    /*not the right style*/
-
-    position: relative;
     left: 200px;
+    padding: 10px 20px;
+    /*not the right style*/
+    position: relative;
 }
 #facebook {
     font-family: times;
     /*not the right style*/
 }
 #facebookButton {
-    position: inherit;
-    right: 50%;
-    top: 50%;
-    width: 32px;
-    height: 32px;
-    padding: 12px;
-    margin: 10px;
     background-color: white;
     border-radius: 100px;
     box-shadow: -9px 9px #86C7DC;
+    height: 32px;
+    margin: 10px;
+    padding: 12px;
+    position: inherit;
+    right: 50%;
+    top: 50%;
     transition: 0.1s;
+    width: 32px;
 }
 #facebookButton:hover {
     box-shadow: -9px 12px #86C7DC;

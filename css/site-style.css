@@ -14,30 +14,31 @@ body {
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
 }
 #overlay {
-    position: fixed;
-    /* Sit on top of the page content */
 
-    display: block;
-    /* Hidden by default */
-
-    width: 100%;
-    /* Full width (cover the whole page) */
-
-    height: 100%;
-    /* Full height (cover the whole page) */
-
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
     /* Black background with opacity */
+    background-color: rgba(0, 0, 0, 0.5);
+    bottom: 0;
+    right: 0;
+    top: 0;
 
-    z-index: 2;
-    /* Specify a stack order in case you're using a different order for other elements */
-
-    cursor: pointer;
     /* Add a pointer on hover */
+    cursor: pointer;
+
+    /* Hidden by default */
+    display: block;
+
+    /* Full height (cover the whole page) */
+    height: 100%;
+    left: 0;
+
+    /* Sit on top of the page content */
+    position: fixed;
+
+    /* Full width (cover the whole page) */
+    width: 100%;
+
+    /* Specify a stack order in case you're using a different order for other elements */
+    z-index: 2;
 }
 /*
 #Instructions{
@@ -54,68 +55,70 @@ body {
 
 input[type=text],
 select {
-    width: 30%;
     height: 20px;
     margin: center;
+    width: 30%;
 }
 input[type=submit] {
-    width: 30%;
     color: white;
     margin: center;
+    width: 30%;
 }
-input[type=submit]:hover {} #playAgain,
+input[type=submit]:hover {
+
+}
+#playAgain,
 #leaderBoard {
     display: inline-block;
-    text-align: center;
-    padding: 20px;
     padding-bottom: 200px;
+    padding: 20px;
+    text-align: center;
 }
 #playAgain button,
 #leaderBoard button {
-    display: inline-block;
-    padding: 15px 25px;
-    font-size: 24px;
-    cursor: pointer;
-    text-align: center;
-    text-decoration: none;
-    outline: none;
-    color: #8AD2E8;
     background-color: white;
     border: none;
     border-radius: 15px;
     box-shadow: -9px 9px #86C7DC;
+    color: #8AD2E8;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 24px;
+    padding: 15px 25px;
+    text-align: center;
+    text-decoration: none;
     transition: 0.1s;
 }
 #playAgain button:hover,
-#leaderBoard button:hover,
-{
+#leaderBoard button:hover {
     box-shadow: -9px 12px #86C7DC;
 }
+
 #parentGameOver {
     margin: center;
     text-align: center;
 }
-/*sky design page*/
 
+/*sky design page*/
 #returnHome {
     display: inline-block;
-    text-align: center;
     padding: 20px;
     padding-bottom: 200px;
+    text-align: center;
 }
 #returnHome button {
-    display: inline-block;
-    padding: 15px 25px;
-    font-size: 24px;
+    background-color: white;
+    border-radius: 15px;
+    border: none;
+    box-shadow: -9px 9px #86C7DC;
+    color: #8AD2E8;
     cursor: pointer;
+    display: inline-block;
+    font-size: 24px;
+    outline: none;
+    padding: 15px 25px;
     text-align: center;
     text-decoration: none;
-    outline: none;
-    color: #8AD2E8;
-    background-color: white;
-    border: none;
-    border-radius: 15px;
-    box-shadow: -9px 9px #86C7DC;
     transition: 0.1s;
 }
 #information {
@@ -126,8 +129,8 @@ input[type=submit]:hover {} #playAgain,
     margin: center;
     text-align: center;
 }
-/*Leaderboard*/
 
+/*Leaderboard*/
 #parentLeaderBoard {
     margin: center;
     text-align: center;

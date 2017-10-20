@@ -1,23 +1,23 @@
 /* Universal Navigation CSS Styling */
 
 .universalNav {
-    z-index: 100;
-    width: 100%;
-    text-align: center;
     margin-bottom: 20px;
+    text-align: center;
+    width: 100%;
+    z-index: 100;
 }
 .universalNav h1 {
-    color: #8AD2E8;
-    padding: 20px;
-    font-size: 32px;
     background-color: white;
+    color: #8AD2E8;
+    font-size: 32px;
+    padding: 20px;
 }
 .universalNav ul {
-    width: 100%;
     background-color: white;
-    padding: 20px 0;
-    border-top: 3px solid #8AD2E8;
     border-bottom: 3px solid #8AD2E8;
+    border-top: 3px solid #8AD2E8;
+    padding: 20px 0;
+    width: 100%;
 }
 .universalNav li {
     display: inline;
