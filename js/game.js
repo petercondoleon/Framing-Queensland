@@ -119,7 +119,7 @@ function startBlurTimer(time) {
         }
         // Floor 75% max width to the nearest interval
         if (width == (Math.floor((maxwidth * 0.75) / intervals) * intervals)) {
-            animateColourChange(elem, "#FF0000", (time * 0.4));
+            animateColourChange(elem, "#FF0000", (time * 0.35));
         }
         if (width == maxwidth) {
             //animateColourChange(elem,"#FF0000",(intervalTime*2));

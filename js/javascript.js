@@ -104,7 +104,6 @@ function blur(object, radius, duration){
 function animateColourChange(htmlElement , colour, duration){
     "use strict";
     var JQObject = $(htmlElement);
-    console.log(colour);
     try {
         JQObject.animate({
             backgroundColor: colour

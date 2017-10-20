@@ -1,5 +1,5 @@
 /*************************************
-40,000 Pictures API call and handling
+40,000 Pictures APIs call and handling
 
 Institution: The University of
 Queensland
@@ -8,30 +8,26 @@ Course: DECO1800 Semester 2 - 2017
 
 Author: Sky Design
 *************************************/
-/**
- * Executes when the document is ready.
- */
-$(document).ready(function () {
-    "use strict";
-    //console.log("js linked!");
-});
 
+// global variables
 // JSON resource info requirement
-const resourceInfo = {
-    slq: {
-        data_id: "9913b881-d76d-43f5-acd6-3541a130853d",
-        limit: 1
-    },
-    keywords: {
-        api_key: "acc_5f2b725d827949d",
-        api_secret: "bcb5c5c688fcb83325dca3a86d1129b9"
-    }
-};
-
-// grab variable from const resource info - allows for updatability
-var slq_data_id = resourceInfo.slq.data_id,
-    slq_limit = resourceInfo.slq.limit,
-    keywords_api_key = resourceInfo.keywords.api_key;
+{
+    const resourceInfo = {
+        slq: {
+            data_id: "9913b881-d76d-43f5-acd6-3541a130853d",
+            limit: 1
+        },
+        keywords: {
+            api_key: "acc_5f2b725d827949d",
+            api_secret: "bcb5c5c688fcb83325dca3a86d1129b9"
+        }
+    };
+    // grab variable from const resource info - allows for updatability
+    var slq_data_id = resourceInfo.slq.data_id,
+        slq_limit = resourceInfo.slq.limit,
+        keywords_api_key = resourceInfo.keywords.api_key;
+        keywords_api_secret = resourceInfo.keywords.api_secret;
+}
 
 /**
  * Accesses data.gov api to return an array json objects with filtered
@@ -196,38 +192,34 @@ function keywordAPICall(imageURL) {
         data = {
             url: imageURL
         };
-        // The following comments won't work as an implementation fix is needed.
-        // I have failed the AUTH by intent, so we don't use quota.
-        // Remove "fail" and replace with following string
-    var username = "Fail",//"acc_5f2b725d827949d",
-        password = "Fail";//"bcb5c5c688fcb83325dca3a86d1129b9";
-    // $.ajax({
-    //     type: "GET",
-    //     username: username,
-    //     password: password,
-    //     url:"localhost",
-    //     //url: 'https://'+username + ":" + password+'@api.imagga.com/v1/tagging',
-    //     dataType : 'jsonp',
-    //     data: data,
-    //     //headers: {
-    //     //    "Authorization": "Basic " + btoa(username + ":" + password)
-    //     //},
-    //     success: function (data) {
-    //         console.log("success!")
-    //         function dataIsHere() {
-    //             setTimeout(function () {
-    //                 if (data.results){
-    //                     console.log("data.results:")
-    //                     console.log(results);
-    //                 } else {
-    //                     console.log("data:")
-    //                     console.log(data);
-    //                     dataIsHere();
-    //                 }
-    //             },1000);
-    //
-    //         }
-    //         dataIsHere();
-    //     }
-    // });
+    var username = keywords_api_key,
+        password = keywords_api_secret;
+        $.ajax({
+            type: "GET",
+            // username: username,
+            // password: password,
+            url: 'https://' + username + ":" + password + '@api.imagga.com/v1/tagging',
+            dataType : 'jsonp',
+            data: data,
+            // headers: {
+            //     "Authorization": "Basic " + btoa(username + ":" + password)
+            // },
+            success: function (data) {
+                function dataIsHere() {
+                    // wait until data is returned
+                    setTimeout(function () {
+                        if (data.results){
+                            // Callback
+                            console.log("success");
+                            console.log(data);
+                        } else {
+                            // recall function
+                            dataIsHere();
+                        }
+                    }, 1000);
+
+                }
+                dataIsHere();
+            }
+        });
 }
