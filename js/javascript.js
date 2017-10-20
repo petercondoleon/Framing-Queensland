@@ -17,9 +17,6 @@ var imageLoaded = false;
  * Executes when the document is ready.
  */
 $(document).ready(function () {
-    //let loadingScreenElement = document.createRange().createContextualFragment
-    //('<div class="loadingScreen">');
-    //if (document.contains(loadingScreenElement)) {
     loadingScreenSetup(false);
     // Used to notify a page that loading screen has been removed.
 });
@@ -31,6 +28,7 @@ $(document).ready(function () {
  * @return {string} <img/> tag form of parsed img string
  */
 function insertImage(image, width) {
+    "use strict";
     return '<img src=' + '"' + image + '"' + 'width=' + width + '/>';
 }
 
@@ -40,6 +38,7 @@ function insertImage(image, width) {
  * @return {undefined}
  */
 function rotateImages(htmlElement) {
+    "use strict";
     $(htmlElement).each(function () {
         var angle = Math.floor(Math.random() * 60) - 30; // randomise angle
         $(this).css("transform", "rotate(" + angle + "deg)");
@@ -54,6 +53,7 @@ function rotateImages(htmlElement) {
  * @return {undefined}
  */
 function loadingScreenSetup(isGamepage) {
+    "use strict";
     setTimeout(function () {
         if (!isLoading && imageLoaded) {
             $("#loadingText").text("Loaded");
@@ -81,22 +81,28 @@ function loadingScreenSetup(isGamepage) {
  * @return {undefined}
  */
 function blur(object, radius, duration){
-  var filterValue = 'blur(' + radius + 'px)';
-  var transitionValue = 'all ' + duration + 's ease-out';
-  object.css({
-      'filter': filterValue,
-      'webkitFilter': filterValue,
-      'mozFilter': filterValue,
-      'transition': transitionValue,
-      '-webkit-transition': transitionValue,
-      '-moz-transition': transitionValue
-  });
+    "use strict";
+    var filterValue = 'blur(' + radius + 'px)';
+    var transitionValue = 'all ' + duration + 's ease-out';
+    object.css({
+        'filter': filterValue,
+        'webkitFilter': filterValue,
+        'mozFilter': filterValue,
+        'transition': transitionValue,
+        '-webkit-transition': transitionValue,
+        '-moz-transition': transitionValue
+    });
 }
 
 /**
- *
+ * Trys to animate colour change with a css hook from jquery.color plugin.
+ * if it fails it transitions colour instantly at the end of the duration.
+ * @param {element} htmlElement a DOM element
+ * @param {string} colour the colour of the new backgroundColor (standard css string convention)
+ * @param {integer} duration number of milliseconds the transition ouccurs over
  */
 function animateColourChange(htmlElement , colour, duration){
+    "use strict";
     var JQObject = $(htmlElement);
     console.log(colour);
     try {

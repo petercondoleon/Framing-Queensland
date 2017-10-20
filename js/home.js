@@ -12,6 +12,7 @@ Author: Sky Design
  * Executes when the document is ready.
  */
 $(document).ready(function () {
+    "use strict";
     loadSLQImagesHomepage(6);
     animateLogo();
     setupHelpMenu();
@@ -21,6 +22,7 @@ $(document).ready(function () {
  * Gets the sky design logo and plays the blink animation.
  */
 function animateLogo() {
+    "use strict";
     $('#skyDesignLogo img').attr("src", "../img/svg/logo2.svg");
     setTimeout(function () {
         $('#skyDesignLogo img').attr("src", "../img/svg/logo3.svg");
@@ -41,34 +43,37 @@ function animateLogo() {
  * @param {Object[]} jsonImages array of objects containing images
  */
 function homepageImagesSetup(jsonImages) {
+    "use strict";
     $("#photoCall img").replaceWith("<ul></ul>");
     for (var i = 0; i < jsonImages.length; i++) {
         console.log(jsonImages[i].image);
         $("#photoCall ul").append(
             "<li>" + insertImage(jsonImages[i].image, 200) + "</li>"
-        )
+        );
     }
 }
 
 /**
  * Provides handlers for opening and closing the help menu.
  */
- function setupHelpMenu() {
-     // Handle the help button being pressed
-     $("#helpButton").click(function () {
-         setHelpMenu(false);
-     });
-     // Handle canceling the help screen
-     $("#instructionsContainer").click(function () {
-         setHelpMenu(true);
-     });
- }
+function setupHelpMenu() {
+    "use strict";
+    // Handle the help button being pressed
+    $("#helpButton").click(function () {
+        setHelpMenu(false);
+    });
+    // Handle canceling the help screen
+    $("#instructionsContainer").click(function () {
+        setHelpMenu(true);
+    });
+}
 
 /**
  * Set the appearance of the help menu on the home page.
  * @param {Boolean} hidden false will show the menu, true will hide the menu
  */
 function setHelpMenu(hidden) {
+    "use strict";
     if (hidden) {
         // Hide the menu
 

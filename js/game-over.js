@@ -12,6 +12,7 @@ Author: Sky Design
  * Executes when the document is ready.
  */
 $(document).ready(function () {
+    "use strict";
     setGameOverImage();
 });
 
@@ -19,6 +20,7 @@ $(document).ready(function () {
  * Sets the last rounds image
  */
 function setGameOverImage() {
+    "use strict";
     $("#gameOverFrame").attr("src", $(sessionStorage.getItem("lastGameImage"))
     .attr("src"));
 }

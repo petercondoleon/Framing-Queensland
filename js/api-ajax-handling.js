@@ -12,17 +12,19 @@ Author: Sky Design
  * Executes when the document is ready.
  */
 $(document).ready(function () {
+    "use strict";
     //console.log("js linked!");
 });
 
 // JSON resource info requirement
 const resourceInfo = {
     slq: {
-        data_id: '9913b881-d76d-43f5-acd6-3541a130853d',
+        data_id: "9913b881-d76d-43f5-acd6-3541a130853d",
         limit: 1
     },
     keywords: {
-        api_key: 'acc_5f2b725d827949d'
+        api_key: "acc_5f2b725d827949d",
+        api_secret: "bcb5c5c688fcb83325dca3a86d1129b9"
     }
 };
 
@@ -38,6 +40,7 @@ var slq_data_id = resourceInfo.slq.data_id,
  * @return {undefined}
  */
 function loadSLQImagesHomepage(count) {
+    "use strict";
     console.log("loadSLQ HOME");
     // if the count is under 1, return 1.
     if (count < 1) {
@@ -101,6 +104,7 @@ function loadSLQImagesHomepage(count) {
  * @return {undefined}
  */
 function loadSLQImagesGame(count, rounds, exclusionData) {
+    "use strict";
     // if the count is under 1, return 1.
     console.log("loadSLQ GAME");
     if (count < 1) {
@@ -160,20 +164,21 @@ function loadSLQImagesGame(count, rounds, exclusionData) {
  * @return {Object} refined json object
  */
 function buildJSON(rawajaxObject) {
+    "use strict";
     var jsonObject = {},
         recordImage = rawajaxObject["1000_pixel_jpg"],
-        recordId = rawajaxObject["_id"];
+        recordId = rawajaxObject._id;
     // check if record image and id exists
     if (recordImage && recordId) {
         jsonObject = {
             image: recordImage,
             id: recordId
-        }
+        };
         // all images should have an image and id, if not something has gone wrong.
     } else {
         jsonObject = {
             help: "an error has occured!"
-        }
+        };
     }
     return jsonObject;
 }
@@ -186,6 +191,7 @@ function buildJSON(rawajaxObject) {
  * referance to the image.
  */
 function keywordAPICall(imageURL) {
+    "use strict";
     var keywords = [],
         data = {
             url: imageURL
@@ -193,8 +199,8 @@ function keywordAPICall(imageURL) {
         // The following comments won't work as an implementation fix is needed.
         // I have failed the AUTH by intent, so we don't use quota.
         // Remove "fail" and replace with following string
-    var username = "Fail"//"acc_5f2b725d827949d",
-        password = "Fail"//"bcb5c5c688fcb83325dca3a86d1129b9";
+    var username = "Fail",//"acc_5f2b725d827949d",
+        password = "Fail";//"bcb5c5c688fcb83325dca3a86d1129b9";
     // $.ajax({
     //     type: "GET",
     //     username: username,

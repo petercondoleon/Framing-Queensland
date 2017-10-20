@@ -12,6 +12,7 @@ Author: Sky Design
  * Executes when the document is ready.
  */
 $(document).ready(function () {
+    "use strict";
     loadingScreenSetup(true);
     var datasetSize = 300;
     loadSLQImagesGame(datasetSize, 6, [0]);
@@ -22,9 +23,9 @@ $(document).ready(function () {
  * @param  {integer} rounds number of guessing rounds
  * @param  {integer} imageCount number of images queried from the database
  * @param  {Object[]} slqImages array of objects containing images
- * @return {undefined}
  */
 function setupGamePage(rounds, imageCount, slqImages) {
+    "use strict";
     // list of images for the game
     var gameImages = [];
     // grab images for game
@@ -40,11 +41,12 @@ function setupGamePage(rounds, imageCount, slqImages) {
  * Starts Game
  * @param  {integer} rounds number of rounds
  * @param  {Array} gameImages an Array containing the game images
- * @return {undefined}
  */
 function startGame(rounds, gameImages) {
+    "use strict";
     // alows for proper indexing of elements
     var round = -1;
+
     function startRound() {
         round++;
         if (round < rounds) {
@@ -59,12 +61,12 @@ function startGame(rounds, gameImages) {
             } else {
                 imageLoaded = true;
             }
-                        // TODO:
+            // TODO:
             // loadavailablePowerups();
 
         } else if (round == rounds) {
-                // GameOver
-                console.log("Game Over!");
+            // GameOver
+            console.log("Game Over!");
         }
     }
     startGame.startRound = startRound;
@@ -76,6 +78,7 @@ function startGame(rounds, gameImages) {
  * @param {string} image an imageURL
  */
 function loadgameImage(image) {
+    "use strict";
     try {
         var photo = insertImage(image.image, 400);
         $("#gameFrame").attr("src", $(photo).attr("src"));
@@ -83,59 +86,61 @@ function loadgameImage(image) {
         // store image in local storage
         sessionStorage.setItem("lastGameImage", photo);
     } catch (err) {
-        console.log("Error: Cannot set gameFrame source to the game image.")
+        console.log("Error: Cannot set gameFrame source to the game image.");
     }
 }
 
 /**
- * Starts Blur and timer!
+ * Starts Blur and timer
  * @param  {integer} time how long the user has to guess in milliseconds.
- * @return {undefined}
  */
 function startBlurTimer(time) {
-    //var elem = $("#timePassed"),
+    "use strict";
+    // all variables can be changed without causing the timer to change
+    // at different times
     var elem = document.getElementById("timePassed"),
         width = 0,
         maxwidth = 100,
         intervals = 1,
         intervalTime = time / (maxwidth / intervals),
         id = setInterval(frame, intervalTime);
-        elem.style.transition = "all " + (intervalTime/1000)*2 + "s";
+    elem.style.transition = "all " + (intervalTime / 1000) * 2 + "s";
+
     function frame() {
         if (width == 0) {
             // sets correct colour and width (0px) for recalls
-            elem.style.backgroundColor = "lightgreen";
+            elem.style.backgroundColor = "#90EE90";
             elem.style.width = width + '%';
         }
         // Floor 75% half width to the nearest interval
-        if (width == (Math.floor(((maxwidth / 2)*0.5)/intervals)*intervals)) {
-            console.log ("25%")
-            animateColourChange(elem,"yellow",(time*0.5));
+        if (width == (Math.floor(((maxwidth / 2) * 0.5) / intervals) *
+        intervals)) {
+            animateColourChange(elem, "#FFFF00", (time * 0.5));
         }
         // Floor 75% max width to the nearest interval
-        if (width == (Math.floor((maxwidth*0.75)/intervals)*intervals)) {
-            console.log ("75%")
-            animateColourChange(elem,"#FF0000",(time*0.4));
+        if (width == (Math.floor((maxwidth * 0.75) / intervals) * intervals)) {
+            animateColourChange(elem, "#FF0000", (time * 0.4));
         }
         if (width == maxwidth) {
             //animateColourChange(elem,"#FF0000",(intervalTime*2));
-            console.log("Round Over!")
+            console.log("Round Over!");
             setupGameoverScreen();
             clearInterval(id);
         } else {
             width = width + intervals;
             elem.style.width = width + '%';
-            blur($("#gameFrame"),((maxwidth - width) / intervals)/(8/intervals),0.1);
+            blur($("#gameFrame"), ((maxwidth - width) / intervals) / (8 /
+                intervals), 0.1);
         }
     }
 }
 
 /**
  * Sets up gameover screen functionality
- * @return {undefined}
  */
-function setupGameoverScreen () {
-    $("#nextRound button").on("click.startNextRound", function() {
+function setupGameoverScreen() {
+    "use strict";
+    $("#nextRound button").on("click.startNextRound", function () {
         // Unbind action as soon as clicked to prevent ending the round early
         $("#nextRound button").off("click.startNextRound");
         startGame.startRound();

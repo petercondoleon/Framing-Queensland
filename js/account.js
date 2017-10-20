@@ -12,6 +12,7 @@ Author: Sky Design
  * Executes when the document is ready.
  */
 $(document).ready(function () {
+    "use strict";
     accountPageSetup();
 });
 
