@@ -7,7 +7,8 @@ Members:
 - @Jayden Howard
 - @Xie Jiaqian
 
-***NOT ALL OF THESE ARE A PRIORITY - IF YOU CAN DO MORE THAN ONE OF THESE AND ARE NOT SURE ON WHICH IS MORE IMPORTANT TO DO, ASK IN THE GROUP CHAT****
+***NOT ALL OF THESE ARE A PRIORITY - IF YOU CAN DO MORE THAN ONE OF THESE AND
+ARE NOT SURE ON WHICH IS MORE IMPORTANT TO DO, ASK IN THE GROUP CHAT****
 TODO:
 - Refine any existing PNG and SVG files.
 - Correct the SVGs
@@ -37,5 +38,8 @@ TODO:
 - Design and make posters for presentation (pitch design to group before making)
 - build wiki for code (will go nicely in report but requires above the
   commenting to be finalised).
+- **DATASET SIZE REDUCED TO 6 and keyword API set to none for now to limit
+  accidental usage! Ignore the invalid credentials error and use the dummy
+  returned keywords for other testing purposes!**
 
 Facebook Page: https://www.facebook.com/Framing-Queensland-128382111225053/

@@ -175,6 +175,29 @@ function buildJSON(slqJsonPictures) {
  */
 function keywordAPICall(image) {
     "use strict";
+    // NOTE: THIS IS PURELY FOR TESTING THE RETURN VALUED WITHOUT HAVING TO
+    // MAKE CALL!
+    var dummyKeywordData = [{
+        "id": "ai_WTrlNkqM",
+        "name": "vehicle",
+        "value": 0.9955914,
+        "app_id": "main"
+    }, {
+        "id": "ai_l8TKp2h5",
+        "name": "people",
+        "value": 0.99399686,
+        "app_id": "main"
+    }, {
+        "id": "ai_VPmHr5bm",
+        "name": "adult",
+        "value": 0.9830597,
+        "app_id": "main"
+    }, {
+        "id": "ai_0SL2mdXt",
+        "name": "military",
+        "value": 0.9758798,
+        "app_id": "main"
+    }];
     var keywordData,
         imageURL = image.image,
         imageId = image.id,
@@ -189,7 +212,8 @@ function keywordAPICall(image) {
         console.log("keyword data is on local storage.");
         keywordData = JSON.parse(localStorage.getItem(localStorageId));
         // sync independant function calls
-        // TODO:
+        // TODO: myfunctionName(dummyKeywordData);
+        // NOTE: dummyKeywordData.name && dummyKeywordData.value
     } else {
         callClarifai(keywordApp);
     }
@@ -201,7 +225,8 @@ function keywordAPICall(image) {
                 response = JSON.stringify(keywordData);
                 localStorage.setItem(localStorageId, response);
                 // sync independant function calls
-                // TODO:
+                // TODO: myfunctionName(dummyKeywordData);
+                // NOTE: dummyKeywordData.name && dummyKeywordData.value
             },
             function(err) {
                 console.error(err);
