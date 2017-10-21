@@ -14,7 +14,7 @@ Author: Sky Design
 $(document).ready(function () {
     "use strict";
     loadingScreenSetup(true);
-    var datasetSize = 500;
+    var datasetSize = 6;
     loadSLQImagesGame(datasetSize, 6, [0]);
 });
 
@@ -52,12 +52,10 @@ function startGame(rounds, gameImages) {
         if (round < rounds) {
             console.log("Round: " + round);
             loadgameImage(gameImages[round]);
-            // Loads from gameframe over the array.src to ensure
-            // that the correct url is passed instead of a delivery url
-            keywordAPICall($("#gameFrame").attr("src"));
+            keywordAPICall(gameImages[round]);
             if (!isLoading && imageLoaded) {
                 //Time of the rounds following the first
-                startBlurTimer(5000);
+                startBlurTimer(10000);
             } else {
                 imageLoaded = true;
             }
@@ -82,7 +80,7 @@ function loadgameImage(image) {
     try {
         var photo = insertImage(image.image, 400);
         $("#gameFrame").attr("src", $(photo).attr("src"));
-        $("#roundImage").attr("src", $(photo).attr("src"));
+        $("#roundImage img").attr("src", $(photo).attr("src"));
         // store image in local storage
         sessionStorage.setItem("lastGameImage", photo);
     } catch (err) {
@@ -129,7 +127,7 @@ function startBlurTimer(time) {
         } else {
             width = width + intervals;
             elem.style.width = width + '%';
-            blur($("#gameFrame"), ((maxwidth - width) / intervals) / (8 /
+            blur($("#gameFrame"), ((maxwidth - width) / intervals) / (6 /
                 intervals), 0.1);
         }
     }

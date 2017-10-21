@@ -15,7 +15,6 @@ Author: Sky Design
  */
 function loadSLQImagesHomepage(count) {
     "use strict";
-    console.log("loadSLQ HOME");
     // if the count is under 1, return 1.
     if (count < 1) {
         // base64_decode resourceInfo data
@@ -31,6 +30,7 @@ function loadSLQImagesHomepage(count) {
     if (localStorage.getItem("slqDataImagesHomepage")) {
         console.log("Data is on local storage.");
         imageData = JSON.parse(localStorage.getItem('slqDataImagesHomepage'));
+        // sync independant function calls
         homepageImagesSetup(imageData);
         rotateImages("#photoStack ul li img");
     } else {
@@ -53,7 +53,7 @@ function loadSLQImagesHomepage(count) {
                             for (var i = 0; i < dataRecords.length; i++) {
                                 imageData.push(buildJSON(dataRecords[i]));
                             }
-                            // Callback
+                            // sync independant function calls
                             data = JSON.stringify(imageData);
                             localStorage.setItem('slqDataImagesHomepage', data);
                             homepageImagesSetup(imageData);
@@ -99,6 +99,7 @@ function loadSLQImagesGame(count, rounds, exclusionData) {
     JSON.parse(localStorage.getItem('slqDataImages')).length == count) {
         console.log("Data is on local storage.");
         imageData = JSON.parse(localStorage.getItem('slqDataImages'));
+        // sync independant function calls
         setupGamePage(rounds, count, imageData);
         isLoading = false;
     } else {
@@ -122,7 +123,7 @@ function loadSLQImagesGame(count, rounds, exclusionData) {
                                 // TODO: check for exclusionData
                                 imageData.push(buildJSON(dataRecords[i]));
                             }
-                            // Callback
+                            // sync independant function calls
                             data = JSON.stringify(imageData);
                             localStorage.setItem('slqDataImages', data);
                             setupGamePage(rounds, count, imageData);
@@ -162,7 +163,6 @@ function buildJSON(slqJsonPictures) {
         };
     }
     // TODO: remove this console.log after testing is done with it (@Jayden)
-    console.log(jsonObject);
     return jsonObject;
 }
 
@@ -173,42 +173,39 @@ function buildJSON(slqJsonPictures) {
  * @return {Object} returns an array of keywords in
  * reference to the image.
  */
-function keywordAPICall(imageURL) {
+function keywordAPICall(image) {
     "use strict";
-    var keywords = [],
-        // base64_decode resourceInfo data
-        usernameKey = atob(keywords_api_key),
-        passwordSecret = atob(keywords_api_secret),
-        data = {
-            url: imageURL,
-            username: usernameKey,
-            password: passwordSecret
-        };
-    $.ajax({
-        type: "GET",
-        username: usernameKey,
-        password: passwordSecret,
-        url: 'https://api.imagga.com/v1/tagging',
-        dataType : 'jsonp',
-        data: data,
-        headers: {
-            "Authorization": "Basic " + btoa(usernameKey + ":" + passwordSecret)
-        },
-        success: function (data) {
-            function dataIsHere() {
-                // wait until data is returned
-                setTimeout(function () {
-                    if (data.results){
-                        // Callback
-                        console.log("success");
-                        console.log(data);
-                    } else {
-                        // recall function
-                        dataIsHere();
-                    }
-                }, 1000);
+    var keywordData,
+        imageURL = image.image,
+        imageId = image.id,
+        localStorageId = 'clarifai'+imageId;
+    const keywordApp = new Clarifai.App({
+        apiKey: atob(keywords_api_key)
+    });
+    // NOTE: normally this check would not be made as the game is designed to
+    // improve as the underlying technology does, however for quota usage this
+    // check is made!
+    if (localStorage.getItem(localStorageId)) {
+        console.log("keyword data is on local storage.");
+        keywordData = JSON.parse(localStorage.getItem(localStorageId));
+        // sync independant function calls
+        // TODO:
+    } else {
+        callClarifai(keywordApp);
+    }
+    function callClarifai(app) {
+        console.log("keyword data isn't on local storage. Grabbing from server.");
+        app.models.predict(Clarifai.GENERAL_MODEL, imageURL).then(
+            function(response) {
+                keywordData = response.outputs[0].data.concepts;
+                response = JSON.stringify(keywordData);
+                localStorage.setItem(localStorageId, response);
+                // sync independant function calls
+                // TODO:
+            },
+            function(err) {
+                console.error(err);
             }
-            dataIsHere();
-        }
-    }); // End of Ajax
+        );
+    } // End of Ajax
 }

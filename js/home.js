@@ -46,7 +46,6 @@ function homepageImagesSetup(jsonImages) {
     "use strict";
     $("#photoCall img").replaceWith("<ul></ul>");
     for (var i = 0; i < jsonImages.length; i++) {
-        console.log(jsonImages[i].image);
         $("#photoCall ul").append(
             "<li>" + insertImage(jsonImages[i].image, 200) + "</li>"
         );
