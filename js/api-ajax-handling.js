@@ -8,32 +8,10 @@ Course: DECO1800 Semester 2 - 2017
 
 Author: Sky Design
 *************************************/
-
-// global variables
-// JSON resource info requirement
-{
-    const resourceInfo = {
-        slq: {
-            data_id: "9913b881-d76d-43f5-acd6-3541a130853d",
-            limit: 1
-        },
-        keywords: {
-            api_key: "acc_5f2b725d827949d",
-            api_secret: "bcb5c5c688fcb83325dca3a86d1129b9"
-        }
-    };
-    // grab variable from const resource info - allows for updatability
-    var slq_data_id = resourceInfo.slq.data_id,
-        slq_limit = resourceInfo.slq.limit,
-        keywords_api_key = resourceInfo.keywords.api_key;
-        keywords_api_secret = resourceInfo.keywords.api_secret;
-}
-
 /**
  * Accesses data.gov api to return an array json objects with filtered
  * attributes: '1000_pixel_jpg', 'id'. specified for the homepage.
  * @param {integer} count the number of images that will be returned
- * @return {undefined}
  */
 function loadSLQImagesHomepage(count) {
     "use strict";
@@ -47,6 +25,7 @@ function loadSLQImagesHomepage(count) {
             resource_id: slq_data_id,
             limit: count
         };
+    // if images are already on system, load them instead of making an ajax call
     if (localStorage.getItem("slqDataImagesHomepage")) {
         console.log("Data is on local storage.");
         imageData = JSON.parse(localStorage.getItem('slqDataImagesHomepage'));
@@ -65,11 +44,12 @@ function loadSLQImagesHomepage(count) {
                 function dataIsHere() {
                     // Loop until the API has returned the specified data.
                     setTimeout(function () {
+                        let dataRecords = data.result.records;
                         // The number of records = the parsed limit.
-                        if (data.result.records.length >= count) {
+                        if (dataRecords.length >= count) {
                             imageData = [];
-                            for (var i = 0; i < data.result.records.length; i++) {
-                                imageData.push(buildJSON(data.result.records[i]));
+                            for (var i = 0; i < dataRecords.length; i++) {
+                                imageData.push(buildJSON(dataRecords[i]));
                             }
                             // Callback
                             data = JSON.stringify(imageData);
@@ -87,7 +67,7 @@ function loadSLQImagesHomepage(count) {
                 }
                 dataIsHere();
             }
-        });
+        }); // End of Ajax
     }
 }
 
@@ -97,7 +77,6 @@ function loadSLQImagesHomepage(count) {
  * @param {integer} count the number of images that will be returned
  * @param {integer} rounds the number of rounds the game is hosting
  * @param {integer[]} array of id's that will NOT be returned.
- * @return {undefined}
  */
 function loadSLQImagesGame(count, rounds, exclusionData) {
     "use strict";
@@ -111,8 +90,9 @@ function loadSLQImagesGame(count, rounds, exclusionData) {
             resource_id: slq_data_id,
             limit: count
         };
-
-    if (localStorage.getItem("slqDataImages")) {
+    // if images are already on system, load them instead of making an ajax call
+    if (localStorage.getItem("slqDataImages") &&
+    JSON.parse(localStorage.getItem('slqDataImages')).length == count) {
         console.log("Data is on local storage.");
         imageData = JSON.parse(localStorage.getItem('slqDataImages'));
         setupGamePage(rounds, count, imageData);
@@ -130,12 +110,13 @@ function loadSLQImagesGame(count, rounds, exclusionData) {
                 function dataIsHere() {
                     // Keep looping until API returns the specified data.
                     setTimeout(function () {
+                        let dataRecords = data.result.records;
                         // The number of records = the parsed limit.
-                        if (data.result.records.length >= count) {
+                        if (dataRecords.length >= count) {
                             imageData = [];
-                            for (var i = 0; i < data.result.records.length; i++) {
+                            for (var i = 0; i < dataRecords.length; i++) {
                                 // TODO: check for exclusionData
-                                imageData.push(buildJSON(data.result.records[i]));
+                                imageData.push(buildJSON(dataRecords[i]));
                             }
                             // Callback
                             data = JSON.stringify(imageData);
@@ -149,33 +130,35 @@ function loadSLQImagesGame(count, rounds, exclusionData) {
                 }
                 dataIsHere();
             }
-        });
+        }); // End of Ajax
     }
 }
 
 /**
  * Helper method for "loadSLQImages", builds a filtered object from database
  * query.
- * @param {Object} rawajaxObject called object
+ * @param {Object} slqJsonPictures called object
  * @return {Object} refined json object
  */
-function buildJSON(rawajaxObject) {
+function buildJSON(slqJsonPictures) {
     "use strict";
     var jsonObject = {},
-        recordImage = rawajaxObject["1000_pixel_jpg"],
-        recordId = rawajaxObject._id;
+        recordImage = slqJsonPicturest["1000_pixel_jpg"],
+        recordId = slqJsonPictures._id;
     // check if record image and id exists
     if (recordImage && recordId) {
         jsonObject = {
             image: recordImage,
             id: recordId
         };
-        // all images should have an image and id, if not something has gone wrong.
+        // all data should have an ID and url, else incorect data was reterived.
     } else {
         jsonObject = {
-            help: "an error has occured!"
+            help: "Error: SLQ has not provided the correct data!"
         };
     }
+    // TODO: remove this console.log after testing is done with it (@Jayden)
+    console.log(jsonObject);
     return jsonObject;
 }
 
@@ -184,42 +167,43 @@ function buildJSON(rawajaxObject) {
  * based on a parsed image url.
  * @param {string} takes a string URL of an image.
  * @return {Object} returns an array of keywords in
- * referance to the image.
+ * reference to the image.
  */
 function keywordAPICall(imageURL) {
     "use strict";
     var keywords = [],
+        usernameKey = keywords_api_key,
+        passwordSecret = keywords_api_secret,
         data = {
-            url: imageURL
+            url: imageURL,
+            username: usernameKey,
+            password: passwordSecret
         };
-    var username = keywords_api_key,
-        password = keywords_api_secret;
-        $.ajax({
-            type: "GET",
-            username: username,
-            password: password,
-            url: 'https://api.imagga.com/v1/tagging',
-            dataType : 'jsonp',
-            data: data,
-            headers: {
-                "Authorization": "Basic " + btoa(username + ":" + password)
-            },
-            success: function (data) {
-                function dataIsHere() {
-                    // wait until data is returned
-                    setTimeout(function () {
-                        if (data.results){
-                            // Callback
-                            console.log("success");
-                            console.log(data);
-                        } else {
-                            // recall function
-                            dataIsHere();
-                        }
-                    }, 1000);
-
-                }
-                dataIsHere();
+    $.ajax({
+        type: "GET",
+        username: usernameKey,
+        password: passwordSecret,
+        url: 'https://api.imagga.com/v1/tagging',
+        dataType : 'jsonp',
+        data: data,
+        headers: {
+            "Authorization": "Basic " + btoa(usernameKey + ":" + passwordSecret)
+        },
+        success: function (data) {
+            function dataIsHere() {
+                // wait until data is returned
+                setTimeout(function () {
+                    if (data.results){
+                        // Callback
+                        console.log("success");
+                        console.log(data);
+                    } else {
+                        // recall function
+                        dataIsHere();
+                    }
+                }, 1000);
             }
-        });
+            dataIsHere();
+        }
+    }); // End of Ajax
 }

@@ -14,7 +14,7 @@ Author: Sky Design
 $(document).ready(function () {
     "use strict";
     loadingScreenSetup(true);
-    var datasetSize = 300;
+    var datasetSize = 500;
     loadSLQImagesGame(datasetSize, 6, [0]);
 });
 
