@@ -1,10 +1,13 @@
 <?php
-    // Include meta tags
-    include $_SERVER['DOCUMENT_ROOT'].'/html/meta.html';
+    // include resource.php infomation
+    require_once $_SERVER['DOCUMENT_ROOT'].'/php/resource.php';
+
+    // include meta tags
+    include_once $_SERVER['DOCUMENT_ROOT'].'/html/meta.html';
 
     // Add the navigation bar to the top of the page
-    include $_SERVER['DOCUMENT_ROOT'].'/html/navigation.html';
+    include_once $_SERVER['DOCUMENT_ROOT'].'/html/navigation.html';
 
-    // Include the html of the leaderboard page
-    include $_SERVER['DOCUMENT_ROOT'].'/html/leaderboard.html';
+    // include the html of the leaderboard page
+    include_once $_SERVER['DOCUMENT_ROOT'].'/html/leaderboard.html';
 ?>

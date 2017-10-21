@@ -1,20 +1,23 @@
 <?php
+    // include resource.php infomation
+    require_once $_SERVER['DOCUMENT_ROOT'].'/php/resource.php';
+
     // Include meta tags
-    include $_SERVER['DOCUMENT_ROOT'].'/html/meta.html';
+    include_once $_SERVER['DOCUMENT_ROOT'].'/html/meta.html';
 
     // First display the loading screen
-    include $_SERVER['DOCUMENT_ROOT'].'/html/loadingscreen.html';
+    include_once $_SERVER['DOCUMENT_ROOT'].'/html/loadingscreen.html';
 
     // Show game instructions on loading screen
     // Append inside loading screen.
     // include $_SERVER['DOCUMENT_ROOT'].'/html/instructions.html';
 
     // Add the navigation bar to the top of the page
-    include $_SERVER['DOCUMENT_ROOT'].'/html/navigation.html';
+    include_once $_SERVER['DOCUMENT_ROOT'].'/html/navigation.html';
 
     // Include the html of the game page
-    include $_SERVER['DOCUMENT_ROOT'].'/html/game.html';
+    include_once $_SERVER['DOCUMENT_ROOT'].'/html/game.html';
 
     // Include the html of the game page
-    include $_SERVER['DOCUMENT_ROOT'].'/html/roundover.html';
+    include_once $_SERVER['DOCUMENT_ROOT'].'/html/roundover.html';
 ?>

@@ -1,3 +1,4 @@
+"use strict";
 // Global variables
 var slq_data_id,
     slq_limit,
@@ -8,12 +9,12 @@ var slq_data_id,
     const resourceInfo =
     {
         slq: {
-            data_id: "9913b881-d76d-43f5-acd6-3541a130853d",
+            data_id: '<?php echo  json_encode($data_id); ?>',
             limit: 1
         },
         keywords: {
-            api_key: "acc_5f2b725d827949d",
-            api_secret: "bcb5c5c688fcb83325dca3a86d1129b9"
+            api_key: '<?php echo  json_encode($api_key); ?>',
+            api_secret: '<?php echo  json_encode($api_secret); ?>'
         }
     };
     // grab variable from const resource info - allows for updatability
