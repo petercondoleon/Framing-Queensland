@@ -18,11 +18,13 @@ function loadSLQImagesHomepage(count) {
     console.log("loadSLQ HOME");
     // if the count is under 1, return 1.
     if (count < 1) {
-        count = slq_limit;
+        // base64_decode resourceInfo data
+        count = atob(slq_limit);
     }
     var imageData = [],
         data = {
-            resource_id: slq_data_id,
+            // base64_decode resourceInfo data
+            resource_id: atob(slq_data_id),
             limit: count
         };
     // if images are already on system, load them instead of making an ajax call
@@ -83,11 +85,13 @@ function loadSLQImagesGame(count, rounds, exclusionData) {
     // if the count is under 1, return 1.
     console.log("loadSLQ GAME");
     if (count < 1) {
-        count = slq_limit;
+        // base64_decode resourceInfo data
+        count = atob(slq_limit);
     }
     var imageData = [],
         data = {
-            resource_id: slq_data_id,
+            // base64_decode resourceInfo data
+            resource_id: atob(slq_data_id),
             limit: count
         };
     // if images are already on system, load them instead of making an ajax call
@@ -143,7 +147,7 @@ function loadSLQImagesGame(count, rounds, exclusionData) {
 function buildJSON(slqJsonPictures) {
     "use strict";
     var jsonObject = {},
-        recordImage = slqJsonPicturest["1000_pixel_jpg"],
+        recordImage = slqJsonPictures["1000_pixel_jpg"],
         recordId = slqJsonPictures._id;
     // check if record image and id exists
     if (recordImage && recordId) {
@@ -172,8 +176,9 @@ function buildJSON(slqJsonPictures) {
 function keywordAPICall(imageURL) {
     "use strict";
     var keywords = [],
-        usernameKey = keywords_api_key,
-        passwordSecret = keywords_api_secret,
+        // base64_decode resourceInfo data
+        usernameKey = atob(keywords_api_key),
+        passwordSecret = atob(keywords_api_secret),
         data = {
             url: imageURL,
             username: usernameKey,

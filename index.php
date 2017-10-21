@@ -1,4 +1,7 @@
 <?php
+    // include resource.php infomation
+    require_once $_SERVER['DOCUMENT_ROOT'].'/php/resource.php';
+
     // Include meta tags
     include_once $_SERVER['DOCUMENT_ROOT'].'/html/meta.html';
 
