@@ -1,0 +1,48 @@
+/* Round Over Styling */
+
+#roundoverScreen {
+    /*bottom: 100%;*/
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    z-index: 1000;
+    background-color: white;
+}
+#roundover {
+    left: 50%;
+    max-height: 90%;
+    padding: 10px;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+}
+#roundImage img {
+    border: 3px dashed #7B7B7B;
+    width: 50%;
+    max-height: 20%;
+    margin: 24px;
+}
+#roundover h3 {
+    color: #8AD2E8;
+    font-size: 48px;
+    margin: 5px;
+}
+#roundover ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+#roundover button {
+    background-color: #8AD2E8;
+    border-radius: 15px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 24px;
+    outline: none;
+    padding: 15px 25px;
+    margin: 24px;
+    text-decoration: none;
+}
