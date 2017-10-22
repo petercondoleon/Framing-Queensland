@@ -3,8 +3,11 @@ Name {
 }
 
 Colour Palette {
-	blue: #8dd2e8
-	deep-blue: #82c2d9
-	red: #f85987
+	light-blue: #8ad2e8
+	blue: #52b2cf
+	light-green: #8ae8a0
+	light-purple: #958ae8
+	blue-complementary: #e8a88a
+	pink: #f85987
 	black: #393e48
 }

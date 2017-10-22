@@ -18,11 +18,31 @@ var imagesLoaded = false;
  */
 $(document).ready(function () {
     loadingScreenSetup(false);
-    // NOTE: testing the form input box
-    $('#guess form input').tagsInput({
-    "defaultText":"Make a guess!",
-    });
 });
+
+/**
+ * Sets internal varaible for loading screen to passed boolean
+ * @param {Boolean} isLoading the loadingscreen state
+ */
+function loadingscreenStateSetter(isLoadingState) {
+    if (typeof isLoadingState === 'boolean') {
+            isLoading = isLoadingState;
+    } else {
+        console.log("Error: Passed value must be a boolean!");
+    }
+}
+
+/**
+ * Sets internal varaible for game frame state to passed boolean
+ * @param {Boolean} imagesLoadedState if the images are loaded
+ */
+function imagesloadingStateSetter(imagesLoadedState) {
+    if (typeof imagesLoadedState === 'boolean') {
+            imagesLoaded = imagesLoadedState;
+    } else {
+        console.log("Error: Passed value must be a boolean!");
+    }
+}
 
 /**
  * loads an image at a give html dom pos
@@ -123,6 +143,13 @@ function animateColourChange(htmlElement , colour, duration){
     }
 }
 
-
-// TODO:
-// function compareHits(){}
+function compareHits(jsonObjectKeywords, arrayKeywords){
+    if (typeof (jsonObjectKeywords) === 'undefined') {
+        setTimeout(function () {
+            compareHits(apiKeywordsGetter(),collectGuesses());
+        }, 3000);
+        console.log("keyword API taking along time to respond");
+    } else {
+        console.log("success!");
+    }
+}

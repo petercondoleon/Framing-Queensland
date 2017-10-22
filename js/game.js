@@ -8,6 +8,10 @@ Course: DECO1800 Semester 2 - 2017
 
 Author: Sky Design
 *************************************/
+// global variables
+var apiKeywordsData;
+var apiKeywordsLoaded = false;
+
 /**
  * Executes when the document is ready.
  */
@@ -35,6 +39,7 @@ function setupGamePage(rounds, imageCount, slqImages) {
         var index = Math.floor(Math.random() * imageCount);
         gameImages.push(slqImages[index]);
     }
+    setupInputTags();
     startGame(rounds, gameImages);
 }
 
@@ -57,8 +62,10 @@ function startGame(rounds, gameImages) {
             if (!isLoading && imagesLoaded) {
                 //Time of the rounds following the first
                 startBlurTimer(10000);
+            // This else statement is called for the first round as the timer is
+            //  started from the end of the loadingscree
             } else {
-                imagesLoaded = true;
+                imagesloadingStateSetter(true);
             }
             // TODO:
             // loadavailablePowerups();
@@ -73,7 +80,7 @@ function startGame(rounds, gameImages) {
 }
 
 /**
- * loads an image object into the gameframe
+ * loads an image object into the gameframe and post gameframe
  * @param {string} image an imageURL
  */
 function loadgameImage(image) {
@@ -81,7 +88,10 @@ function loadgameImage(image) {
     try {
         var photo = insertImage(image.image, 400);
         $("#gameFrame").attr("src", $(photo).attr("src"));
-        $("#roundImage img").attr("src", $(photo).attr("src"));
+        // delay on post game image changing as not to reveal the next image
+        setTimeout(function () {
+            $("#roundImage img").attr("src", $(photo).attr("src"));
+        },1000);
         // store image in local storage
         sessionStorage.setItem("lastGameImage", photo);
     } catch (err) {
@@ -106,7 +116,7 @@ function startBlurTimer(time) {
     function frame() {
         if (width == 0) {
             // sets correct colour and width (0px) for recalls
-            elem.style.backgroundColor = "#90EE90";
+            elem.style.backgroundColor = "#8ae8a0";
             elem.style.width = width + '%';
         }
         // Floor 75% half width to the nearest interval
@@ -120,7 +130,8 @@ function startBlurTimer(time) {
         }
         if (width == maxwidth) {
             console.log("Round Over!");
-            setupGameoverScreen();
+            setupNextRoundButton();
+            compareHits(apiKeywordsGetter(),collectGuesses());
             // Delay presenting the round over menu
             setTimeout(function () {
                 showRoundoverMenu(true);
@@ -136,9 +147,49 @@ function startBlurTimer(time) {
 }
 
 /**
+ * Sets up empty inputTags box
+ */
+function setupInputTags() {
+    $('#guess form input').tagsInput({
+        "defaultText":"Make a guess!",
+    });
+}
+
+/**
+ * Collects the current guesses in guess tag inputs
+ * @return {string[]} guesses made
+ */
+function collectGuesses() {
+    "use strict";
+    var guesses = [];
+    $("#guess form div span").each(function () {
+        guesses.push($("span",this).text());
+    });
+    return guesses;
+}
+
+/**
+ * Sets internal keywords property to passed jsonObject,
+ * sets interal keyword load check to true
+ * @param {jsonObject} keywords the keyword data from api
+ */
+function apiKeywordsSetter(keywords) {
+    apiKeywordsData = keywords;
+    apiKeywordsLoaded = true;
+}
+
+/**
+ * returns the current api keywords
+ * @return {jsonObject} the results from image recognition API
+ */
+function apiKeywordsGetter() {
+    return apiKeywordsData;
+}
+
+/**
  * Sets up gameover screen functionality
  */
-function setupGameoverScreen() {
+function setupNextRoundButton() {
     "use strict";
     $("#nextRound button").on("click.startNextRound", function () {
         // Unbind action as soon as clicked to prevent ending the round early
@@ -160,6 +211,12 @@ function showRoundoverMenu(show) {
         $("#roundoverScreen").animate({
             bottom: "0%"
         }, 500);
+        collectGuesses().forEach(function(x){
+            $('#userKeywords ul').append("<li>"+x+"</li>");
+        });
+        apiKeywordsGetter().forEach(function(x){
+            $('#apiKeywords ul').append("<li>"+x.name+"</li>");
+        });
     } else {
         // Hide the menu
         $("#roundoverScreen").animate({
@@ -168,5 +225,9 @@ function showRoundoverMenu(show) {
         setTimeout(function () {
             $("#roundoverScreen").css('visibility', "hidden");
         }, 500);
+        // clear keyword data
+        $('#userKeywords ul').html("");
+        $('#apiKeywords ul').html("");
+        $('#guess form input').importTags('');
     }
 }
