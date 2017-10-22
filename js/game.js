@@ -9,8 +9,9 @@ Course: DECO1800 Semester 2 - 2017
 Author: Sky Design
 *************************************/
 // global variables
-var apiKeywordsData;
-var apiKeywordsLoaded = false;
+var apiKeywordsData,
+    apiKeywordsLoaded = false,
+    currentScore;
 
 /**
  * Executes when the document is ready.
@@ -19,7 +20,7 @@ $(document).ready(function () {
     "use strict";
     loadingScreenSetup(true);
     // data set size reduced to 6 for testing
-    var datasetSize = 6;
+    var datasetSize = 10000;
     loadSLQImagesGame(datasetSize, 6, [0]);
 });
 
@@ -33,6 +34,7 @@ function setupGamePage(rounds, imageCount, slqImages) {
     "use strict";
     // list of images for the game
     var gameImages = [];
+    currentScore = 0;
     // grab images for game
     for (var i = 0; i < rounds; i++) {
         // Generate image index
@@ -55,6 +57,7 @@ function startGame(rounds, gameImages) {
 
     function startRound() {
         round++;
+        $('#guess form input').importTags('');
         if (round < rounds) {
             console.log("Round: " + round);
             loadgameImage(gameImages[round]);
@@ -131,7 +134,7 @@ function startBlurTimer(time) {
         if (width == maxwidth) {
             console.log("Round Over!");
             setupNextRoundButton();
-            compareHits(apiKeywordsGetter(),collectGuesses());
+            scoreSetter(compareHits(apiKeywordsGetter(),collectGuesses()));
             // Delay presenting the round over menu
             setTimeout(function () {
                 showRoundoverMenu(true);
@@ -171,7 +174,7 @@ function collectGuesses() {
 /**
  * Sets internal keywords property to passed jsonObject,
  * sets interal keyword load check to true
- * @param {jsonObject} keywords the keyword data from api
+ * @param {JSON} keywords the keyword data from api
  */
 function apiKeywordsSetter(keywords) {
     apiKeywordsData = keywords;
@@ -180,10 +183,26 @@ function apiKeywordsSetter(keywords) {
 
 /**
  * returns the current api keywords
- * @return {jsonObject} the results from image recognition API
+ * @return {JSON} the results from image recognition API
  */
 function apiKeywordsGetter() {
     return apiKeywordsData;
+}
+
+/**
+ * sets the current gamescore
+ * @param {integer} score current score
+ */
+function scoreSetter(score) {
+    currentScore = score;
+}
+
+/**
+ * returns the current gamescore
+ * @return {integer} current score
+ */
+function scoreGetter() {
+    return currentScore;
 }
 
 /**
@@ -211,12 +230,17 @@ function showRoundoverMenu(show) {
         $("#roundoverScreen").animate({
             bottom: "0%"
         }, 500);
+        // Append user and API guesses
         collectGuesses().forEach(function(x){
             $('#userKeywords ul').append("<li>"+x+"</li>");
         });
         apiKeywordsGetter().forEach(function(x){
-            $('#apiKeywords ul').append("<li>"+x.name+"</li>");
+            $('#apiKeywords ul').append("<li>" + x.name +
+            " = " + (Math.floor(100*x.value)) + "</li>");
         });
+        // Append score
+        console.log(scoreGetter());
+        $("#totalScore").html("<p>"+scoreGetter()+"</p>");
     } else {
         // Hide the menu
         $("#roundoverScreen").animate({
@@ -229,5 +253,6 @@ function showRoundoverMenu(show) {
         $('#userKeywords ul').html("");
         $('#apiKeywords ul').html("");
         $('#guess form input').importTags('');
+        apiKeywordsData = undefined;
     }
 }

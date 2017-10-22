@@ -143,13 +143,36 @@ function animateColourChange(htmlElement , colour, duration){
     }
 }
 
+/**
+ * Compares the an array of strings with api guesses
+ * @param  {JSON} jsonObjectKeywords Object containing .name and .score property
+ * @param  {string[]} arrayKeywords array of strings containg keywords
+ * @return {integer} the player score
+ */
 function compareHits(jsonObjectKeywords, arrayKeywords){
+    var score = 0;
+    // this line of code is here to ensure the object is a correct JSON.
+    console.log(jsonObjectKeywords);
+    var jsonObjectCon = JSON.parse(JSON.stringify(jsonObjectKeywords));
+    // if keywords aren't found keep waiting till they are
     if (typeof (jsonObjectKeywords) === 'undefined') {
         setTimeout(function () {
             compareHits(apiKeywordsGetter(),collectGuesses());
         }, 3000);
-        console.log("keyword API taking along time to respond");
+        console.log("keyword API taking along time to respond!");
     } else {
-        console.log("success!");
+        if (arrayKeywords.length >= 1) {
+        $(arrayKeywords).each(function () {
+            var guess = (this.toLowerCase()).trim();
+                $(jsonObjectCon).each(function () {
+                var keyword = (this.name).trim();
+                if (guess == keyword) {
+                        score = score + Math.floor(100*this.value);
+                    }
+                });
+            }); // End of double foreach check
+        }
+        console.log(score);
+        return score;
     }
 }

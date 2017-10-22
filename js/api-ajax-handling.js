@@ -83,7 +83,6 @@ function loadSLQImagesHomepage(count) {
 function loadSLQImagesGame(count, rounds, exclusionData) {
     "use strict";
     // if the count is under 1, return 1.
-    console.log("loadSLQ GAME");
     if (count < 1) {
         // base64_decode resourceInfo data
         count = atob(slq_limit);
