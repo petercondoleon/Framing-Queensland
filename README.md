@@ -20,12 +20,10 @@ TODO:
   timer (width == maxwidth).
 - ensure that regardless of the image loaded in the game page it cannot exceed a
   certain height and the game.php cannot be scrolled on desktop
-- Ajax Call on keywords, store in a variable
 - tagging text field (like Facebook, Stack overflow, etc, tagging).
 - Store users guesses in a variable
 - determine scoring system and pass both user and API guess and return score.
 - fix all commenting on JS code (if nothing is returned don't use return)
-- ensure all JS is on the correct JS file.
 - ensure all CSS is on the correct page.
 - center FQ loading symbol on homepage
 - improve homepage animation for images
@@ -36,8 +34,7 @@ TODO:
 - Create a basic speech flow for our presentation
 - Complete report for PART C
 - Design and make posters for presentation (pitch design to group before making)
-- build wiki for code (will go nicely in report but requires above the
-  commenting to be finalised).
+
 - **DATASET SIZE REDUCED TO 6 and keyword API set to none for now to limit
   accidental usage! Ignore the invalid credentials error and use the dummy
   returned keywords for other testing purposes!**
@@ -45,3 +42,7 @@ TODO:
 Recently Completed:
 - do roundover.html css and transition from off page to on page
 - fix instructions, roundover and loadingscreen page showing up on the home screen when rescaling
+- ensure all JS is on the correct JS file.
+- Ajax Call on keywords, store in a variable
+- build wiki for code (will go nicely in report but requires above the
+  commenting to be finalised).
