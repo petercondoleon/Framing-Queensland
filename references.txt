@@ -1,2 +1,5 @@
-jquery-3.2.1
-jquery.color-2.1.2
+jquery-3.2.1:           http://jquery.com/
+jquery.color-2.1.2:     https://github.com/jquery/jquery-color
+jquery.tagsinput:       https://github.com/xoxco/jQuery-Tags-Input
+cssResetHTML5:          http://html5doctor.com/html-5-reset-stylesheet/
+clarifai:               https://www.clarifai.com/

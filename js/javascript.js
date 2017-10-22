@@ -11,14 +11,17 @@ Author: Sky Design
 *************************************/
 // global variables
 var isLoading = true;
-var imageLoaded = false;
+var imagesLoaded = false;
 
 /**
  * Executes when the document is ready.
  */
 $(document).ready(function () {
     loadingScreenSetup(false);
-    // Used to notify a page that loading screen has been removed.
+    // NOTE: testing the form input box
+    $('#guess form input').tagsInput({
+    "defaultText":"Make a guess!",
+    });
 });
 
 /**
@@ -55,7 +58,7 @@ function rotateImages(htmlElement) {
 function loadingScreenSetup(isGamepage) {
     "use strict";
     setTimeout(function () {
-        if (!isLoading && imageLoaded) {
+        if (!isLoading && imagesLoaded) {
             $("#loadingText").text("Loaded");
             $("#loadingSpinner").attr("src", "../img/gif/loaded.gif");
             $(".loadingScreen").click(function () {

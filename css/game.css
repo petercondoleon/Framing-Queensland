@@ -41,6 +41,15 @@
     padding: 20px;
     text-align: center;
 }
+#guess div{
+    margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+#guess div input{
+    width: 100%;
+}
 .gameFrame {
     display: block;
     filter: blur(20px);

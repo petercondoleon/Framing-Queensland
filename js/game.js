@@ -54,11 +54,11 @@ function startGame(rounds, gameImages) {
             console.log("Round: " + round);
             loadgameImage(gameImages[round]);
             keywordAPICall(gameImages[round]);
-            if (!isLoading && imageLoaded) {
+            if (!isLoading && imagesLoaded) {
                 //Time of the rounds following the first
                 startBlurTimer(10000);
             } else {
-                imageLoaded = true;
+                imagesLoaded = true;
             }
             // TODO:
             // loadavailablePowerups();
@@ -95,8 +95,7 @@ function loadgameImage(image) {
  */
 function startBlurTimer(time) {
     "use strict";
-    // all variables can be changed without causing the timer to change
-    // at different times
+    // all variables are adjustable without effecting visual consistentancy
     var elem = document.getElementById("timePassed"),
         width = 0,
         maxwidth = 100,
@@ -104,7 +103,6 @@ function startBlurTimer(time) {
         intervalTime = time / (maxwidth / intervals),
         id = setInterval(frame, intervalTime);
     elem.style.transition = "all " + (intervalTime / 1000) * 2 + "s";
-
     function frame() {
         if (width == 0) {
             // sets correct colour and width (0px) for recalls
@@ -121,7 +119,6 @@ function startBlurTimer(time) {
             animateColourChange(elem, "#FF0000", (time * 0.35));
         }
         if (width == maxwidth) {
-            //animateColourChange(elem,"#FF0000",(intervalTime*2));
             console.log("Round Over!");
             setupGameoverScreen();
             // Delay presenting the round over menu
