@@ -59,23 +59,29 @@ function setupHelpMenu() {
     "use strict";
     // Handle the help button being pressed
     $("#helpButton").click(function () {
-        setHelpMenu(false);
+        showHelpMenu(true);
     });
     // Handle canceling the help screen
     $("#instructionsContainer").click(function () {
-        setHelpMenu(true);
+        showHelpMenu(false);
     });
 }
 
 /**
  * Set the appearance of the help menu on the home page.
- * @param {Boolean} hidden false will show the menu, true will hide the menu
+ * @param {Boolean} show true will show the menu, false will hide the menu
  */
-function setHelpMenu(hidden) {
+function showHelpMenu(show) {
     "use strict";
-    if (hidden) {
+    if (show) {
+        // Show the menu
+        $("#instructionsContainer").css('visibility', "visible");
+        $("#instructionsContainer").animate({
+            bottom: "0%"
+        }, 300);
+        blur($("#home"), 10, 0.3);
+    } else {
         // Hide the menu
-
         $("#instructionsContainer").animate({
             bottom: "100%"
         }, 300);
@@ -83,12 +89,5 @@ function setHelpMenu(hidden) {
             $("#instructionsContainer").css('visibility', "hidden");
         }, 300);
         blur($("#home"), 0, 0.3);
-    } else {
-        // Show the menu
-        $("#instructionsContainer").css('visibility', "visible");
-        $("#instructionsContainer").animate({
-            bottom: "0%"
-        }, 300);
-        blur($("#home"), 10, 0.3);
     }
 }

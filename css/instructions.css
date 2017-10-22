@@ -1,11 +1,13 @@
 /* Instructions Styling */
 
 #instructionsContainer {
-    bottom: 100%;
     height: 100%;
     position: absolute;
     width: 100%;
     z-index: 1000;
+    /* Remove below to test html page */
+    bottom: 100%;
+    visibility: hidden;
 }
 #instructions {
     background-color: white;

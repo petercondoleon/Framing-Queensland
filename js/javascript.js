@@ -59,6 +59,9 @@ function loadingScreenSetup(isGamepage) {
             $("#loadingText").text("Loaded");
             $("#loadingSpinner").attr("src", "../img/gif/loaded.gif");
             $(".loadingScreen").click(function () {
+                setTimeout(function () {
+                    $(".loadingScreen").css('visibility', "hidden");
+                }, 500);
                $(this).animate({
                    bottom: "100%"
                }, 500);

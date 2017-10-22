@@ -124,7 +124,10 @@ function startBlurTimer(time) {
             //animateColourChange(elem,"#FF0000",(intervalTime*2));
             console.log("Round Over!");
             setupGameoverScreen();
-            showRoundoverMenu(true);
+            // Delay presenting the round over menu
+            setTimeout(function () {
+                showRoundoverMenu(true);
+            }, 1000);
             clearInterval(id);
         } else {
             width = width + intervals;
@@ -159,14 +162,14 @@ function showRoundoverMenu(show) {
         $("#roundoverScreen").css('visibility', "visible");
         $("#roundoverScreen").animate({
             bottom: "0%"
-        }, 300);
+        }, 500);
     } else {
         // Hide the menu
         $("#roundoverScreen").animate({
             bottom: "100%"
-        }, 300);
+        }, 500);
         setTimeout(function () {
             $("#roundoverScreen").css('visibility', "hidden");
-        }, 300);
+        }, 500);
     }
 }
