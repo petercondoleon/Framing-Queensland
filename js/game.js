@@ -124,6 +124,7 @@ function startBlurTimer(time) {
             //animateColourChange(elem,"#FF0000",(intervalTime*2));
             console.log("Round Over!");
             setupGameoverScreen();
+            showRoundoverMenu(true);
             clearInterval(id);
         } else {
             width = width + intervals;
@@ -143,5 +144,29 @@ function setupGameoverScreen() {
         // Unbind action as soon as clicked to prevent ending the round early
         $("#nextRound button").off("click.startNextRound");
         startGame.startRound();
+        showRoundoverMenu(false);
     });
+}
+
+/**
+ * Set the appearance of the round over menu on the game page.
+ * @param {Boolean} show true will show the menu, false will hide the menu
+ */
+function showRoundoverMenu(show) {
+    "use strict";
+    if (show) {
+        // Show the menu
+        $("#roundoverScreen").css('visibility', "visible");
+        $("#roundoverScreen").animate({
+            bottom: "0%"
+        }, 300);
+    } else {
+        // Hide the menu
+        $("#roundoverScreen").animate({
+            bottom: "100%"
+        }, 300);
+        setTimeout(function () {
+            $("#roundoverScreen").css('visibility', "hidden");
+        }, 300);
+    }
 }
