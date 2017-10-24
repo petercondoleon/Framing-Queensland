@@ -62,7 +62,7 @@ function setupHelpMenu() {
         showHelpMenu(true);
     });
     // Handle canceling the help screen
-    $("#instructionsContainer").click(function () {
+    $("#cancelButton").click(function () {
         showHelpMenu(false);
     });
 }

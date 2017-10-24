@@ -9,6 +9,22 @@
     bottom: 100%;
     visibility: hidden;
 }
+#cancelButton {
+    z-index: 100;
+    background-color: white;
+    border-radius: 100px;
+    width: 36px;
+    height: 36px;
+    padding: 4px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    transform: translate(-50%, -50%);
+    transition: 0.1s;
+}
+#cancelButton:hover {
+    cursor: pointer;
+}
 #instructions {
     background-color: white;
     border: 3px dashed #7B7B7B;
