@@ -1,38 +1,38 @@
 /* Loading Screen */
 
-.loadingScreen {
+#loadingScreen {
     background-color: white;
     height: 100%;
     position: absolute;
     width: 100%;
     z-index: 1000;
 }
-.loadingScreen div {
+#loadingScreen div {
     left: 50%;
     position: absolute;
     top: 50%;
     transform: translate(-50%, -50%);
     width: 100%;
 }
-.loadingScreen h1 {
+#loadingScreen h1 {
     color: #8AD2E8;
     font-size: 72px;
     padding: 50px;
     text-align: center;
 }
-.loadingScreen img {
+#loadingScreen img {
     display: block;
     height: 200px;
     margin: 0 auto;
     padding: 50px;
 }
-.loadingScreen h2 {
+#loadingScreen h2 {
     color: #8AD2E8;
     font-size: 32px;
     padding: 16px;
     text-align: center;
 }
-.loadingScreen p {
+#loadingScreen p {
     color: #8AD2E8;
     font-size: 24px;
     padding: 8px;

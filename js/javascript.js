@@ -79,11 +79,12 @@ function loadingScreenSetup(isGamepage) {
     "use strict";
     setTimeout(function () {
         if (!isLoading && imagesLoaded) {
-            $("#loadingText").text("Loaded");
-            $("#loadingSpinner").attr("src", "../img/gif/loaded.gif");
-            $(".loadingScreen").click(function () {
+            $("#loadingText").text("Click To Play");
+            $("#loadingImage").attr("src", "../img/gif/loaded.gif");
+            $("#loadingScreen").css("cursor", "pointer");
+            $("#loadingScreen").click(function () {
                 setTimeout(function () {
-                    $(".loadingScreen").css('visibility', "hidden");
+                    $("#loadingScreen").css('visibility', "hidden");
                 }, 500);
                $(this).animate({
                    bottom: "100%"
