@@ -40,6 +40,9 @@ body {
     /* Specify a stack order in case you're using a different order for other elements */
     z-index: 2;
 }
+button {
+    font-family: inherit;
+}
 /*
 #Instructions{
     text-align: center;
