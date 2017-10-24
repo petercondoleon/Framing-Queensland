@@ -50,21 +50,31 @@
 #guess div input{
     width: 100%;
 }
-.gameFrame {
-    display: block;
-    filter: blur(20px);
-    margin: auto;
-    padding: 20px;
-    width: 40%;
+#gameImageOuter {
+    text-align: center;
 }
-.gameoverScreen {
+#gameImageInner {
+    background-color: white;
+    border: 3px dashed #7B7B7B;
+    outline: 3px solid white;
+    display: inline-block;
+    padding: 3px;
+    margin: 16px;
+}
+#gameFrame {
+    display: block;
+    margin: 0 auto;
+    filter: blur(20px);
+    height: 45%;
+}
+#gameoverScreen {
     background-color: white;
     height: 100%;
     position: absolute;
     width: 100%;
     z-index: 1000;
 }
-.gameoverScreen div {
+#gameoverScreen div {
     left: 50%;
     position: absolute;
     top: 50%;
