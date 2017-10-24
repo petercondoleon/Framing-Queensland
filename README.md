@@ -12,6 +12,8 @@ Facebook Page: https://www.facebook.com/Framing-Queensland-128382111225053/
 ***NOT ALL OF THESE ARE A PRIORITY - IF YOU CAN DO MORE THAN ONE OF THESE AND
 ARE NOT SURE ON WHICH IS MORE IMPORTANT TO DO, ASK IN THE GROUP CHAT****
 TODO:
+- About Page Styling
+- Mock leaderboard page. BONUS: have user score added to leaderboard page after game.
 - ensure that regardless of the image loaded in the game page it cannot exceed a
   certain height and the game.php cannot be scrolled on desktop
 - tagging text field (like Facebook, Stack overflow, etc, tagging).
