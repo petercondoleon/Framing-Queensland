@@ -45,7 +45,7 @@ function imagesloadingStateSetter(imagesLoadedState) {
 }
 
 /**
- * loads an image at a give html dom pos
+ * Loads an image at a given html dom pos
  * @param {string} image source
  * @param {integer} image width
  * @return {string} <img/> tag form of parsed img string
