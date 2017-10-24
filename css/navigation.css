@@ -6,11 +6,14 @@
     width: 100%;
     z-index: 100;
 }
-.universalNav h1 {
+.universalNav #title h1 {
     background-color: white;
     color: #8AD2E8;
     font-size: 32px;
-    padding: 20px;
+    padding: 16px;
+}
+.universalNav #title {
+    text-decoration: none;
 }
 .universalNav ul {
     background-color: white;
@@ -27,11 +30,11 @@
     height: 20px;
     padding-right: 5px;
 }
-.universalNav a {
+.universalNav li a {
     color: #8AD2E8;
     font-size: 24px;
     text-decoration: none;
 }
-.universalNav a:hover {
+.universalNav li a:hover {
     text-decoration: underline;
 }
