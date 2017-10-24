@@ -12,12 +12,6 @@ Facebook Page: https://www.facebook.com/Framing-Queensland-128382111225053/
 ***NOT ALL OF THESE ARE A PRIORITY - IF YOU CAN DO MORE THAN ONE OF THESE AND
 ARE NOT SURE ON WHICH IS MORE IMPORTANT TO DO, ASK IN THE GROUP CHAT****
 TODO:
-- Refine any existing PNG and SVG files.
-- Correct the SVGs
-- Sort SVGs and PNGs with consistent names and remove any older/not being
-  planned on being used.
-  (like loading screen but reverse), this can be called from the end of the
-  timer (width == maxwidth).
 - ensure that regardless of the image loaded in the game page it cannot exceed a
   certain height and the game.php cannot be scrolled on desktop
 - tagging text field (like Facebook, Stack overflow, etc, tagging).
@@ -32,7 +26,6 @@ TODO:
   at implementing the jquery function called slideToggle()
   http://api.jquery.com/slidetoggle/, or an alternative.
 - Create a basic speech flow for our presentation
-- Complete report for PART C
 - Design and make posters for presentation (pitch design to group before making)
 
 - **DATASET SIZE REDUCED TO 6 and keyword API set to none for now to limit
@@ -46,3 +39,8 @@ Recently Completed:
 - Ajax Call on keywords, store in a variable
 - build wiki for code (will go nicely in report but requires above the
   commenting to be finalised).
+- Refine any existing PNG and SVG files.
+- Correct the SVGs
+- Sort SVGs and PNGs with consistent names and remove any older/not being
+  planned on being used.
+- Complete report for PART C
