@@ -10,6 +10,7 @@
     text-shadow: -9px 9px #86C7DC;
     top: 10%;
     transform: translate(-50%, 0);
+    transition: 0.1s;
 }
 #title a:hover {
     text-shadow: -9px 12px #86C7DC;
