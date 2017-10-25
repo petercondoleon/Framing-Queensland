@@ -235,7 +235,9 @@ function showRoundoverMenu(show) {
         }, 500);
         // Append user and API guesses
         collectGuesses().forEach(function(x){
-            $('#userKeywords ul').append("<li>"+x+"</li>");
+            if (x) {
+                $('#userKeywords ul').append("<li>"+x+"</li>");
+            }
         });
         apiKeywordsGetter().forEach(function(x){
             $('#apiKeywords ul').append("<li>" + x.name +

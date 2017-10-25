@@ -5,39 +5,46 @@
     </head>
     <body>
         <div id="roundoverScreen">
-          <div id="roundover">
-              <div id="roundImage">
-                  <img src="../img/gif/loading.gif"/>
-              </div>
-              <div class="keywords">
-                  <h3>
-                      AI Guessed
-                  </h3>
-                  <div id="apiKeywords">
-                      <ul></ul>
-                  </div>
-              </div>
-              <div class= "keywords">
-                  <h3>
-                      You Guessed
-                  </h3>
-                  <div id="userKeywords">
-                      <ul></ul>
-                  </div>
-              </div>
-              <div id="scoring">
-                  <h3>
-                      Current Total
-                  </h3>
-                  <div id="totalScore">
-                  </div>
-              </div>
-              <div id="nextRound">
-                  <button>
-                      Next Round
-                  </button>
-              </div>
-          </div>
+
+            <div id="roundOver">
+                <div id="roundImage">
+                    <img src="../img/gif/loading.gif"/>
+                </div>
+
+                <div id="guesses">
+                    <div>
+                        <h3>
+                            AI Guessed
+                        </h3>
+                        <div id="apiKeywords" class="guessTable">
+                            <ul></ul>
+                        </div>
+                    </div>
+                    <div>
+                        <h3>
+                            You Guessed
+                        </h3>
+                        <div id="userKeywords" class="guessTable">
+                            <ul></ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="scoring">
+                    <h3>
+                        Total Score
+                    </h3>
+                    <div id="totalScore">
+                    </div>
+                </div>
+
+                <div id="nextRound">
+                    <button>
+                        Next Round
+                    </button>
+                </div>
+            </div>
+
         </div>
     </body>
 </html>

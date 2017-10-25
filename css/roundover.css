@@ -1,42 +1,90 @@
 /* Round Over Styling */
 
 #roundoverScreen {
-    height: 100%;
     position: fixed;
+    height: 100%;
     width: 100%;
     z-index: 1000;
     background-color: white;
+    overflow: scroll;
     /* Remove below to test html page */
     bottom: 100%;
     visibility: hidden;
 }
 #roundover {
-    left: 50%;
-    max-height: 90%;
-    padding: 10px;
     position: absolute;
-    text-align: center;
-    top: 50%;
-    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 150px;
+    bottom: 5%;
+    transform: translateX(-50%);
     width: 90%;
+    text-align: center;
 }
+#roundImage {
+    background-color: white;
+    outline: 3px dashed #7B7B7B;
+    outline-offset: -6px;
+    border: 10px solid white;
+    margin: 16px 0;
+    display: inline-block;
+}
+#guesses {
+    text-align: center;
+    max-width: 90%;
+    padding: 10px;
+    overflow: scroll;
+    display: table;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    border-spacing: 24px;
+}
+#guesses > div {
+    display: table-cell;
+}
+
 #roundImage img {
-    border: 3px dashed #7B7B7B;
-    width: 35%;
-    max-height: 20%;
-    margin: 24px;
+    height: 35%;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
 }
-#roundover h3 {
+#guesses h3 {
     color: #8AD2E8;
     font-size: 48px;
     margin: 5px;
+    display: inline-block;
 }
-#roundover ul {
+#guesses .guessTable {
+    border-radius: 24px;
+    border: 1px solid white;
+    z-index: 10;
+    overflow: hidden;
+    background-color: #8AD2E8;
+}
+#guesses ul {
     list-style: none;
     padding: 0;
     margin: 0;
+    max-height: 200px;
+    overflow: scroll;
 }
-#roundover button {
+
+#guesses ul li {
+    list-style: none;
+    padding: 5px 20px;
+    background-color: #8AD2E8;
+    border: 1px solid white;
+    color: white;
+
+}
+#scoring {
+    color: #8AD2E8;
+    font-size: 48px;
+    margin: 5px;
+    display: inline-block;
+}
+#nextRound button {
     background-color: #8AD2E8;
     border-radius: 15px;
     border: none;
@@ -47,9 +95,5 @@
     padding: 15px 25px;
     margin: 24px;
     text-decoration: none;
-}
-.keywords {
-    float: left;
-    padding-left: 1.5%;
-    padding-right: 1.5%;
+    display: inline-block;
 }
