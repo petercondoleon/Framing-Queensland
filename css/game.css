@@ -1,10 +1,19 @@
 /*Timer and Timer initiating instructions*/
 
+#gameContainer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -50;
+    display: inline-block;
+}
 #totalTime {
     background-color: grey;
     border-radius: 5px;
     margin: auto;
-    width: 40%;
+    width: 100%;
+    display: block;
 }
 #timePassed {
     border-radius: 5px;
@@ -60,13 +69,12 @@
     display: inline-block;
     padding: 4px;
     margin: 16px;
-    max-width: 75%;
-    overflow: hidden;
+    max-width: inherit;
 }
 #gameFrame {
     display: block;
     margin: 0 auto;
-    filter: blur(20px);
+    /*filter: blur(20px);*/
     height: 45%;
 }
 #gameoverScreen {
