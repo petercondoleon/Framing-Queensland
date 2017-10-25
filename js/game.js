@@ -10,7 +10,6 @@ Author: Sky Design
 *************************************/
 // global variables
 var apiKeywordsData,
-    apiKeywordsLoaded = false,
     currentScore;
 
 /**
@@ -181,7 +180,6 @@ function collectGuesses() {
  */
 function apiKeywordsSetter(keywords) {
     apiKeywordsData = keywords;
-    apiKeywordsLoaded = true;
 }
 
 /**
