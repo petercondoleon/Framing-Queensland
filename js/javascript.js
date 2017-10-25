@@ -59,7 +59,6 @@ function insertImage(image, width) {
 /**
  * Transform html elements by slightly randomly roatating and adjusting them.
  * @param  {string} htmlElement a string a HtmlDOM position
- * @return {undefined}
  */
 function rotateImages(htmlElement) {
     "use strict";
@@ -74,7 +73,6 @@ function rotateImages(htmlElement) {
 /**
  * Loading screen handling
  * @param  {Boolean} isGamepage loading screen is the premise to the gamepage
- * @return {undefined}
  */
 function loadingScreenSetup(isGamepage) {
     "use strict";
@@ -106,7 +104,6 @@ function loadingScreenSetup(isGamepage) {
  * @param  {Object} object the jquery object
  * @param  {Number} radius the blur radius to set
  * @param  {Number} duration the time taken to blur
- * @return {undefined}
  */
 function blur(object, radius, duration){
     "use strict";
