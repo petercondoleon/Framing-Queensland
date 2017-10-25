@@ -5,6 +5,9 @@
     // Include meta tags
     include_once $_SERVER['DOCUMENT_ROOT'].'/html/meta.html';
 
+    // Add the navigation bar to the top of the page
+    include_once $_SERVER['DOCUMENT_ROOT'].'/html/navigation.html';
+
     // Include Instructions screen
     include_once $_SERVER['DOCUMENT_ROOT'].'/html/instructions.html';
 

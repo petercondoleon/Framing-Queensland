@@ -2,24 +2,18 @@
 
 #title a {
     color: white;
-    font-size: 5em;
+    font-size: 6em;
     left: 50%;
     position: absolute;
     text-align: center;
     text-decoration: none;
     text-shadow: -9px 9px #86C7DC;
-    top: 10%;
+    top: 20%;
     transform: translate(-50%, 0);
     transition: 0.1s;
 }
 #title a:hover {
     text-shadow: -9px 12px #86C7DC;
-}
-#skyDesignLogo {
-    left: 1%;
-    position: absolute;
-    top: 1%;
-    width: 64px;
 }
 #helpButton {
     background-color: white;
@@ -30,7 +24,7 @@
     left: 3%;
     padding: 12px;
     position: absolute;
-    top: 10%;
+    top: 160px;
     transition: 0.1s;
     width: 32px;
 }
@@ -45,7 +39,7 @@
     padding: 12px;
     position: absolute;
     right: 3%;
-    top: 10%;
+    top: 160px;
     transition: 0.1s;
     width: 32px;
 }
@@ -68,7 +62,7 @@
     overflow: hidden;
     padding: 100px;
     position: absolute;
-    top: 50%;
+    top: 60%;
     transform: translate(-50%, -50%);
     width: 70%;
     z-index: -10;

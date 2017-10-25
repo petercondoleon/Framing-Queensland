@@ -80,6 +80,7 @@ function showHelpMenu(show) {
             bottom: "0%"
         }, 300);
         blur($("#home"), 10, 0.3);
+        blur($("#universalNav"), 10, 0.3);
     } else {
         // Hide the menu
         $("#instructionsContainer").animate({
@@ -89,5 +90,6 @@ function showHelpMenu(show) {
             $("#instructionsContainer").css('visibility', "hidden");
         }, 300);
         blur($("#home"), 0, 0.3);
+        blur($("#universalNav"), 0, 0.3);
     }
 }

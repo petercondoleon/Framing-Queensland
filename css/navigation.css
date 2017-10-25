@@ -8,21 +8,43 @@
     left: 0;
     width: 100%;
 }
-#universalNav #title h1 {
+#universalNav #expandIcon {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 28px;
+    transform: rotate(-45deg);
+    cursor: pointer;
+    transition: 0.2s;
+}
+#universalNav #skyDesignLogo {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 42px;
+}
+#universalNav #navTitle {
     background-color: white;
+    height: 68px;
+    border-bottom: 3px solid #8AD2E8;
+    text-align: center;
+}
+#universalNav #navTitle a {
     color: #8AD2E8;
     font-size: 32px;
-    padding: 16px;
-}
-#universalNav #title {
     text-decoration: none;
+    position: relative;
+    top: 17px;
 }
 #universalNav ul {
     background-color: white;
     border-bottom: 3px solid #8AD2E8;
-    border-top: 3px solid #8AD2E8;
     padding: 20px 0;
     width: 100%;
+    transition: 0.2s;
+    position: relative;
+    z-index: -50;
+    top: -150px;
 }
 #universalNav li {
     display: inline;

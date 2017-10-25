@@ -18,6 +18,7 @@ var imagesLoaded = false;
  */
 $(document).ready(function () {
     loadingScreenSetup(false);
+    setupNavigation();
 });
 
 /**
@@ -176,4 +177,20 @@ function compareHits(jsonObjectKeywords, arrayKeywords){
         console.log(score);
         return score;
     }
+}
+
+var navOpen = false;
+function setupNavigation() {
+    $("#expandIcon").click(function() {
+        if (navOpen) {
+            $("#expandIcon").css("transform", "rotate(-45deg)");
+            $("#universalNav ul").css("top", "-150px");
+            navOpen = false;
+        } else {
+            $("#expandIcon").css("transform", "rotate(0deg)");
+            $("#universalNav ul").css("top", "0px");
+            navOpen = true;
+        }
+    });
+
 }
