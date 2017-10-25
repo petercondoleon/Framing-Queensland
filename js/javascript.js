@@ -176,6 +176,53 @@ function compareHits(jsonObjectKeywords, arrayKeywords){
     }
 }
 
+/**
+* Checks whether a word matches with api guesses
+* @param  {JSON} jsonObjectKeywords Object containing .name and .score property
+* @param  {string} text the string keyword to check
+* @return {boolean} true if it matches and false otherwise
+ */
+function checkGuessHit(jsonObjectKeywords, text) {
+    var jsonObjectCon = JSON.parse(JSON.stringify(jsonObjectKeywords));
+    // if keywords aren't found keep waiting till they are
+    var result = false;
+    if (typeof (jsonObjectKeywords) === 'undefined') {
+        setTimeout(function () {
+            checkGuessHit(apiKeywordsGetter(), text);
+        }, 3000);
+        console.log("keyword API taking along time to respond!");
+    } else {
+        var guess = (text.toLowerCase()).trim();
+        $(jsonObjectCon).each(function () {
+            var keyword = (this.name).trim();
+            if (guess == keyword) {
+                result = true;
+            }
+        });
+    }
+    return result;
+}
+
+/**
+ * Checks whether a guess matches any of the keywords
+ * @param  {string[]} arrayKeywords array of strings containg keywords
+ * @param  {string} text the string guess to check
+ * @return {boolean} true if it matches and false otherwise
+ */
+function checkKeywordHit(arrayKeywords, text) {
+    var result = false;
+    if (arrayKeywords.length >= 1) {
+    $(arrayKeywords).each(function () {
+        var guess = (text.toLowerCase()).trim();
+        var keyword = (this.toLowerCase()).trim();
+        if (guess == keyword) {
+                result = true;
+            }
+        }); // End of double foreach check
+    }
+    return result;
+}
+
 var navOpen = false;
 function setupNavigation() {
     $("#expandIcon").click(function() {

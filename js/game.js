@@ -235,11 +235,19 @@ function showRoundoverMenu(show) {
         collectGuesses().forEach(function(x){
             if (x) {
                 $('#userKeywords ul').append("<li>"+x+"</li>");
+                if ((checkGuessHit(apiKeywordsGetter(), x))) {
+                    $('#userKeywords ul li').last().css("background-color", "#8ae8a0");
+                }
             }
         });
         apiKeywordsGetter().forEach(function(x){
             $('#apiKeywords ul').append("<li>" + x.name +
             " = " + (Math.floor(100*x.value)) + "</li>");
+
+            if ((checkKeywordHit(collectGuesses(), x.name))) {
+                $('#apiKeywords ul li').last().css("background-color", "#8ae8a0");
+            }
+
         });
         // Append score
         console.log(scoreGetter());
