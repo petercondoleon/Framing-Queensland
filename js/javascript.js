@@ -184,22 +184,14 @@ function compareHits(jsonObjectKeywords, arrayKeywords){
  */
 function checkGuessHit(jsonObjectKeywords, text) {
     var jsonObjectCon = JSON.parse(JSON.stringify(jsonObjectKeywords));
-    // if keywords aren't found keep waiting till they are
     var result = false;
-    if (typeof (jsonObjectKeywords) === 'undefined') {
-        setTimeout(function () {
-            checkGuessHit(apiKeywordsGetter(), text);
-        }, 3000);
-        console.log("keyword API taking along time to respond!");
-    } else {
-        var guess = (text.toLowerCase()).trim();
-        $(jsonObjectCon).each(function () {
-            var keyword = (this.name).trim();
-            if (guess == keyword) {
-                result = true;
-            }
-        });
-    }
+    var guess = (text.toLowerCase()).trim();
+    $(jsonObjectCon).each(function () {
+        var keyword = (this.name).trim();
+        if (guess == keyword) {
+            result = true;
+        }
+    });
     return result;
 }
 
@@ -218,7 +210,7 @@ function checkKeywordHit(arrayKeywords, text) {
         if (guess == keyword) {
                 result = true;
             }
-        }); // End of double foreach check
+        });
     }
     return result;
 }
