@@ -57,6 +57,7 @@ function startGame(rounds, gameImages) {
 
     function startRound() {
         round++;
+        $("#roundValue").text(round+1);
         $('#guess form input').importTags('');
         if (round < rounds) {
             console.log("Round: " + round);
@@ -117,6 +118,8 @@ function startBlurTimer(time) {
         id = setInterval(frame, intervalTime);
     elem.style.transition = "all " + (intervalTime / 1000) * 2 + "s";
     function frame() {
+        // Update the time displayed in the timer
+        $("#timerValue").text(parseFloat((time/1000)*(1-width/100)).toFixed(2));
         if (width == 0) {
             // sets correct colour and width (0px) for recalls
             elem.style.backgroundColor = "#8ae8a0";
