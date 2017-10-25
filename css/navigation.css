@@ -1,40 +1,42 @@
 /* Universal Navigation CSS Styling */
 
-.universalNav {
-    margin-bottom: 20px;
+#universalNav {
     text-align: center;
+    z-index: 1000;
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    z-index: 100;
 }
-.universalNav #title h1 {
+#universalNav #title h1 {
     background-color: white;
     color: #8AD2E8;
     font-size: 32px;
     padding: 16px;
 }
-.universalNav #title {
+#universalNav #title {
     text-decoration: none;
 }
-.universalNav ul {
+#universalNav ul {
     background-color: white;
     border-bottom: 3px solid #8AD2E8;
     border-top: 3px solid #8AD2E8;
     padding: 20px 0;
     width: 100%;
 }
-.universalNav li {
+#universalNav li {
     display: inline;
     padding: 0 5%;
 }
-.universalNav li img {
+#universalNav li img {
     height: 20px;
     padding-right: 5px;
 }
-.universalNav li a {
+#universalNav li a {
     color: #8AD2E8;
     font-size: 24px;
     text-decoration: none;
 }
-.universalNav li a:hover {
+#universalNav li a:hover {
     text-decoration: underline;
 }

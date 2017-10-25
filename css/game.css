@@ -2,12 +2,42 @@
 
 #gameContainer {
     position: absolute;
-    top: 50%;
+    top: 150px;
+    bottom: 5%;
     left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: -50;
+    transform: translate(-50%, 0);
     display: inline-block;
+    max-width: 85%;
+    overflow-x: hidden;
+    overflow-y: scroll;
 }
+
+/* Game Image */
+
+#gameImageOuter {
+    text-align: center;
+}
+#gameImageInner {
+    background-color: white;
+    outline: 3px dashed #7B7B7B;
+    outline-offset: -6px;
+    border: 10px solid white;
+    display: inline-block;
+    margin: 16px;
+    max-width: 90%;
+    overflow: hidden;
+}
+#gameFrame {
+    display: absolute;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
+    filter: blur(20px);
+    height: 60%;
+}
+
+/* Game Timer */
+
 #totalTime {
     background-color: grey;
     border-radius: 5px;
@@ -21,28 +51,9 @@
     transition-timing-function: linear;
     width: 0;
 }
-#endGame {
-    padding: 20px;
-    padding-bottom: 200px;
-    text-align: center;
-}
-#endGame button {
-    background-color: white;
-    border: none;
-    border-radius: 15px;
-    box-shadow: -9px 9px #86C7DC;
-    color: #8AD2E8;
-    cursor: pointer;
-    display: inline-block;
-    font-size: 24px;
-    padding: 15px 25px;
-    text-align: center;
-    text-decoration: none;
-    transition: 0.1s;
-}
-#endGame button:hover {
-    box-shadow: -9px 12px #86C7DC;
-}
+
+/* User Input */
+
 #guess {
     margin: 0 auto;
     margin-left: auto;
@@ -58,24 +69,6 @@
 }
 #guess div input{
     width: 100%;
-}
-#gameImageOuter {
-    text-align: center;
-}
-#gameImageInner {
-    background-color: white;
-    border: 3px dashed #7B7B7B;
-    outline: 3px solid white;
-    display: inline-block;
-    padding: 4px;
-    margin: 16px;
-    max-width: inherit;
-}
-#gameFrame {
-    display: block;
-    margin: 0 auto;
-    /*filter: blur(20px);*/
-    height: 45%;
 }
 #gameoverScreen {
     background-color: white;
