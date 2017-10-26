@@ -1,0 +1,42 @@
+/* game Over Styling */
+
+#gameoverScreen {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 1000;
+    background-color: white;
+    overflow: scroll;
+    /* Remove below to test html page */
+    bottom: 100%;
+    visibility: hidden;
+}
+#gameover {
+    position: absolute;
+    left: 50%;
+    top: 150px;
+    bottom: 5%;
+    transform: translateX(-50%);
+    width: 90%;
+    text-align: center;
+    display: inline-block;
+}
+#scoring {
+    color: #8AD2E8;
+    font-size: 48px;
+    margin: 5px;
+    display: inline-block;
+}
+.gameButton button {
+    background-color: #8AD2E8;
+    border-radius: 15px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 24px;
+    outline: none;
+    padding: 15px 25px;
+    margin: 24px;
+    text-decoration: none;
+    display: inline-block;
+}

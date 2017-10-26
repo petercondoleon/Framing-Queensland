@@ -1,34 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Framing Queensland - Gameover!</title>
-        <meta property="og:title" content="Framing Queensland - Gameover!">
-        <link rel="stylesheet" type="text/css" media="screen" href="../css/cssResetHTML5.min.css"/>
-        <link rel="stylesheet" type="text/css" media="screen" href="../css/main.css"/>
+        <link rel="stylesheet" type="text/css" media="screen" href="../css/gameover.css"/>
     </head>
     <body>
-        <section>
-            <!--Every page except the hompage has this Nav.
-            Either we copy or paste, or just JS in the html
-            to save loading times-->
+        <div id="gameoverScreen">
+            <div id="Gameover">
+                <!-- <div id="roundImage">
+                    <img src="../img/gif/loading.gif"/>
+                </div> -->
+                <div id="scoring">
+                    <h3>
+                        Final Score:
+                    </h3>
+                    <div id="finalScore">
+                    </div>
+                </div>
+                <!-- <div class="gamebutton">
+                    <a href="../php/game.php">
+                        <button>
+                            Replay
+                        </button>
+                    </a>
+                </div>
+                <div class="gamebutton">
+                    <a href="../index.php">
+                        <button>
+                            Home
+                        </button>
+                    </a>
+                </div>
+            </div> -->
 
-            <div id="photosFromGame">
-                <img id="gameOverFrame" class="gameOverFrame" src="../img/gif/loading.gif" alt="placeholder for images" width="350px"/>
-            </div>
-            <div id="parentGameOver">
-                <div id="playAgain">
-                    <a href="../php/game.php"><button>Play Again!</button></a>
-                </div>
-                <div id="leaderBoard">
-                    <a href="../php/leaderboard.php"><button>Check the leaderboards!</button></a>
-                </div>
-            </div>
-        </section>
-        <footer>
-        </footer>
-        <div>
-            <!-- END CONTAINER SCRIPTS -->
-            <script type="text/javascript" src="../js/game-over.js"></script>
         </div>
     </body>
 </html>

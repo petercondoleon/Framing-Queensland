@@ -10,7 +10,8 @@ Author: Sky Design
 *************************************/
 // global variables
 var apiKeywordsData,
-    currentScore;
+    currentScore = 0;
+    totalGameScore = 0;
 
 /**
  * Executes when the document is ready.
@@ -34,6 +35,7 @@ function setupGamePage(rounds, imageCount, slqImages) {
     // list of images for the game
     var gameImages = [];
     currentScore = 0;
+    totalGameScore = 0;
     // grab images for game
     for (var i = 0; i < rounds; i++) {
         // Generate image index
@@ -76,6 +78,7 @@ function startGame(rounds, gameImages) {
         } else if (round == rounds) {
             // GameOver
             console.log("Game Over!");
+            showGameoverMenu(true);
         }
     }
     startGame.startRound = startRound;
@@ -136,7 +139,9 @@ function startBlurTimer(time) {
         if (width == maxwidth) {
             console.log("Round Over!");
             setupNextRoundButton();
-            scoreSetter(compareHits(apiKeywordsGetter(),collectGuesses()));
+            var roundScore = compareHits(apiKeywordsGetter(),collectGuesses());
+            scoreSetter(roundScore);
+            totalScoreSetter(totalScoreGetter()+roundScore);
             // Delay presenting the round over menu
             setTimeout(function () {
                 showRoundoverMenu(true);
@@ -207,6 +212,22 @@ function scoreGetter() {
 }
 
 /**
+ * sets the current gamescore
+ * @param {integer} totalScore current score
+ */
+function totalScoreSetter(totalScore) {
+    totalGameScore = totalScore;
+}
+
+/**
+ * returns the current gamescore
+ * @return {integer} current score
+ */
+function totalScoreGetter() {
+    return totalGameScore;
+}
+
+/**
  * Sets up gameover screen functionality
  */
 function setupNextRoundButton() {
@@ -250,8 +271,8 @@ function showRoundoverMenu(show) {
 
         });
         // Append score
-        console.log(scoreGetter());
-        $("#totalScore").html("<p>"+scoreGetter()+"</p>");
+        $("#currentScore").html("<p>"+scoreGetter()+"</p>");
+        $("#scoreValue").html("<p>"+totalScoreGetter()+"</p>");
     } else {
         // Hide the menu
         $("#roundoverScreen").animate({
@@ -265,5 +286,29 @@ function showRoundoverMenu(show) {
         $('#apiKeywords ul').html("");
         $('#guess form input').importTags('');
         apiKeywordsData = undefined;
+    }
+}
+
+/**
+ * Set the appearance of the game over menu on the game page.
+ * @param {Boolean} show true will show the menu, false will hide the menu
+ */
+function showGameoverMenu(show) {
+    "use strict";
+    if (show) {
+        // Show the menu
+        $("#gameoverScreen").css('visibility', "visible");
+        $("#gameoverScreen").animate({
+            bottom: "0%"
+        }, 500);
+        $("#scoring h3").html("<p>"+"Final Score: "+totalScoreGetter()+"</p>");
+    } else {
+        // Hide the menu
+        $("#gameoverScreen").animate({
+            bottom: "100%"
+        }, 500);
+        setTimeout(function () {
+            $("#gameoverScreen").css('visibility', "hidden");
+        }, 500);
     }
 }

@@ -12,8 +12,18 @@ Author: Sky Design
  * Executes when the document is ready.
  */
 $(document).ready(function() {
+    console.log("hello");
     $('#morerank').hide();
+    var moreShown = false;
     $("#more").click(function() {
-        $("#morerank").show();
+        if (moreShown) {
+            $("#morerank").hide();
+            moreShown = false;
+            $("#more").css("transform", "rotate(90deg)");
+        } else {
+            $("#morerank").show();
+            moreShown = true;
+            $("#more").css("transform", "rotate(270deg)");
+        }
     });
 });
