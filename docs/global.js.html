@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: global.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: global.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/*************************************
+40,000 Pictures APIs call and handling
+
+Institution: The University of
+Queensland
+
+Course: DECO1800 Semester 2 - 2017
+
+Author: Sky Design
+*************************************/
+/**
+ * Accesses data.gov api to return an array json objects with filtered
+ * attributes: '1000_pixel_jpg', 'id'. specified for the homepage.
+ * @param {integer} count the number of images that will be returned
+ */
+function loadSLQImagesHomepage(count) {
+    "use strict";
+    // if the count is under 1, return 1.
+    if (count &lt; 1) {
+        // base64_decode resourceInfo data
+        count = atob(slq_limit);
+    }
+    var imageData = [],
+        data = {
+            // base64_decode resourceInfo data
+            resource_id: atob(slq_data_id),
+            limit: count
+        };
+    // if images are already on system, load them instead of making an ajax call
+    if (localStorage.getItem("slqDataImagesHomepage")) {
+        console.log("Data is on local storage.");
+        imageData = JSON.parse(localStorage.getItem('slqDataImagesHomepage'));
+        // sync independant function calls
+        homepageImagesSetup(imageData);
+        rotateImages("#photoStack ul li img");
+    } else {
+        console.log("Data isn't on local storage. Grabbing from server.");
+        $.ajax({
+            url: 'https://data.gov.au/api/action/datastore_search',
+            data: data,
+            dataType: 'jsonp',
+            cache: true,
+            async: true,
+            type: "POST",
+            success: function (data) {
+                function dataIsHere() {
+                    // Loop until the API has returned the specified data.
+                    setTimeout(function () {
+                        let dataRecords = data.result.records;
+                        // The number of records = the parsed limit.
+                        if (dataRecords.length >= count) {
+                            imageData = [];
+                            for (var i = 0; i &lt; dataRecords.length; i++) {
+                                imageData.push(buildJSON(dataRecords[i]));
+                            }
+                            // sync independant function calls
+                            data = JSON.stringify(imageData);
+                            localStorage.setItem('slqDataImagesHomepage', data);
+                            homepageImagesSetup(imageData);
+                            rotateImages("#photoStack ul li img");
+                        } else {
+                            console.log(
+                                "Error: SLQ database cannot provide " +
+                                "the requested data. Retrying..."
+                            );
+                            dataIsHere();
+                        }
+                    }, 1000);
+                }
+                dataIsHere();
+            }
+        }); // End of Ajax
+    }
+}
+
+/**
+ * Accesses data.gov api to return an array json objects with filtered
+ * attributes: '1000_pixel_jpg', 'id'. specified for the gamepage.
+ * @param {integer} count the number of images that will be returned
+ * @param {integer} rounds the number of rounds the game is hosting
+ * @param {integer[]} array of id's that will NOT be returned.
+ */
+function loadSLQImagesGame(count, rounds, exclusionData) {
+    "use strict";
+    // if the count is under 1, return 1.
+    if (count &lt; 1) {
+        // base64_decode resourceInfo data
+        count = atob(slq_limit);
+    }
+    var imageData = [],
+        data = {
+            // base64_decode resourceInfo data
+            resource_id: atob(slq_data_id),
+            limit: count
+        };
+    // if images are already on system, load them instead of making an ajax call
+    if (localStorage.getItem("slqDataImages") &amp;&amp;
+    JSON.parse(localStorage.getItem('slqDataImages')).length == count) {
+        console.log("Data is on local storage.");
+        imageData = JSON.parse(localStorage.getItem('slqDataImages'));
+        // sync independant function calls
+        setupGamePage(rounds, count, imageData);
+        loadingscreenStateSetter(false);
+    } else {
+        console.log("Data isn't on local storage. Grabbing from server.");
+        $.ajax({
+            url: 'https://data.gov.au/api/action/datastore_search',
+            data: data,
+            dataType: 'jsonp',
+            cache: true,
+            async: true,
+            type: "POST",
+            success: function (data) {
+                function dataIsHere() {
+                    // Keep looping until API returns the specified data.
+                    setTimeout(function () {
+                        let dataRecords = data.result.records;
+                        // The number of records = the parsed limit.
+                        if (dataRecords.length >= count) {
+                            imageData = [];
+                            for (var i = 0; i &lt; dataRecords.length; i++) {
+                                // TODO: check for exclusionData
+                                imageData.push(buildJSON(dataRecords[i]));
+                            }
+                            // sync independant function calls
+                            data = JSON.stringify(imageData);
+                            localStorage.setItem('slqDataImages', data);
+                            setupGamePage(rounds, count, imageData);
+                            loadingscreenStateSetter(false);
+                        } else {
+                            dataIsHere();
+                        }
+                    }, 1000);
+                }
+                dataIsHere();
+            }
+        }); // End of Ajax
+    }
+}
+
+/**
+ * Helper method for "loadSLQImages", builds a filtered object from database
+ * query.
+ * @param {Object} slqJsonPictures called object
+ * @return {Object} refined json object
+ */
+function buildJSON(slqJsonPictures) {
+    "use strict";
+    var jsonObject = {},
+        recordImage = slqJsonPictures["1000_pixel_jpg"],
+        recordId = slqJsonPictures._id;
+    // check if record image and id exists
+    if (recordImage &amp;&amp; recordId) {
+        jsonObject = {
+            image: recordImage,
+            id: recordId
+        };
+        // all data should have an ID and url, else incorect data was reterived.
+    } else {
+        jsonObject = {
+            help: "Error: SLQ has not provided the correct data!"
+        };
+    }
+    // TODO: remove this console.log after testing is done with it (@Jayden)
+    return jsonObject;
+}
+
+/**
+ * An external API is called to generate keywords
+ * based on a parsed image url.
+ * @param {string} takes a string URL of an image.
+ * @return {Object} returns an array of keywords in
+ * reference to the image.
+ */
+function keywordAPICall(image) {
+    "use strict";
+    var keywordData,
+        imageURL = image.image,
+        imageId = image.id,
+        localStorageId = 'clarifai'+imageId;
+    const keywordApp = new Clarifai.App({
+        apiKey: atob(keywords_api_key)
+    });
+    // NOTE: normally this check would not be made as the game is designed to
+    // improve as the underlying technology does, however for quota usage this
+    // check is made!
+    if (localStorage.getItem(localStorageId)) {
+        console.log("keyword data is on local storage.");
+        keywordData = JSON.parse(localStorage.getItem(localStorageId));
+        // sync independant function calls
+        apiKeywordsSetter(keywordData);
+    } else {
+        callClarifai(keywordApp);
+    }
+    function callClarifai(app) {
+        console.log("keyword data isn't on local storage. Grabbing from server.");
+        app.models.predict(Clarifai.GENERAL_MODEL, imageURL).then(
+            function(response) {
+                keywordData = response.outputs[0].data.concepts;
+                response = JSON.stringify(keywordData);
+                localStorage.setItem(localStorageId, response);
+                // sync independant function calls
+                apiKeywordsSetter(keywordData);
+            },
+            function(err) {
+                console.error(err);
+                alert("API error: Api is either offline,"+
+                "or quota for this month has been used!");
+            }
+        );
+    } // End of Ajax
+}
+/*************************************
+Gameplay handling
+
+Institution: The University of
+Queensland
+
+Course: DECO1800 Semester 2 - 2017
+
+Author: Sky Design
+*************************************/
+// global variables
+var apiKeywordsData,
+    currentScore;
+
+/**
+ * Executes when the document is ready.
+ */
+$(document).ready(function () {
+    "use strict";
+    loadingScreenSetup(true);
+    // data set size reduced to 6 for testing
+    var datasetSize = 10000;
+    loadSLQImagesGame(datasetSize, 6, [0]);
+});
+
+/**
+ * Sets up the game page with specified rounds, imageCount and slqImages
+ * @param  {integer} rounds number of guessing rounds
+ * @param  {integer} imageCount number of images queried from the database
+ * @param  {Object[]} slqImages array of objects containing images
+ */
+function setupGamePage(rounds, imageCount, slqImages) {
+    "use strict";
+    // list of images for the game
+    var gameImages = [];
+    currentScore = 0;
+    // grab images for game
+    for (var i = 0; i &lt; rounds; i++) {
+        // Generate image index
+        var index = Math.floor(Math.random() * imageCount);
+        gameImages.push(slqImages[index]);
+    }
+    setupInputTags();
+    startGame(rounds, gameImages);
+}
+
+/**
+ * Starts Game
+ * @param  {integer} rounds number of rounds
+ * @param  {Array} gameImages an Array containing the game images
+ */
+function startGame(rounds, gameImages) {
+    "use strict";
+    // alows for proper indexing of elements
+    var round = -1;
+
+    function startRound() {
+        round++;
+        $("#roundValue").text(round+1);
+        $('#guess form input').importTags('');
+        if (round &lt; rounds) {
+            console.log("Round: " + round);
+            loadgameImage(gameImages[round]);
+            keywordAPICall(gameImages[round]);
+            if (!isLoading &amp;&amp; imagesLoaded) {
+                //Time of the rounds following the first
+                startBlurTimer(10000);
+            // This else statement is called for the first round as the timer is
+            //  started from the end of the loadingscree
+            } else {
+                imagesloadingStateSetter(true);
+            }
+            // TODO:
+            // loadavailablePowerups();
+
+        } else if (round == rounds) {
+            // GameOver
+            console.log("Game Over!");
+        }
+    }
+    startGame.startRound = startRound;
+    startRound();
+}
+
+/**
+ * loads an image object into the gameframe and post gameframe
+ * @param {string} image an imageURL
+ */
+function loadgameImage(image) {
+    "use strict";
+    try {
+        var photo = insertImage(image.image, 400);
+        $("#gameFrame").attr("src", $(photo).attr("src"));
+        // delay on post game image changing as not to reveal the next image
+        setTimeout(function () {
+            $("#roundImage img").attr("src", $(photo).attr("src"));
+        },1000);
+        // store image in local storage
+        sessionStorage.setItem("lastGameImage", photo);
+    } catch (err) {
+        console.log("Error: Cannot set gameFrame source to the game image.");
+    }
+}
+
+/**
+ * Starts Blur and timer
+ * @param  {integer} time how long the user has to guess in milliseconds.
+ */
+function startBlurTimer(time) {
+    "use strict";
+    // all variables are adjustable without effecting visual consistentancy
+    var elem = document.getElementById("timePassed"),
+        width = 0,
+        maxwidth = 100,
+        intervals = 1,
+        intervalTime = time / (maxwidth / intervals),
+        id = setInterval(frame, intervalTime);
+    elem.style.transition = "all " + (intervalTime / 1000) * 2 + "s";
+    function frame() {
+        // Update the time displayed in the timer
+        $("#timerValue").text(parseFloat((time/1000)*(1-width/100)).toFixed(2));
+        if (width == 0) {
+            // sets correct colour and width (0px) for recalls
+            elem.style.backgroundColor = "#8ae8a0";
+            elem.style.width = width + '%';
+        }
+        // Floor 75% half width to the nearest interval
+        if (width == (Math.floor(((maxwidth / 2) * 0.5) / intervals) *
+        intervals)) {
+            animateColourChange(elem, "#FFFF00", (time * 0.5));
+        }
+        // Floor 75% max width to the nearest interval
+        if (width == (Math.floor((maxwidth * 0.75) / intervals) * intervals)) {
+            animateColourChange(elem, "#FF0000", (time * 0.35));
+        }
+        if (width == maxwidth) {
+            console.log("Round Over!");
+            setupNextRoundButton();
+            scoreSetter(compareHits(apiKeywordsGetter(),collectGuesses()));
+            // Delay presenting the round over menu
+            setTimeout(function () {
+                showRoundoverMenu(true);
+            }, 1000);
+            clearInterval(id);
+        } else {
+            width = width + intervals;
+            elem.style.width = width + '%';
+            blur($("#gameFrame"), ((maxwidth - width) / intervals) / (6 /
+                intervals), 0.1);
+        }
+    }
+}
+
+/**
+ * Sets up empty inputTags box
+ */
+function setupInputTags() {
+    $('#guess form input').tagsInput({
+        "defaultText":"Make a guess!",
+    });
+}
+
+/**
+ * Collects the current guesses in guess tag inputs
+ * @return {string[]} guesses made
+ */
+function collectGuesses() {
+    "use strict";
+    var guesses = [];
+    $("#guess form div span").each(function () {
+        guesses.push($("span",this).text());
+    });
+    return guesses;
+}
+
+/**
+ * Sets internal keywords property to passed jsonObject,
+ * sets interal keyword load check to true
+ * @param {JSON} keywords the keyword data from api
+ */
+function apiKeywordsSetter(keywords) {
+    apiKeywordsData = keywords;
+}
+
+/**
+ * returns the current api keywords
+ * @return {JSON} the results from image recognition API
+ */
+function apiKeywordsGetter() {
+    return apiKeywordsData;
+}
+
+/**
+ * sets the current gamescore
+ * @param {integer} score current score
+ */
+function scoreSetter(score) {
+    currentScore = score;
+}
+
+/**
+ * returns the current gamescore
+ * @return {integer} current score
+ */
+function scoreGetter() {
+    return currentScore;
+}
+
+/**
+ * Sets up gameover screen functionality
+ */
+function setupNextRoundButton() {
+    "use strict";
+    $("#nextRound button").on("click.startNextRound", function () {
+        // Unbind action as soon as clicked to prevent ending the round early
+        $("#nextRound button").off("click.startNextRound");
+        startGame.startRound();
+        showRoundoverMenu(false);
+    });
+}
+
+/**
+ * Set the appearance of the round over menu on the game page.
+ * @param {Boolean} show true will show the menu, false will hide the menu
+ */
+function showRoundoverMenu(show) {
+    "use strict";
+    if (show) {
+        // Show the menu
+        $("#roundoverScreen").css('visibility', "visible");
+        $("#roundoverScreen").animate({
+            bottom: "0%"
+        }, 500);
+        // Append user and API guesses
+        collectGuesses().forEach(function(x){
+            if (x) {
+                $('#userKeywords ul').append("&lt;li>"+x+"&lt;/li>");
+                if ((checkGuessHit(apiKeywordsGetter(), x))) {
+                    $('#userKeywords ul li').last().css("background-color", "#8ae8a0");
+                }
+            }
+        });
+        apiKeywordsGetter().forEach(function(x){
+            $('#apiKeywords ul').append("&lt;li>" + x.name +
+            " = " + (Math.floor(100*x.value)) + "&lt;/li>");
+
+            if ((checkKeywordHit(collectGuesses(), x.name))) {
+                $('#apiKeywords ul li').last().css("background-color", "#8ae8a0");
+            }
+
+        });
+        // Append score
+        console.log(scoreGetter());
+        $("#totalScore").html("&lt;p>"+scoreGetter()+"&lt;/p>");
+    } else {
+        // Hide the menu
+        $("#roundoverScreen").animate({
+            bottom: "100%"
+        }, 500);
+        setTimeout(function () {
+            $("#roundoverScreen").css('visibility', "hidden");
+        }, 500);
+        // clear keyword data
+        $('#userKeywords ul').html("");
+        $('#apiKeywords ul').html("");
+        $('#guess form input').importTags('');
+        apiKeywordsData = undefined;
+    }
+}
+
+/*************************************
+universal functions and/or global variables
+
+Institution: The University of
+Queensland
+
+Course: DECO1800 Semester 2 - 2017
+
+Author: Sky Design
+*************************************/
+// global variables
+var isLoading = true;
+var imagesLoaded = false;
+
+/**
+ * Executes when the document is ready.
+ */
+$(document).ready(function () {
+    loadingScreenSetup(false);
+    setupNavigation();
+});
+
+/**
+ * Sets internal varaible for loading screen to passed boolean
+ * @param {Boolean} isLoading the loadingscreen state
+ */
+function loadingscreenStateSetter(isLoadingState) {
+    if (typeof isLoadingState === 'boolean') {
+            isLoading = isLoadingState;
+    } else {
+        console.log("Error: Passed value must be a boolean!");
+    }
+}
+
+/**
+ * Sets internal varaible for game frame state to passed boolean
+ * @param {Boolean} imagesLoadedState if the images are loaded
+ */
+function imagesloadingStateSetter(imagesLoadedState) {
+    if (typeof imagesLoadedState === 'boolean') {
+            imagesLoaded = imagesLoadedState;
+    } else {
+        console.log("Error: Passed value must be a boolean!");
+    }
+}
+
+/**
+ * Loads an image at a given html dom pos
+ * @param {string} image source
+ * @param {integer} image width
+ * @return {string} &lt;img/> tag form of parsed img string
+ */
+function insertImage(image, width) {
+    "use strict";
+    return '&lt;img src=' + '"' + image + '"' + 'width=' + width + '/>';
+}
+
+/**
+ * Transform html elements by slightly randomly roatating and adjusting them.
+ * @param  {string} htmlElement a string a HtmlDOM position
+ */
+function rotateImages(htmlElement) {
+    "use strict";
+    $(htmlElement).each(function () {
+        var angle = Math.floor(Math.random() * 60) - 30; // randomise angle
+        $(this).css("transform", "rotate(" + angle + "deg)");
+        var width = Math.floor(Math.random() * 100) + 150; // randomise width
+        $(this).css("width", width + "px");
+    });
+}
+
+/**
+ * Loading screen handling
+ * @param  {Boolean} isGamepage loading screen is the premise to the gamepage
+ */
+function loadingScreenSetup(isGamepage) {
+    "use strict";
+    setTimeout(function () {
+        if (!isLoading &amp;&amp; imagesLoaded) {
+            $("#loadingText").text("Click To Play");
+            $("#loadingImage").attr("src", "../img/gif/loaded.gif");
+            $("#loadingScreen").css("cursor", "pointer");
+            $("#loadingScreen").click(function () {
+                setTimeout(function () {
+                    $("#loadingScreen").css('visibility', "hidden");
+                }, 500);
+               $(this).animate({
+                   bottom: "100%"
+               }, 500);
+               if (isGamepage) {
+                   startBlurTimer(10000);
+               }
+           });
+       } else {
+           loadingScreenSetup(isGamepage);
+       }
+    // how often the loading screen checks if the data is loaded
+    },2000 );
+}
+
+/**
+ * Blur objects
+ * @param  {Object} object the jquery object
+ * @param  {Number} radius the blur radius to set
+ * @param  {Number} duration the time taken to blur
+ */
+function blur(object, radius, duration){
+    "use strict";
+    var filterValue = 'blur(' + radius + 'px)';
+    var transitionValue = 'all ' + duration + 's ease-out';
+    object.css({
+        'filter': filterValue,
+        'webkitFilter': filterValue,
+        'mozFilter': filterValue,
+        'transition': transitionValue,
+        '-webkit-transition': transitionValue,
+        '-moz-transition': transitionValue
+    });
+}
+
+/**
+ * Trys to animate colour change with a css hook from jquery.color plugin.
+ * if it fails it transitions colour instantly at the end of the duration.
+ * @param {element} htmlElement a DOM element
+ * @param {string} colour the colour of the new backgroundColor (standard css string convention)
+ * @param {integer} duration number of milliseconds the transition ouccurs over
+ */
+function animateColourChange(htmlElement , colour, duration){
+    "use strict";
+    var JQObject = $(htmlElement);
+    try {
+        JQObject.animate({
+            backgroundColor: colour
+        }, duration);
+    } catch (err) {
+        console.log("Error: cannot transition timer colour"+
+         " over-time because the browser doesn't support it!");
+         setTimeout(function () {
+             htmlElement.style.backgroundColor = colour;
+         }, duration);
+    }
+}
+
+/**
+ * Compares the an array of strings with api guesses
+ * @param  {JSON} jsonObjectKeywords Object containing .name and .score property
+ * @param  {string[]} arrayKeywords array of strings containg keywords
+ * @return {integer} the player score
+ */
+function compareHits(jsonObjectKeywords, arrayKeywords){
+    var score = 0;
+    // this line of code is here to ensure the object is a correct JSON.
+    console.log(jsonObjectKeywords);
+    var jsonObjectCon = JSON.parse(JSON.stringify(jsonObjectKeywords));
+    // if keywords aren't found keep waiting till they are
+    if (typeof (jsonObjectKeywords) === 'undefined') {
+        setTimeout(function () {
+            compareHits(apiKeywordsGetter(),collectGuesses());
+        }, 3000);
+        console.log("keyword API taking along time to respond!");
+    } else {
+        if (arrayKeywords.length >= 1) {
+        $(arrayKeywords).each(function () {
+            var guess = (this.toLowerCase()).trim();
+                $(jsonObjectCon).each(function () {
+                var keyword = (this.name).trim();
+                if (guess == keyword) {
+                        score = score + Math.floor(100*this.value);
+                    }
+                });
+            }); // End of double foreach check
+        }
+        console.log(score);
+        return score;
+    }
+}
+
+/**
+* Checks whether a word matches with api guesses
+* @param  {JSON} jsonObjectKeywords Object containing .name and .score property
+* @param  {string} text the string keyword to check
+* @return {boolean} true if it matches and false otherwise
+ */
+function checkGuessHit(jsonObjectKeywords, text) {
+    var jsonObjectCon = JSON.parse(JSON.stringify(jsonObjectKeywords));
+    var result = false;
+    var guess = (text.toLowerCase()).trim();
+    $(jsonObjectCon).each(function () {
+        var keyword = (this.name).trim();
+        if (guess == keyword) {
+            result = true;
+        }
+    });
+    return result;
+}
+
+/**
+ * Checks whether a guess matches any of the keywords
+ * @param  {string[]} arrayKeywords array of strings containg keywords
+ * @param  {string} text the string guess to check
+ * @return {boolean} true if it matches and false otherwise
+ */
+function checkKeywordHit(arrayKeywords, text) {
+    var result = false;
+    if (arrayKeywords.length >= 1) {
+    $(arrayKeywords).each(function () {
+        var guess = (text.toLowerCase()).trim();
+        var keyword = (this.toLowerCase()).trim();
+        if (guess == keyword) {
+                result = true;
+            }
+        });
+    }
+    return result;
+}
+
+var navOpen = false;
+function setupNavigation() {
+    $("#expandIcon").click(function() {
+        if (navOpen) {
+            $("#expandIcon").css("transform", "rotate(-45deg)");
+            $("#universalNav ul").css("top", "-150px");
+            navOpen = false;
+        } else {
+            $("#expandIcon").css("transform", "rotate(0deg)");
+            $("#universalNav ul").css("top", "0px");
+            navOpen = true;
+        }
+    });
+
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#animateColourChange">animateColourChange</a></li><li><a href="global.html#apiKeywordsGetter">apiKeywordsGetter</a></li><li><a href="global.html#apiKeywordsSetter">apiKeywordsSetter</a></li><li><a href="global.html#blur">blur</a></li><li><a href="global.html#buildJSON">buildJSON</a></li><li><a href="global.html#checkGuessHit">checkGuessHit</a></li><li><a href="global.html#checkKeywordHit">checkKeywordHit</a></li><li><a href="global.html#collectGuesses">collectGuesses</a></li><li><a href="global.html#compareHits">compareHits</a></li><li><a href="global.html#imagesloadingStateSetter">imagesloadingStateSetter</a></li><li><a href="global.html#insertImage">insertImage</a></li><li><a href="global.html#keywordAPICall">keywordAPICall</a></li><li><a href="global.html#loadgameImage">loadgameImage</a></li><li><a href="global.html#loadingScreenSetup">loadingScreenSetup</a></li><li><a href="global.html#loadingscreenStateSetter">loadingscreenStateSetter</a></li><li><a href="global.html#loadSLQImagesGame">loadSLQImagesGame</a></li><li><a href="global.html#loadSLQImagesHomepage">loadSLQImagesHomepage</a></li><li><a href="global.html#rotateImages">rotateImages</a></li><li><a href="global.html#scoreGetter">scoreGetter</a></li><li><a href="global.html#scoreSetter">scoreSetter</a></li><li><a href="global.html#setupGamePage">setupGamePage</a></li><li><a href="global.html#setupInputTags">setupInputTags</a></li><li><a href="global.html#setupNextRoundButton">setupNextRoundButton</a></li><li><a href="global.html#showRoundoverMenu">showRoundoverMenu</a></li><li><a href="global.html#startBlurTimer">startBlurTimer</a></li><li><a href="global.html#startGame">startGame</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Thu Oct 26 2017 10:25:35 GMT+1000 (E. Australia Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
