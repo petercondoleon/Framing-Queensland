@@ -46,6 +46,22 @@ function imagesloadingStateSetter(imagesLoadedState) {
 }
 
 /**
+ * returns internal varaible for loading screen state
+ * @return {boolean} loading screen state
+ */
+function loadingscreenStateGetter() {
+    return isLoading;
+}
+
+/**
+ * returns internal varaible for game images loaded
+ * @return {boolean} imagesloaded state
+ */
+function imagesloadingStateGetter() {
+    return imagesLoaded;
+}
+
+/**
  * Loads an image at a given html dom pos
  * @param {string} image source
  * @param {integer} image width
@@ -77,7 +93,7 @@ function rotateImages(htmlElement) {
 function loadingScreenSetup(isGamepage) {
     "use strict";
     setTimeout(function () {
-        if (!isLoading && imagesLoaded) {
+        if (imagesloadingStateGetter()) {
             $("#loadingText").text("Click To Play");
             $("#loadingImage").attr("src", "../img/gif/loaded.gif");
             $("#loadingScreen").css("cursor", "pointer");
@@ -88,15 +104,13 @@ function loadingScreenSetup(isGamepage) {
                $(this).animate({
                    bottom: "100%"
                }, 500);
-               if (isGamepage) {
-                   startBlurTimer(10000);
-               }
+               loadingscreenStateSetter(false);
            });
        } else {
            loadingScreenSetup(isGamepage);
        }
     // how often the loading screen checks if the data is loaded
-    },2000 );
+},1000 );
 }
 
 /**

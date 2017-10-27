@@ -28,13 +28,13 @@ function loadSLQImagesHomepage(count) {
         };
     // if images are already on system, load them instead of making an ajax call
     if (localStorage.getItem("slqDataImagesHomepage")) {
-        console.log("Data is on local storage.");
+        //console.log("Data is on local storage.");
         imageData = JSON.parse(localStorage.getItem('slqDataImagesHomepage'));
         // sync independant function calls
         homepageImagesSetup(imageData);
         rotateImages("#photoStack ul li img");
     } else {
-        console.log("Data isn't on local storage. Grabbing from server.");
+        //console.log("Data isn't on local storage. Grabbing from server.");
         $.ajax({
             url: 'https://data.gov.au/api/action/datastore_search',
             data: data,
@@ -96,13 +96,13 @@ function loadSLQImagesGame(count, rounds, exclusionData) {
     // if images are already on system, load them instead of making an ajax call
     if (localStorage.getItem("slqDataImages") &&
     JSON.parse(localStorage.getItem('slqDataImages')).length == count) {
-        console.log("Data is on local storage.");
+        //console.log("Data is on local storage.");
         imageData = JSON.parse(localStorage.getItem('slqDataImages'));
         // sync independant function calls
         setupGamePage(rounds, count, imageData);
         loadingscreenStateSetter(false);
     } else {
-        console.log("Data isn't on local storage. Grabbing from server.");
+        //console.log("Data isn't on local storage. Grabbing from server.");
         $.ajax({
             url: 'https://data.gov.au/api/action/datastore_search',
             data: data,
@@ -125,9 +125,12 @@ function loadSLQImagesGame(count, rounds, exclusionData) {
                             // sync independant function calls
                             data = JSON.stringify(imageData);
                             localStorage.setItem('slqDataImages', data);
-                            setupGamePage(rounds, count, imageData);
-                            loadingscreenStateSetter(false);
+                            setupGamepage(rounds, count, imageData);
                         } else {
+                            console.log(
+                                "Error: SLQ database cannot provide " +
+                                "the requested data. Retrying..."
+                              );
                             dataIsHere();
                         }
                     }, 1000);
@@ -184,16 +187,8 @@ function keywordAPICall(image) {
     // NOTE: normally this check would not be made as the game is designed to
     // improve as the underlying technology does, however for quota usage this
     // check is made!
-    if (localStorage.getItem(localStorageId)) {
-        console.log("keyword data is on local storage.");
-        keywordData = JSON.parse(localStorage.getItem(localStorageId));
-        // sync independant function calls
-        apiKeywordsSetter(keywordData);
-    } else {
-        callClarifai(keywordApp);
-    }
+    callClarifai(keywordApp);
     function callClarifai(app) {
-        console.log("keyword data isn't on local storage. Grabbing from server.");
         app.models.predict(Clarifai.GENERAL_MODEL, imageURL).then(
             function(response) {
                 keywordData = response.outputs[0].data.concepts;

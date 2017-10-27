@@ -25,12 +25,61 @@ $(document).ready(function () {
 });
 
 /**
+ * Sets internal keywords property to passed jsonObject,
+ * sets interal keyword load check to true
+ * @param {JSON} keywords the keyword data from api
+ */
+function apiKeywordsSetter(keywords) {
+    apiKeywordsData = keywords;
+}
+
+/**
+ * returns the current api keywords
+ * @return {JSON} the results from image recognition API
+ */
+function apiKeywordsGetter() {
+    return apiKeywordsData;
+}
+
+/**
+ * sets the current gamescore
+ * @param {integer} score current score
+ */
+function scoreSetter(score) {
+    currentScore = score;
+}
+
+/**
+ * returns the current gamescore
+ * @return {integer} current score
+ */
+function scoreGetter() {
+    return currentScore;
+}
+
+/**
+ * sets the current gamescore
+ * @param {integer} totalScore current score
+ */
+function totalScoreSetter(totalScore) {
+    totalGameScore = totalScore;
+}
+
+/**
+ * returns the current gamescore
+ * @return {integer} current score
+ */
+function totalScoreGetter() {
+    return totalGameScore;
+}
+
+/**
  * Sets up the game page with specified rounds, imageCount and slqImages
  * @param  {integer} rounds number of guessing rounds
  * @param  {integer} imageCount number of images queried from the database
  * @param  {Object[]} slqImages array of objects containing images
  */
-function setupGamePage(rounds, imageCount, slqImages) {
+function setupGamepage(rounds, imageCount, slqImages) {
     "use strict";
     // list of images for the game
     var gameImages = [];
@@ -64,17 +113,7 @@ function startGame(rounds, gameImages) {
             console.log("Round: " + round);
             loadgameImage(gameImages[round]);
             keywordAPICall(gameImages[round]);
-            if (!isLoading && imagesLoaded) {
-                //Time of the rounds following the first
-                startBlurTimer(10000);
-            // This else statement is called for the first round as the timer is
-            //  started from the end of the loadingscree
-            } else {
-                imagesloadingStateSetter(true);
-            }
-            // TODO:
-            // loadavailablePowerups();
-
+            gameImageLoading();
         } else if (round == rounds) {
             // GameOver
             console.log("Game Over!");
@@ -86,6 +125,19 @@ function startGame(rounds, gameImages) {
 }
 
 /**
+ * The function waits for the loading screen to disappear before excuting
+ */
+function gameImageLoading () {
+    setTimeout(function () {
+        if (!(loadingscreenStateGetter())) {
+            startBlurTimer(10000);
+        } else {
+            gameImageLoading();
+        }
+    },500);
+}
+
+/**
  * loads an image object into the gameframe and post gameframe
  * @param {string} image an imageURL
  */
@@ -94,6 +146,8 @@ function loadgameImage(image) {
     try {
         var photo = insertImage(image.image, 400);
         $("#gameFrame").attr("src", $(photo).attr("src"));
+        // Sets the image loaded state to true
+        imagesloadingStateSetter(true);
         // delay on post game image changing as not to reveal the next image
         setTimeout(function () {
             $("#roundImage img").attr("src", $(photo).attr("src"));
@@ -176,55 +230,6 @@ function collectGuesses() {
         guesses.push($("span",this).text());
     });
     return guesses;
-}
-
-/**
- * Sets internal keywords property to passed jsonObject,
- * sets interal keyword load check to true
- * @param {JSON} keywords the keyword data from api
- */
-function apiKeywordsSetter(keywords) {
-    apiKeywordsData = keywords;
-}
-
-/**
- * returns the current api keywords
- * @return {JSON} the results from image recognition API
- */
-function apiKeywordsGetter() {
-    return apiKeywordsData;
-}
-
-/**
- * sets the current gamescore
- * @param {integer} score current score
- */
-function scoreSetter(score) {
-    currentScore = score;
-}
-
-/**
- * returns the current gamescore
- * @return {integer} current score
- */
-function scoreGetter() {
-    return currentScore;
-}
-
-/**
- * sets the current gamescore
- * @param {integer} totalScore current score
- */
-function totalScoreSetter(totalScore) {
-    totalGameScore = totalScore;
-}
-
-/**
- * returns the current gamescore
- * @return {integer} current score
- */
-function totalScoreGetter() {
-    return totalGameScore;
 }
 
 /**
