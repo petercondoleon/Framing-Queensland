@@ -165,7 +165,6 @@ function animateColourChange(htmlElement , colour, duration){
 function compareHits(jsonObjectKeywords, arrayKeywords){
     var score = 0;
     // this line of code is here to ensure the object is a correct JSON.
-    console.log(jsonObjectKeywords);
     var jsonObjectCon = JSON.parse(JSON.stringify(jsonObjectKeywords));
     // if keywords aren't found keep waiting till they are
     if (typeof (jsonObjectKeywords) === 'undefined') {
@@ -185,7 +184,6 @@ function compareHits(jsonObjectKeywords, arrayKeywords){
                 });
             }); // End of double foreach check
         }
-        console.log(score);
         return score;
     }
 }

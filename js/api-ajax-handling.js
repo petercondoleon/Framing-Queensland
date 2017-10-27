@@ -99,7 +99,7 @@ function loadSLQImagesGame(count, rounds, exclusionData) {
         //console.log("Data is on local storage.");
         imageData = JSON.parse(localStorage.getItem('slqDataImages'));
         // sync independant function calls
-        setupGamePage(rounds, count, imageData);
+        setupGamepage(rounds, count, imageData);
         loadingscreenStateSetter(false);
     } else {
         //console.log("Data isn't on local storage. Grabbing from server.");

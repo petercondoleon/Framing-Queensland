@@ -104,7 +104,6 @@ function startGame(rounds, gameImages) {
     "use strict";
     // alows for proper indexing of elements
     var round = -1;
-
     function startRound() {
         round++;
         $("#roundValue").text(round+1);
@@ -129,12 +128,15 @@ function startGame(rounds, gameImages) {
  */
 function gameImageLoading () {
     setTimeout(function () {
-        if (!(loadingscreenStateGetter())) {
-            startBlurTimer(10000);
+        if (!(loadingscreenStateGetter()) && imagesloadingStateGetter()) {
+            showRoundoverMenu(false);
+            setTimeout(function () {
+                startBlurTimer(10000);
+            },500);
         } else {
             gameImageLoading();
         }
-    },500);
+    },200);
 }
 
 /**
@@ -151,7 +153,7 @@ function loadgameImage(image) {
         // delay on post game image changing as not to reveal the next image
         setTimeout(function () {
             $("#roundImage img").attr("src", $(photo).attr("src"));
-        },1000);
+        },1500);
         // store image in local storage
         sessionStorage.setItem("lastGameImage", photo);
     } catch (err) {
@@ -241,7 +243,7 @@ function setupNextRoundButton() {
         // Unbind action as soon as clicked to prevent ending the round early
         $("#nextRound button").off("click.startNextRound");
         startGame.startRound();
-        showRoundoverMenu(false);
+
     });
 }
 
@@ -252,6 +254,7 @@ function setupNextRoundButton() {
 function showRoundoverMenu(show) {
     "use strict";
     if (show) {
+        imagesloadingStateSetter(false);
         // Show the menu
         $("#roundoverScreen").css('visibility', "visible");
         $("#roundoverScreen").animate({
